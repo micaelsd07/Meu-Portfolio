@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPET | Petshop, Banho e Tosa e Veterinário de Alto Padrão. O melhor cuidado, saúde e carinho para o seu cão ou gato com agendamento online e equipe especializada.">
+  <meta name="keywords" content="petshop taubate, banho e tosa taubate, veterinario taubate, clinica veterinaria, vacina importada, racao premium">
+  <meta name="author" content="UPET Premium Pet Care">
+  
+  <title>UPET | Petshop, Banho e Tosa e Veterinário</title>
+  
+  <!-- FontAwesome (Ícones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos Globais e Componentes -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- 1. LOADING ELEGANTE -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-logo">
+      <i class="fas fa-paw"></i> UPET<span>.</span>
+    </div>
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- 2. CONTAINER DE TOASTS (NOTIFICAÇÕES FLUTUANTES) -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- =================================================================
+       LAYOUT PÚBLICO (HOME, SERVIÇOS, PRODUTOS, AGENDAMENTO, ETC.)
+       ================================================================= -->
+  <div id="public-layout">
+    
+    <!-- HEADER FIXO TRANSPARENTE/SÓLIDO -->
+    <header class="header">
+      <div class="container header-container">
+        <a href="#/home" class="logo">
+          <img src="img/logo.jpg" alt="UPET Logo"> UPET
+        </a>
+        
+        <!-- Menu Hamburguer Mobile -->
+        <div id="burger-menu" class="burger-menu">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </div>
+
+        <!-- Menu de Navegação -->
+        <nav id="nav-menu" class="nav-menu">
+          <a href="#/home" class="nav-link active">Home</a>
+          <a href="#/servicos" class="nav-link">Serviços</a>
+          <a href="#/produtos" class="nav-link">Produtos</a>
+          <a href="#/galeria" class="nav-link">Galeria</a>
+          <a href="#/sobre" class="nav-link">Sobre</a>
+          <a href="#/contato" class="nav-link">Contato</a>
+          <div class="nav-cta">
+            <a href="#/agendamento" class="btn btn-primary btn-booking-nav">
+              <i class="far fa-calendar-check"></i> Agendamento
+            </a>
+          </div>
+          <div class="nav-cta" style="margin-left: 0.5rem;">
+            <a href="#/admin" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <i class="fas fa-lock"></i> Admin
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- VIEWS / ABAS DO SITE (ROUTER SPA PÚBLICO) -->
+    <main>
+      
+      <!-- ABA 1: HOME (VISÃO GERAL) -->
+      <section id="view-home" class="page-view active">
+        <!-- Hero Section Animada Parallax -->
+        <div class="hero">
+          <div class="hero-parallax-bg"></div>
+          <div class="container hero-content">
+            <div class="hero-text">
+              <span class="badge badge-green" style="margin-bottom: 1.5rem; animation: pulse-light 2.5s infinite">
+                <i class="fas fa-certificate"></i> Cuidados Premium de Taubaté
+              </span>
+              <h1>Cuidado, carinho e <span>saúde para seu pet.</span></h1>
+              <p>Oferecemos o que há de melhor em estética pet, consultas veterinárias e farmácia especializada em um ambiente seguro, tecnológico e acolhedor.</p>
+              <div class="hero-buttons">
+                <a href="#/agendamento" class="btn btn-accent">Agendar Atendimento</a>
+                <a href="#/servicos" class="btn btn-secondary">Conhecer Serviços</a>
+              </div>
+            </div>
+            <div class="hero-image-wrapper">
+              <div class="hero-circle-accent"></div>
+              <img src="img/cachorro4.jpg" class="hero-pet-img" alt="Cachorro Feliz UPET">
+            </div>
+          </div>
+          <a href="#view-home-services" class="hero-scroll-btn">
+            <i class="fas fa-chevron-down"></i>
+          </a>
+        </div>
+
+        <!-- Seção Estilo Diferenciais Curtos -->
+        <div class="container" style="padding: 6rem 0 2rem 0;" id="view-home-services">
+          <div class="section-title">Por que escolher a <span>UPET?</span></div>
+          <div class="values-grid">
+            <div class="glass-card value-card">
+              <div class="value-icon"><i class="fas fa-heartbeat"></i></div>
+              <h3>Amor incondicional</h3>
+              <p>Manejo de baixo estresse onde cada pet é tratado com o respeito e afeto que merece.</p>
+            </div>
+            <div class="glass-card value-card">
+              <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+              <h3>Ambiente Seguro</h3>
+              <p>Instalações higienizadas e monitoradas por câmeras de segurança em tempo integral.</p>
+            </div>
+            <div class="glass-card value-card">
+              <div class="value-icon"><i class="fas fa-user-md"></i></div>
+              <h3>Médicos Especialistas</h3>
+              <p>Corpo clínico qualificado e equipamentos de última geração no suporte diagnóstico.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- A) SEÇÃO SOBRE NÓS (RESUMO INSTITUCIONAL EXPANDIDO) -->
+        <div class="home-about-section" style="padding: 6rem 0; border-top: 1px solid var(--glass-border);">
+          <div class="container">
+            <div class="about-intro-grid" style="align-items: center; gap: 4rem;">
+              <div class="about-img-box">
+                <img src="img/Foto frente.jpg" class="about-img" alt="Fachada UPET Taubaté" style="border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--shadow-lg); width: 100%; height: 400px; object-fit: cover;">
+                <div class="glass-card about-badge-exp" style="bottom: 20px; right: 20px;">
+                  <h4>10+</h4>
+                  <span>Anos cuidando<br>de animais</span>
+                </div>
+              </div>
+              <div class="about-text">
+                <span class="badge badge-green" style="margin-bottom: 1rem;"><i class="fas fa-paw"></i> Quem Somos</span>
+                <h2>Estética Pet e Saúde de Alto Padrão em Taubaté</h2>
+                <p>A <strong>UPET</strong> nasceu do amor incondicional pelos animais e do desejo de oferecer uma experiência acolhedora de banho, tosa e clínica veterinária na região. Dispomos de um espaço planejado para o relaxamento do seu melhor amigo.</p>
+                <p style="margin-bottom: 2rem;">Nossa equipe de esteticistas e médicos veterinários é altamente capacitada, utilizando cosméticos premium biodegradáveis e equipamentos silenciosos de última geração.</p>
+                
+                <!-- UPET em Números -->
+                <div class="stats-counter-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.2rem;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 50px; height: 50px; background: rgba(9, 216, 149, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent-green); border: 1px solid var(--accent-green); flex-shrink: 0;"><i class="fas fa-paw"></i></div>
+                    <div>
+                      <h4 style="font-size: 1.3rem; font-weight: 800; color: #fff; margin:0; line-height: 1.2;">5.000+</h4>
+                      <span style="font-size: 0.8rem; color: var(--text-muted);">Pets Atendidos</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 50px; height: 50px; background: rgba(9, 216, 149, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent-green); border: 1px solid var(--accent-green); flex-shrink: 0;"><i class="fas fa-user-md"></i></div>
+                    <div>
+                      <h4 style="font-size: 1.3rem; font-weight: 800; color: #fff; margin:0; line-height: 1.2;">15+</h4>
+                      <span style="font-size: 0.8rem; color: var(--text-muted);">Especialistas</span>
+                    </div>
+                  </div>
+                </div>
+
+                <a href="#/sobre" class="btn btn-secondary">
+                  <i class="fas fa-info-circle"></i> Conhecer Nossa História
+                </a>
+              </div>
+            </div>
+
+            <!-- Filosofia da Empresa na Home (Missão, Visão e Valores) -->
+            <div class="values-grid" style="margin-top: 5rem;">
+              <div class="glass-card value-card" style="padding: 2.5rem; transition: var(--transition-smooth); border: 1px solid var(--glass-border);">
+                <div class="value-icon"><i class="fas fa-bullseye"></i></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Nossa Missão</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">Proporcionar saúde preventiva e estética premium de excelência técnica, superando as expectativas dos tutores e garantindo felicidade integral e dignidade aos animais de estimação.</p>
+              </div>
+              <div class="glass-card value-card" style="padding: 2.5rem; transition: var(--transition-smooth); border: 1px solid var(--glass-border);">
+                <div class="value-icon"><i class="far fa-eye"></i></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Nossa Visão</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">Ser a maior e mais qualificada rede de cuidados pet do Vale do Paraíba, servindo de modelo de ética e segurança em manuseio animal e sustentabilidade mercadológica.</p>
+              </div>
+              <div class="glass-card value-card" style="padding: 2.5rem; transition: var(--transition-smooth); border: 1px solid var(--glass-border);">
+                <div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Nossos Valores</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">Respeito irrestrito à vida animal, transparência nas condutas terapêuticas, contínuo aprimoramento profissional da equipe, afeto genuíno e responsabilidade sanitária.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- B) SEÇÃO DESTAQUE DE SERVIÇOS (BANHO, TOSA E SAÚDE ROBUSTA) -->
+        <div class="home-services-section" style="padding: 6rem 0; background: rgba(15, 23, 42, 0.3); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+          <div class="container">
+            <div class="section-title">Estética e <span>Veterinária</span></div>
+            <p class="text-center" style="max-width: 600px; margin: -2rem auto 4rem auto; color: var(--text-muted);">
+              Cuidado especializado e infraestrutura de alta tecnologia focados no conforto do seu cão ou gato.
+            </p>
+            
+            <div class="services-grid" style="max-width: 950px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+              <!-- Banho e Tosa -->
+              <div class="glass-card service-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2.5rem;">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-bath"></i></div>
+                  <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Banho e Tosa Premium</h3>
+                  <span class="badge badge-green" style="margin-bottom: 1.2rem; display: inline-block;">A partir de R$ 69,90</span>
+                  <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Higiene completa e corte artístico com cosméticos nobres e foco no relaxamento e bem-estar do seu pet.</p>
+                  
+                  <!-- Checklist de Benefícios -->
+                  <div class="benefits-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem;">
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Cosméticos Hydra Hipoalergênicos Importados</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Secadores e Sopradores Super Silenciosos</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Corte de unhas e limpeza auricular inclusos</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Toalhas higienizadas individualmente e lacradas</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Vidro na recepção para acompanhar o banho</span>
+                    </div>
+                  </div>
+
+                  <img src="img/cachorro1.jpg" class="service-card-img" alt="Banho e Tosa UPET" style="height: 200px; width: 100%; border-radius: var(--border-radius-md); object-fit: cover;">
+                </div>
+                <a href="#/banho-e-tosa" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">Ver Preços e Detalhes</a>
+              </div>
+
+              <!-- Veterinária -->
+              <div class="glass-card service-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2.5rem;">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-stethoscope"></i></div>
+                  <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Clínica Veterinária</h3>
+                  <span class="badge badge-green" style="margin-bottom: 1.2rem; display: inline-block;">Consultas a partir de R$ 130,00</span>
+                  <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Atendimento humanizado com equipamentos modernos e médicos especializados na saúde integral do pet.</p>
+                  
+                  <!-- Checklist de Benefícios -->
+                  <div class="benefits-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem;">
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Consultórios Climatizados e equipados</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Abordagem Cat-Friendly (sem estresse para felinos)</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Vacinas Importadas de Alto Padrão (V10, Antirrábica)</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Exames diagnósticos rápidos e laboratoriais</span>
+                    </div>
+                    <div class="benefit-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem;">
+                      <i class="fas fa-check-circle" style="color: var(--accent-green); flex-shrink:0;"></i>
+                      <span>Corpo Clínico Especialista de Taubaté</span>
+                    </div>
+                  </div>
+
+                  <img src="img/unnamed (1).jpg" class="service-card-img" alt="Clínica Veterinária UPET" style="height: 200px; width: 100%; border-radius: var(--border-radius-md); object-fit: cover;">
+                </div>
+                <a href="#/veterinario" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">Ver Corpo Clínico</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C) SEÇÃO PRODUTOS EM DESTAQUE (BOUTIQUE ROBUSTA) -->
+        <div class="home-products-section" style="padding: 6rem 0; border-top: 1px solid var(--glass-border);">
+          <div class="container">
+            <div class="section-title">Produtos <span>em Destaque</span></div>
+            <p class="text-center" style="max-width: 600px; margin: -2rem auto 4rem auto; color: var(--text-muted);">
+              Confira alguns dos itens mais procurados em nossa boutique exclusiva em Taubaté.
+            </p>
+            
+            <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+              <!-- Produto 1 -->
+              <div class="glass-card product-card">
+                <div class="product-img-box" style="height: 200px;">
+                  <img src="https://images.unsplash.com/photo-1589722819827-62f7ef77a771?q=80&w=600&auto=format&fit=crop" class="product-img" alt="Ração Royal Canin">
+                  <span class="badge badge-green product-category">Rações</span>
+                </div>
+                <div class="product-details" style="padding: 1.2rem;">
+                  <h3 style="font-size: 1rem; font-weight: 700; height: 40px; margin-bottom: 8px; line-height:1.4;">Ração Royal Canin Premium Cães Adultos 10kg</h3>
+                  <div class="product-price-box">
+                    <span class="product-price" style="font-size: 1.2rem;">R$ 189.90</span>
+                    <a href="#/produtos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Ver Loja</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Produto 2 -->
+              <div class="glass-card product-card">
+                <div class="product-img-box" style="height: 200px;">
+                  <img src="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=600&auto=format&fit=crop" class="product-img" alt="Ração Premiatta">
+                  <span class="badge badge-green product-category">Rações</span>
+                </div>
+                <div class="product-details" style="padding: 1.2rem;">
+                  <h3 style="font-size: 1rem; font-weight: 700; height: 40px; margin-bottom: 8px; line-height:1.4;">Ração Premiatta Gatos Castrados Salmão 1.5kg</h3>
+                  <div class="product-price-box">
+                    <span class="product-price" style="font-size: 1.2rem;">R$ 64.90</span>
+                    <a href="#/produtos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Ver Loja</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Produto 3 -->
+              <div class="glass-card product-card">
+                <div class="product-img-box" style="height: 200px;">
+                  <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=600&auto=format&fit=crop" class="product-img" alt="Kong Classic">
+                  <span class="badge badge-green product-category">Brinquedos</span>
+                </div>
+                <div class="product-details" style="padding: 1.2rem;">
+                  <h3 style="font-size: 1rem; font-weight: 700; height: 40px; margin-bottom: 8px; line-height:1.4;">Brinquedo Mordedor Kong Classic Vermelho M</h3>
+                  <div class="product-price-box">
+                    <span class="product-price" style="font-size: 1.2rem;">R$ 89.90</span>
+                    <a href="#/produtos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Ver Loja</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Produto 4 -->
+              <div class="glass-card product-card">
+                <div class="product-img-box" style="height: 200px;">
+                  <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=600&auto=format&fit=crop" class="product-img" alt="Simparic">
+                  <span class="badge badge-green product-category">Remédios</span>
+                </div>
+                <div class="product-details" style="padding: 1.2rem;">
+                  <h3 style="font-size: 1rem; font-weight: 700; height: 40px; margin-bottom: 8px; line-height:1.4;">Antipulgas/Carrapatos Simparic 20mg (10-20kg)</h3>
+                  <div class="product-price-box">
+                    <span class="product-price" style="font-size: 1.2rem;">R$ 104.90</span>
+                    <a href="#/produtos" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Ver Loja</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Destaques da Boutique (Boutique Highlights) -->
+            <div class="glass-card boutique-banner-card" style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: center; padding: 2.5rem; border-radius: 20px; border: 1px solid var(--glass-border);">
+              <div style="height: 280px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                <img src="img/unnamed (2).jpg" alt="Prateleira de Produtos UPET" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div>
+                <span class="badge badge-green" style="margin-bottom: 1rem;"><i class="fas fa-shopping-bag"></i> Boutique Completa</span>
+                <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #fff;">Visite Nossa Loja Física e Farmácia</h3>
+                <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                  Na UPET, selecionamos apenas os melhores itens do mercado para garantir a saúde e a alegria do seu animal de estimação. Contamos com um estoque completo, atendimento consultivo e estacionamento privativo.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-green);"></i>
+                    <span>Farmácia Completa</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-green);"></i>
+                    <span>Petiscos Saudáveis</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-green);"></i>
+                    <span>Acessórios Exclusivos</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-green);"></i>
+                    <span>Frete Grátis Taubaté*</span>
+                  </div>
+                </div>
+                <a href="#/produtos" class="btn btn-accent">Ver Todo o Catálogo</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- E) PERGUNTAS FREQUENTES (FAQ HOME) -->
+        <div class="home-faq-section" style="padding: 6rem 0; border-top: 1px solid var(--glass-border); background: rgba(15, 23, 42, 0.2);">
+          <div class="container">
+            <div class="section-title">Dúvidas <span>Frequentes</span></div>
+            <p class="text-center" style="max-width: 600px; margin: -2rem auto 4rem auto; color: var(--text-muted);">
+              Tem alguma dúvida sobre nossos procedimentos ou sobre a nossa loja? Veja as respostas rápidas abaixo.
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+              <div class="accordion-item">
+                <div class="accordion-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; cursor: pointer; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; transition: var(--transition-fast);">
+                  <span style="font-weight: 600; font-size: 1.05rem; color: #fff; text-align:left; padding-right:15px;">Preciso agendar o banho e tosa com antecedência?</span>
+                  <i class="fas fa-chevron-down accordion-icon" style="color: var(--accent-green); transition: transform 0.3s ease;"></i>
+                </div>
+                <div class="accordion-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(15, 23, 42, 0.4); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                  <p style="margin: 0; padding: 1.5rem; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; text-align:left;">
+                    Recomendamos agendar com antecedência para garantir o dia e o horário de sua preferência, especialmente às sextas-feiras e sábados. No entanto, você pode entrar em contato para verificar se temos algum encaixe rápido disponível.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; cursor: pointer; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; transition: var(--transition-fast);">
+                  <span style="font-weight: 600; font-size: 1.05rem; color: #fff; text-align:left; padding-right:15px;">Posso acompanhar o banho do meu animal de estimação?</span>
+                  <i class="fas fa-chevron-down accordion-icon" style="color: var(--accent-green); transition: transform 0.3s ease;"></i>
+                </div>
+                <div class="accordion-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(15, 23, 42, 0.4); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                  <p style="margin: 0; padding: 1.5rem; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; text-align:left;">
+                    Sim, com certeza! Dispomos de uma ampla parede de vidro temperado na nossa recepção. Isso permite que você acompanhe visualmente todo o carinho e o processo de banho e estética do seu pet em tempo real.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; cursor: pointer; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; transition: var(--transition-fast);">
+                  <span style="font-weight: 600; font-size: 1.05rem; color: #fff; text-align:left; padding-right:15px;">Quais vacinas meu pet precisa tomar anualmente?</span>
+                  <i class="fas fa-chevron-down accordion-icon" style="color: var(--accent-green); transition: transform 0.3s ease;"></i>
+                </div>
+                <div class="accordion-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(15, 23, 42, 0.4); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                  <p style="margin: 0; padding: 1.5rem; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; text-align:left;">
+                    Para cães, indicamos o reforço anual da vacina múltipla (V10 importada), da vacina de Gripe e da Antirrábica. Para gatos, indicamos a Quádrupla Felina (V4) e a Antirrábica. Nossos médicos veterinários realizam um check-up clínico prévio antes da aplicação de qualquer imunizante.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; cursor: pointer; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; transition: var(--transition-fast);">
+                  <span style="font-weight: 600; font-size: 1.05rem; color: #fff; text-align:left; padding-right:15px;">Como funciona a entrega de produtos (Ração/Remédios)?</span>
+                  <i class="fas fa-chevron-down accordion-icon" style="color: var(--accent-green); transition: transform 0.3s ease;"></i>
+                </div>
+                <div class="accordion-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(15, 23, 42, 0.4); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                  <p style="margin: 0; padding: 1.5rem; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; text-align:left;">
+                    Entregamos em toda a área urbana de Taubaté - SP. Você pode escolher os itens pelo nosso catálogo e fechar no WhatsApp. Em compras acima de R$ 150,00, a entrega é 100% grátis!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- D) SEÇÃO CONTATO E LOCALIZAÇÃO RÁPIDA (BOTTOM HOME) -->
+        <div class="home-contact-section" style="padding: 6rem 0; background: rgba(15, 23, 42, 0.45); border-top: 1px solid var(--glass-border);">
+          <div class="container">
+            <div class="section-title">Onde nos <span>Encontrar</span></div>
+            
+            <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+              <!-- Info à esquerda -->
+              <div class="contact-info-block" style="background: none; border: none; padding: 0;">
+                <div class="contact-info-item" style="margin-bottom: 2rem;">
+                  <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+                  <div class="contact-info-text">
+                    <h4>WhatsApp Corporativo</h4>
+                    <p><a href="https://api.whatsapp.com/send?phone=5512991071043" target="_blank" style="color: var(--accent-green); font-weight: 700; font-size: 1.2rem;">(12) 99107-1043 (Clique para Iniciar)</a></p>
+                  </div>
+                </div>
+
+                <div class="contact-info-item" style="margin-bottom: 2rem;">
+                  <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                  <div class="contact-info-text">
+                    <h4>Endereço Completo</h4>
+                    <p>Av. Maj. Joaquim Monteiro Patto, 31 - Jardim das Moncoes, Taubaté - SP, 12050-620</p>
+                  </div>
+                </div>
+
+                <div class="contact-info-item" style="margin-bottom: 2rem;">
+                  <div class="contact-info-icon"><i class="far fa-clock"></i></div>
+                  <div class="contact-info-text">
+                    <h4>Horário de Funcionamento</h4>
+                    <p>Segunda a Sexta: 08:00 - 19:00 | Sábado: 08:00 - 16:00</p>
+                  </div>
+                </div>
+                
+                <div style="margin-top: 3rem; display: flex; gap: 15px; flex-wrap: wrap;">
+                  <a href="#/contato" class="btn btn-primary"><i class="fas fa-phone-alt"></i> Ver Página de Contato</a>
+                  <a href="#/agendamento" class="btn btn-accent"><i class="far fa-calendar-check"></i> Agendar Atendimento</a>
+                </div>
+              </div>
+
+              <!-- Mapa à direita -->
+              <div class="glass-card" style="padding: 10px; border-radius: 20px; overflow: hidden; height: 350px;">
+                <div class="map-wrapper" style="height: 100%; border-radius: 12px; overflow: hidden;">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.6698944641774!2d-45.5786801!3d-23.0175027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ccc4efaa4618e9%3A0xe5a1b0286e00cfbe!2sAv.%20Maj.%20Joaquim%20Monteiro%20Patto%2C%2031%20-%20Jardim%20das%20Mon%C3%A7%C3%B5es%2C%20Taubat%C3%A9%20-%20SP%2C%2012050-620!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" style="width: 100%; height: 100%; border: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 2: SERVIÇOS (CARDS ANIMADOS) -->
+      <section id="view-servicos" class="page-view">
+        <div class="services-highlight" style="padding-top: 130px;">
+          <div class="container">
+            <div class="section-title">Nossos Serviços <span>Especializados</span></div>
+            <p class="text-center" style="max-width: 600px; margin: -2rem auto 4rem auto; color: var(--text-muted);">
+              Selecione o serviço desejado para conferir preços, benefícios exclusivos, fotos estruturais e perguntas frequentes.
+            </p>
+            
+            <div class="services-grid">
+              <!-- Card 1: Banho e Tosa -->
+              <div class="glass-card service-card">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-bath"></i></div>
+                  <h3>Banho e Tosa</h3>
+                  <p>Higiene completa e corte artístico com cosméticos hipoalergênicos importados e secagem de ruído reduzido.</p>
+                  <img src="img/cachorro1.jpg" class="service-card-img" alt="Banho e Tosa">
+                </div>
+                <a href="#/banho-e-tosa" class="btn btn-primary" style="width: 100%;">Ver Detalhes</a>
+              </div>
+
+              <!-- Card 2: Veterinário -->
+              <div class="glass-card service-card">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-stethoscope"></i></div>
+                  <h3>Veterinário</h3>
+                  <p>Atendimento ambulatorial integral focado no bem-estar, prevenção de enfermidades e longevidade.</p>
+                  <img src="img/unnamed (1).jpg" class="service-card-img" alt="Veterinário">
+                </div>
+                <a href="#/veterinario" class="btn btn-primary" style="width: 100%;">Ver Detalhes</a>
+              </div>
+
+              <!-- Card 3: Vacinação -->
+              <div class="glass-card service-card">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-syringe"></i></div>
+                  <h3>Vacinação</h3>
+                  <p>Imunização canina e felina utilizando vacinas importadas de ponta com carteira de controle digitalizada.</p>
+                  <img src="img/unnamed (5).jpg" class="service-card-img" alt="Vacinação">
+                </div>
+                <a href="#/vacinacao" class="btn btn-primary" style="width: 100%;">Ver Detalhes</a>
+              </div>
+
+              <!-- Card 4: Consultas Médicas -->
+              <div class="glass-card service-card">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-user-md"></i></div>
+                  <h3>Consultas Médicas</h3>
+                  <p>Avaliação física clínica completa, raspados de pele rápidos e indicação a exames especializados.</p>
+                  <img src="img/unnamed (6).jpg" class="service-card-img" alt="Consultas Médicas">
+                </div>
+                <a href="#/consultas" class="btn btn-primary" style="width: 100%;">Ver Detalhes</a>
+              </div>
+
+              <!-- Card 5: Loja Pet -->
+              <div class="glass-card service-card">
+                <div class="service-card-top">
+                  <div class="service-icon-box"><i class="fas fa-shopping-bag"></i></div>
+                  <h3>Loja Pet (Produtos)</h3>
+                  <p>Boutique exclusiva contendo rações super premium, brinquedos interativos de enriquecimento e farmácia.</p>
+                  <img src="img/unnamed (2).jpg" class="service-card-img" alt="Loja Pet">
+                </div>
+                <a href="#/loja-pet" class="btn btn-primary" style="width: 100%;">Ver Detalhes</a>
+              </div>
+            </div>
+            
+            <!-- Banner Especial da Ala Veterinária e Emergências -->
+            <div class="emergency-banner" style="margin-top: 6rem;">
+              <div class="emergency-content">
+                <span class="emergency-tag">Atendimento Veterinário</span>
+                <h3 class="emergency-title">Necessita de Atendimento Urgente?</h3>
+                <p>Nossa equipe veterinária está disponível durante todo o horário comercial de funcionamento para triagem rápida e suporte a intercorrências médicas com agilidade.</p>
+              </div>
+              <div class="emergency-cta">
+                <a href="tel:12991071043" class="btn btn-emergency">
+                  <i class="fas fa-phone-alt"></i> (12) 99107-1043
+                </a>
+              </div>
+            </div>
+
+            <!-- Apresentação da Equipe de Veterinários -->
+            <div class="vet-section">
+              <div class="section-title">Equipe <span>Veterinária</span></div>
+              <div class="vets-grid">
+                <!-- Médico 1 -->
+                <div class="vet-card">
+                  <div class="vet-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop" class="vet-img" alt="Dra. Mariana Silva">
+                  </div>
+                  <div class="vet-info">
+                    <h3>Dra. Mariana Silva</h3>
+                    <span class="vet-crmv">CRMV-SP 45.192</span>
+                    <p class="vet-spec">Clínica Geral & Dermatologia</p>
+                    <p class="vet-desc">Especialista em alergias, infecções cutâneas crônicas e manejo de pele sensível com abordagem terapêutica integrativa.</p>
+                    <div class="vet-hours"><i class="far fa-clock"></i> Segunda a Sexta - 09h às 17h</div>
+                  </div>
+                </div>
+
+                <!-- Médico 2 -->
+                <div class="vet-card">
+                  <div class="vet-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop" class="vet-img" alt="Dr. Roberto Santos">
+                  </div>
+                  <div class="vet-info">
+                    <h3>Dr. Roberto Santos</h3>
+                    <span class="vet-crmv">CRMV-SP 38.271</span>
+                    <p class="vet-spec">Cardiologia & Urgências</p>
+                    <p class="vet-desc">Mais de 12 anos em triagem intensiva, ecocardiogramas, exames de pressão arterial sistólica e monitoramento cardíaco cirúrgico.</p>
+                    <div class="vet-hours"><i class="far fa-clock"></i> Terça a Sábado - 08h às 16h</div>
+                  </div>
+                </div>
+
+                <!-- Médico 3 -->
+                <div class="vet-card">
+                  <div class="vet-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=400&auto=format&fit=crop" class="vet-img" alt="Dra. Camila Nogueira">
+                  </div>
+                  <div class="vet-info">
+                    <h3>Dra. Camila Nogueira</h3>
+                    <span class="vet-crmv">CRMV-SP 52.883</span>
+                    <p class="vet-spec">Medicina Felina & Pediatria</p>
+                    <p class="vet-desc">Abordagem clínica especializada e manuseio sem estresse (Cat-friendly) focado nas particularidades clínicas e comportamentais dos felinos.</p>
+                    <div class="vet-hours"><i class="far fa-clock"></i> Seg, Qua e Sex - 10h às 19h</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA INTERNA AUXILIAR: DETALHES DO SERVIÇO (RENDERIZADO VIA JS) -->
+      <section id="view-servico-detalhe" class="page-view">
+        <!-- O JS de renderização de serviços preencherá esta área de forma dinâmica com banner, tabelas e FAQs -->
+      </section>
+
+      <!-- ABA 3: PRODUTOS (CATÁLOGO MODERNO COM FILTROS E BUSCA) -->
+      <section id="view-produtos" class="page-view">
+        <div class="products-section">
+          <div class="container">
+            <div class="section-title">Nosso Catálogo de <span>Produtos</span></div>
+            
+            <div class="catalog-header">
+              <!-- Barra de Ferramentas de Busca e Filtro de Categorias -->
+              <div class="catalog-actions">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="product-search" class="form-input" placeholder="Pesquisar rações, brinquedos, remédios...">
+                </div>
+                
+                <div class="filter-tabs">
+                  <div class="filter-tab product-filter-tab active" data-category="Todos">Todos</div>
+                  <div class="filter-tab product-filter-tab" data-category="Rações">Rações</div>
+                  <div class="filter-tab product-filter-tab" data-category="Brinquedos">Brinquedos</div>
+                  <div class="filter-tab product-filter-tab" data-category="Remédios">Remédios</div>
+                  <div class="filter-tab product-filter-tab" data-category="Higiene">Higiene</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid de Produtos Renderizado Dinamicamente -->
+            <div id="products-grid" class="products-grid">
+              <!-- Produtos preenchidos via JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 4: GALERIA INTERATIVA (COM LIGHTBOX) -->
+      <section id="view-galeria" class="page-view">
+        <div class="gallery-section">
+          <div class="container">
+            <div class="section-title">Galeria de <span>Clientes Felizes</span></div>
+            <p class="text-center" style="max-width: 600px; margin: -2rem auto 4rem auto; color: var(--text-muted);">
+              Acompanhe fotos reais de alguns dos pets incríveis atendidos no nosso espaço estético e de bem-estar.
+            </p>
+
+            <!-- Abas de Categorias da Galeria -->
+            <div style="display:flex; justify-content:center; gap: 10px; margin-bottom: 3rem; flex-wrap:wrap;">
+              <div class="filter-tab gallery-tab active" data-category="Todos">Ver Tudo</div>
+              <div class="filter-tab gallery-tab" data-category="Banho">Banho</div>
+              <div class="filter-tab gallery-tab" data-category="Tosa">Tosa</div>
+              <div class="filter-tab gallery-tab" data-category="Veterinario">Veterinário</div>
+              <div class="filter-tab gallery-tab" data-category="Dia-a-Dia">Dia a Dia</div>
+            </div>
+
+            <!-- Grid de Mídias -->
+            <div id="gallery-grid" class="gallery-grid">
+              <!-- Preenchido dinamicamente via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 5: SOBRE A UPET -->
+      <section id="view-sobre" class="page-view">
+        <div class="about-section">
+          <div class="container">
+            
+            <div class="about-intro-grid">
+              <div class="about-img-box">
+                <img src="img/unnamed.jpg" class="about-img" alt="Recepção UPET">
+                <div class="glass-card about-badge-exp">
+                  <h4>10+</h4>
+                  <span>Anos cuidando<br>de animais</span>
+                </div>
+              </div>
+              <div class="about-text">
+                <span class="badge badge-green"><i class="fas fa-star"></i> Excelência Comprovada</span>
+                <h2 style="margin-top: 10px;">Quem somos nós</h2>
+                <p>Nascida em Taubaté do desejo profundo de oferecer uma experiência hospitalar e estética humanizada, a <strong>UPET</strong> consolidou-se como referência regional em medicina preventiva e estética de alta qualidade para animais.</p>
+                <p>Nossas instalações reúnem os mais modernos secadores e equipamentos cirúrgicos com técnicas avançadas de manejo comportamental que eliminam a ansiedade e o sofrimento dos pets durante os procedimentos.</p>
+                <p>Nosso compromisso inegociável é estender a qualidade de vida e a alegria do seu companheiro de quatro patas, tratando cada indivíduo com o máximo de carinho e profissionalismo técnico.</p>
+              </div>
+            </div>
+
+            <!-- Missão, Visão, Valores -->
+            <div class="section-title" style="margin-top: 8rem;">Nossa <span>Filosofia</span></div>
+            <div class="values-grid" style="margin-bottom: 5rem;">
+              <div class="glass-card value-card">
+                <div class="value-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Nossa Missão</h3>
+                <p>Proporcionar saúde preventiva e estética premium de excelência técnica, superando as expectativas dos tutores e garantindo felicidade integral e dignidade aos animais de estimação.</p>
+              </div>
+              <div class="glass-card value-card">
+                <div class="value-icon"><i class="far fa-eye"></i></div>
+                <h3>Nossa Visão</h3>
+                <p>Ser a maior e mais qualificada rede de cuidados pet do Vale do Paraíba, servindo de modelo de ética e segurança em manuseio animal e sustentabilidade mercadológica.</p>
+              </div>
+              <div class="glass-card value-card">
+                <div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3>Nossos Valores</h3>
+                <p>Respeito irrestrito à vida animal, transparência nas condutas terapêuticas, contínuo aprimoramento profissional da equipe, afeto genuíno e responsabilidade sanitária.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 6: CONTATO E LOCALIZAÇÃO (MAPA INTEGRADO) -->
+      <section id="view-contato" class="page-view">
+        <div class="contact-section">
+          <div class="container">
+            <div class="section-title">Fale Conosco e <span>Localização</span></div>
+            
+            <div class="contact-grid">
+              
+              <!-- Informações e Mapa -->
+              <div class="contact-info-block">
+                <div class="contact-info-item">
+                  <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+                  <div class="contact-info-text">
+                    <h4>WhatsApp Corporativo</h4>
+                    <p><a href="https://api.whatsapp.com/send?phone=5512991071043" target="_blank">(12) 99107-1043 (Clique aqui)</a></p>
+                  </div>
+                </div>
+
+                <div class="contact-info-item">
+                  <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                  <div class="contact-info-text">
+                    <h4>Telefone Fixo</h4>
+                    <p><a href="tel:1236224455">(12) 3622-4455</a></p>
+                  </div>
+                </div>
+
+                <div class="contact-info-item">
+                  <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                  <div class="contact-info-text">
+                    <h4>Endereço UPET</h4>
+                    <p>Av. Maj. Joaquim Monteiro Patto, 31 - Jardim das Moncoes, Taubaté - SP, 12050-620</p>
+                  </div>
+                </div>
+
+                <!-- Google Maps em Cores Dark/Vidro -->
+                <div class="map-wrapper">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.6698944641774!2d-45.5786801!3d-23.0175027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ccc4efaa4618e9%3A0xe5a1b0286e00cfbe!2sAv.%20Maj.%20Joaquim%20Monteiro%20Patto%2C%2031%20-%20Jardim%20das%20Mon%C3%A7%C3%B5es%2C%20Taubat%C3%A9%20-%20SP%2C%2012050-620!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+
+              <!-- Formulário Interno de Contato -->
+              <div class="glass-card contact-form-card">
+                <h3 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem;">Envie uma Mensagem</h3>
+                <form id="contact-form">
+                  <div class="form-group">
+                    <label class="form-label" for="contact-name">Nome Completo</label>
+                    <input type="text" id="contact-name" class="form-input" placeholder="Ex: Ana de Mello" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-email">Endereço de E-mail</label>
+                    <input type="email" id="contact-email" class="form-input" placeholder="Ex: ana@exemplo.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-subject">Assunto</label>
+                    <input type="text" id="contact-subject" class="form-input" placeholder="Ex: Dúvida sobre vacina ou preço" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-message">Sua Mensagem</label>
+                    <textarea id="contact-message" class="form-textarea" placeholder="Digite detalhadamente a sua solicitação..." required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    <i class="far fa-paper-plane"></i> Enviar Mensagem
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 7: AGENDAMENTO (SISTEMA INTEGRADO COM WHATSAPP) -->
+      <section id="view-agendamento" class="page-view">
+        <div class="booking-section">
+          <div class="container">
+            <div class="booking-grid">
+              
+              <!-- Texto Explicativo à Esquerda -->
+              <div class="booking-info">
+                <span class="badge badge-green"><i class="far fa-calendar-check"></i> Sem Filas ou Demoras</span>
+                <h2>Faça seu Agendamento Online</h2>
+                <p>Preencha os dados do formulário e garanta o horário ideal para os cuidados estéticos ou médicos do seu pet. Nosso sistema integrará os dados diretamente com o atendimento via WhatsApp de forma instantânea e descomplicada!</p>
+                
+                <div class="booking-steps">
+                  <div class="booking-step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                      <h4>Preencha as Informações</h4>
+                      <p>Forneça os detalhes do tutor, o nome do pet e selecione o serviço que ele precisa.</p>
+                    </div>
+                  </div>
+                  <div class="booking-step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                      <h4>Escolha Data e Hora</h4>
+                      <p>Selecione a data desejada e a faixa de horário de sua melhor conveniência comercial.</p>
+                    </div>
+                  </div>
+                  <div class="booking-step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                      <h4>Confirmação no WhatsApp</h4>
+                      <p>Ao confirmar, o site prepara uma mensagem estruturada e abre seu WhatsApp para fechamento imediato.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Formulário Inteligente de Agendamento -->
+              <div class="glass-card booking-form-card">
+                <h3 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+                  Formulário de Pré-Agendamento
+                </h3>
+                <form id="booking-form">
+                  <div class="form-group">
+                    <label class="form-label" for="book-name">Nome do Tutor</label>
+                    <input type="text" id="book-name" class="form-input" placeholder="Seu nome completo" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="book-phone">Telefone de Contato (WhatsApp)</label>
+                    <input type="tel" id="book-phone" class="form-input" placeholder="Ex: (12) 99107-1043" required>
+                  </div>
+                  <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                      <label class="form-label" for="book-pet-name">Nome do Pet</label>
+                      <input type="text" id="book-pet-name" class="form-input" placeholder="Nome do animal" required>
+                    </div>
+                    <div>
+                      <label class="form-label" for="book-pet-breed">Raça / Porte</label>
+                      <input type="text" id="book-pet-breed" class="form-input" placeholder="Ex: Poodle / Pequeno">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="book-service">Serviço Pretendido</label>
+                    <select id="book-service" class="form-select" required>
+                      <!-- Preenchido via Javascript com a base do data.js -->
+                    </select>
+                  </div>
+                  <div class="form-group" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 15px;">
+                    <div>
+                      <label class="form-label" for="book-date">Data Desejada</label>
+                      <input type="date" id="book-date" class="form-input" required>
+                    </div>
+                    <div>
+                      <label class="form-label" for="book-time">Horário</label>
+                      <input type="time" id="book-time" class="form-input" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fab fa-whatsapp"></i> Confirmar Agendamento
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RODAPÉ COMPLETO (FOOTER) -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="#/home" class="logo">
+            <img src="img/logo.jpg" alt="UPET Logo"> UPET
+          </a>
+          <p>Oferecendo saúde, estética de alto padrão e acolhimento familiar com a responsabilidade e o carinho técnico que seu pet merece.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/upet_shop/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=5512991071043" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Links Rápidos</h3>
+          <div class="footer-links">
+            <a href="#/home">Página Inicial</a>
+            <a href="#/servicos">Serviços</a>
+            <a href="#/produtos">Produtos Catálogo</a>
+            <a href="#/galeria">Galeria</a>
+            <a href="#/sobre">Sobre Nós</a>
+            <a href="#/contato">Contato e Endereço</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Nossos Serviços</h3>
+          <div class="footer-links">
+            <a href="#/banho-e-tosa">Banho e Tosa</a>
+            <a href="#/veterinario">Veterinário</a>
+            <a href="#/vacinacao">Vacinação Importada</a>
+            <a href="#/consultas">Consultas Médicas</a>
+            <a href="#/loja-pet">Loja e Boutique</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Horário de Funcionamento</h3>
+          <div class="hours-list">
+            <div class="hours-item"><span>Segunda a Sexta</span> <span>08:00 - 19:00</span></div>
+            <div class="hours-item"><span>Sábado</span> <span>08:00 - 16:00</span></div>
+            <div class="hours-item"><span>Domingo e Feriados</span> <span>Fechado</span></div>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1.5rem; border-left:2px solid var(--accent-green); padding-left:8px;">
+              Emergências médicas atendidas sob triagem durante todo o horário comercial de funcionamento.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>&copy; 2026 UPET Petshop / Banho e Tosa / Veterinário. Todos os direitos reservados.<br>
+        Av. Maj. Joaquim Monteiro Patto, 31 - Jardim das Monções, Taubaté - SP - CEP 12050-620</p>
+      </div>
+    </footer>
+
+  </div> <!-- FIM DO LAYOUT PÚBLICO -->
+
+
+  <!-- =================================================================
+       LAYOUT PRIVADO (PAINEL ADMINISTRATIVO MOCK INTEGRADO)
+       ================================================================= -->
+  <div id="admin-layout" style="display: none;">
+    
+    <!-- 1. TELA DE LOGIN DO ADMIN -->
+    <div id="admin-login-overlay" class="admin-login-overlay">
+      <div class="glass-card admin-login-card">
+        <div class="admin-login-logo" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+          <img src="img/logo.jpg" alt="UPET Logo" style="height: 48px; width: 48px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--glass-border);"> UPET<span>.</span>
+        </div>
+        <h3>Acesso Restrito ao Painel</h3>
+        
+        <form id="admin-login-form">
+          <div class="form-group">
+            <label class="form-label" for="admin-username">Usuário Administrador</label>
+            <input type="text" id="admin-username" class="form-input" placeholder="Ex: admin" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="admin-password">Senha de Segurança</label>
+            <input type="password" id="admin-password" class="form-input" placeholder="Digite sua senha" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+            <i class="fas fa-sign-in-alt"></i> Entrar no Painel
+          </button>
+        </form>
+
+        <div class="admin-login-helper">
+          💡 Dica de Acesso: Use <strong>admin</strong> e senha <strong>admin</strong> para validar o login local.
+        </div>
+        
+        <a href="#/home" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
+          <i class="fas fa-arrow-left"></i> Voltar ao Site Público
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. ESTRUTURA DASHBOARD PAINEL ADMIN -->
+    <div id="admin-wrapper" class="admin-wrapper" style="display: none;">
+      
+      <!-- SIDEBAR DO ADMIN -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-top">
+          <div class="admin-brand" style="display: flex; align-items: center; gap: 8px;">
+            <img src="img/logo.jpg" alt="UPET Logo" style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--glass-border);">
+            <div class="admin-brand-logo">UPET</div>
+            <span class="admin-brand-badge">SaaS</span>
+          </div>
+
+          <div class="admin-menu">
+            <div class="admin-menu-item active" data-sub-target="admin-sub-dashboard">
+              <i class="fas fa-chart-line"></i> Dashboard
+            </div>
+            <div class="admin-menu-item" data-sub-target="admin-sub-agendamentos">
+              <i class="far fa-calendar-alt"></i> Agendamentos
+            </div>
+            <div class="admin-menu-item" data-sub-target="admin-sub-produtos">
+              <i class="fas fa-store"></i> Produtos (CRUD)
+            </div>
+            <div class="admin-menu-item" data-sub-target="admin-sub-mensagens">
+              <i class="far fa-envelope"></i> Contatos Recebidos
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-sidebar-footer">
+          <button id="admin-reset-btn" class="btn btn-secondary" style="padding: 0.5rem; font-size: 0.75rem; width:100%; border-color: rgba(239, 68, 68, 0.2); color:#ef4444;">
+            <i class="fas fa-sync-alt"></i> Redefinir Dados
+          </button>
+          
+          <div class="admin-user">
+            <div class="admin-avatar">AD</div>
+            <div class="admin-user-info">
+              <h4>Administrador UPET</h4>
+              <span>Nível Diretor</span>
+            </div>
+            <button id="admin-logout-btn" style="margin-left: auto; cursor:pointer; color:var(--text-muted);" title="Sair do Painel">
+              <i class="fas fa-power-off"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ÁREA DE CONTEÚDO DINÂMICA DO ADMIN (SUB-VIEWS) -->
+      <main class="admin-content">
+        
+        <!-- SUB-ABA 1: DASHBOARD GERAL -->
+        <div id="admin-sub-dashboard" class="admin-sub-view active">
+          <div class="admin-header-title">
+            <div>
+              <h2>Painel de Visão Geral</h2>
+              <p style="color:var(--text-muted)">Acompanhe dados em tempo real sobre os agendamentos e interações com a sua clínica.</p>
+            </div>
+            <a href="#/home" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Visualizar Site</a>
+          </div>
+
+          <!-- Cards Rápidos de Dados -->
+          <div class="admin-stats-grid">
+            <div class="glass-card stat-card">
+              <div class="stat-card-header">
+                <span class="stat-card-title">Total Agendamentos</span>
+                <div class="stat-icon stat-icon-green"><i class="far fa-calendar-check"></i></div>
+              </div>
+              <div id="admin-stat-agendamentos" class="stat-value">0</div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="stat-card-header">
+                <span class="stat-card-title">Faturamento Estimado</span>
+                <div class="stat-icon stat-icon-blue"><i class="fas fa-hand-holding-usd"></i></div>
+              </div>
+              <div id="admin-stat-faturamento" class="stat-value">R$ 0,00</div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="stat-card-header">
+                <span class="stat-card-title">Itens no Catálogo</span>
+                <div class="stat-icon stat-icon-purple"><i class="fas fa-boxes"></i></div>
+              </div>
+              <div id="admin-stat-produtos" class="stat-value">0</div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="stat-card-header">
+                <span class="stat-card-title">Novos Contatos</span>
+                <div class="stat-icon stat-icon-yellow"><i class="far fa-envelope"></i></div>
+              </div>
+              <div id="admin-stat-mensagens" class="stat-value">0</div>
+            </div>
+          </div>
+
+          <!-- Tabelas Rápidas no Dashboard -->
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;">
+            
+            <!-- Últimos Agendamentos -->
+            <div class="glass-card admin-table-card">
+              <h3 style="font-size: 1.2rem; font-weight: 700;">Atendimentos Recentes</h3>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Pet (Tutor)</th>
+                      <th>Serviço</th>
+                      <th>Data/Hora</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-recent-schedules-tbody">
+                    <!-- Gerado no JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Contatos de Clientes -->
+            <div class="glass-card admin-table-card">
+              <h3 style="font-size: 1.2rem; font-weight: 700;">Mensagens Recentes</h3>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Tutor</th>
+                      <th>Assunto</th>
+                      <th>Status</th>
+                      <th>Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-recent-messages-tbody">
+                    <!-- Gerado no JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-ABA 2: GERENCIAMENTO DE AGENDAMENTOS -->
+        <div id="admin-sub-agendamentos" class="admin-sub-view">
+          <div class="admin-header-title">
+            <div>
+              <h2>Painel de Agendamentos</h2>
+              <p style="color:var(--text-muted)">Gerencie, mude status e entre em contato direto com os tutores sobre as reservas solicitadas.</p>
+            </div>
+          </div>
+
+          <div class="glass-card admin-table-card">
+            <h3 style="font-size: 1.2rem; font-weight: 700; border-bottom:1px solid var(--glass-border); padding-bottom:1rem;">
+              Lista Completa de Agendamentos (Sync com LocalStorage)
+            </h3>
+            
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nome do Pet</th>
+                    <th>Nome do Tutor / Contato</th>
+                    <th>Serviço Desejado</th>
+                    <th>Data & Horário</th>
+                    <th>Status Atual</th>
+                    <th>Ações Rápidas de Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-schedules-tbody">
+                  <!-- Gerado no JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-ABA 3: CRUD COMPLETO DE PRODUTOS -->
+        <div id="admin-sub-produtos" class="admin-sub-view">
+          <div class="admin-header-title">
+            <div>
+              <h2>Gerenciador do Catálogo de Produtos (CRUD)</h2>
+              <p style="color:var(--text-muted)">Crie novos produtos, edite valores e remova itens do catálogo público instantaneamente.</p>
+            </div>
+          </div>
+
+          <div class="admin-form-grid">
+            
+            <!-- Lista Lateral dos Produtos Atuais -->
+            <div class="glass-card">
+              <h3 style="font-size: 1.2rem; font-weight: 700; padding: 1.5rem 1.5rem 0.5rem 1.5rem;">Produtos Atuais</h3>
+              <div id="admin-products-list-container" class="admin-items-list-card">
+                <!-- Inserido dinamicamente via JS -->
+              </div>
+            </div>
+
+            <!-- Formulário CRUD de Produto -->
+            <div class="glass-card" style="padding: 2.5rem;">
+              <h3 id="admin-prod-form-title" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 2rem; border-bottom:1px solid var(--glass-border); padding-bottom:1rem;">
+                Adicionar Novo Produto
+              </h3>
+              
+              <form id="admin-product-form">
+                <input type="hidden" id="admin-prod-id" value="">
+                
+                <div class="form-group">
+                  <label class="form-label" for="admin-prod-name">Nome do Produto *</label>
+                  <input type="text" id="admin-prod-name" class="form-input" placeholder="Ex: Ração Premium Gatos 5kg" required>
+                </div>
+                
+                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                  <div>
+                    <label class="form-label" for="admin-prod-category">Categoria *</label>
+                    <select id="admin-prod-category" class="form-select" required>
+                      <option value="Rações">Rações</option>
+                      <option value="Brinquedos">Brinquedos</option>
+                      <option value="Remédios">Remédios</option>
+                      <option value="Higiene">Higiene</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="form-label" for="admin-prod-price">Preço R$ (Venda) *</label>
+                    <input type="number" step="0.01" id="admin-prod-price" class="form-input" placeholder="Ex: 89.90" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-prod-image">URL da Imagem (Visualização)</label>
+                  <input type="url" id="admin-prod-image" class="form-input" placeholder="URL da foto (Unsplash ou similar)">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-prod-description">Descrição Completa</label>
+                  <textarea id="admin-prod-description" class="form-textarea" placeholder="Descreva os benefícios, componentes e detalhes técnicos..." style="min-height: 90px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-prod-features">Destaques rápidos (Separar por vírgulas)</label>
+                  <input type="text" id="admin-prod-features" class="form-input" placeholder="Ex: Hipoalergênico, Pelagem Macia, Controle de pH">
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 1.5rem;">
+                  <button type="submit" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-save"></i> Salvar Produto
+                  </button>
+                  <button type="button" id="admin-cancel-product-btn" class="btn btn-secondary">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-ABA 4: CAIXA DE MENSAGENS RECEBIDAS -->
+        <div id="admin-sub-mensagens" class="admin-sub-view">
+          <div class="admin-header-title">
+            <div>
+              <h2>Contatos e Mensagens dos Clientes</h2>
+              <p style="color:var(--text-muted)">Acompanhe as dúvidas e mensagens enviadas pelos clientes no site.</p>
+            </div>
+          </div>
+
+          <div id="admin-messages-container">
+            <!-- Renderizado via JS -->
+          </div>
+        </div>
+
+      </main>
+    </div> <!-- FIM DO WRAPPER ADMIN -->
+
+  </div> <!-- FIM DO LAYOUT ADMINISTRATIVO -->
+
+
+  <!-- =================================================================
+       MODAIS E VISUALIZADORES COMUNS A QUALQUER PÁGINA
+       ================================================================= -->
+
+  <!-- A) LIGHTBOX DE FOTOS (GALERIA) -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+      <span id="lightbox-close" class="lightbox-close"><i class="fas fa-times"></i></span>
+      <span id="lightbox-prev" class="lightbox-nav lightbox-prev"><i class="fas fa-chevron-left"></i></span>
+      <span id="lightbox-next" class="lightbox-nav lightbox-next"><i class="fas fa-chevron-right"></i></span>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="Ampliação de Clientes UPET">
+      <div id="lightbox-caption" class="lightbox-caption">Legenda da Foto</div>
+    </div>
+  </div>
+
+  <!-- B) MODAL DE DETALHES DE PRODUTO -->
+  <div id="product-detail-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="product-modal-close" class="modal-close-btn"><i class="fas fa-times"></i></span>
+      <div class="modal-header">
+        <h3 style="font-size: 1.3rem; font-weight:700;"><i class="fas fa-shopping-basket"></i> Detalhes do Produto</h3>
+      </div>
+      <div id="product-modal-body" class="modal-body">
+        <!-- Renderizado dinamicamente pelo js/app.js ao clicar em "Ver Detalhes" -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JavaScript Scripts (CORS-free) -->
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

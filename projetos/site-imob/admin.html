@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Painel Administrativo Fabelle</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-logo">FABELLE ADMIN</div>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuário (admin)" required>
+                <input type="password" id="password" placeholder="Senha (fabelle2026)" required>
+                <button type="submit" class="login-btn">Entrar</button>
+            </form>
+            <p id="error-msg" style="color: var(--color-danger); font-size: 0.8rem; margin-top: 10px; display: none;">Credenciais inválidas.</p>
+            <a href="index.html" class="back-home">← Voltar ao site principal</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            // Simple client-side auth for demonstration
+            if (user === 'admin' && pass === 'fabelle2026') {
+                sessionStorage.setItem('fabelle_admin_auth', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        });
+
+        // Check if already logged in
+        if (sessionStorage.getItem('fabelle_admin_auth') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

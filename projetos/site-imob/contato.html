@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Fabelle Imobiliária</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .page-header {
+            padding: 150px 0 50px;
+            background-color: var(--color-black-light);
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info-card {
+            background-color: var(--color-card);
+            padding: 40px;
+            border: 1px solid var(--color-border);
+            margin-bottom: 20px;
+        }
+
+        .contact-info-card h4 {
+            color: var(--color-gold);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info-card p, .contact-info-card a {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+        }
+
+        .contact-info-card a:hover {
+            color: var(--color-white);
+        }
+
+        .contact-form {
+            background-color: var(--color-card);
+            padding: 40px;
+            border: 1px solid var(--color-border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--color-black);
+            border: 1px solid var(--color-border);
+            color: var(--color-white);
+            font-family: var(--font-body);
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">FABELLE</a>
+            <div class="menu-toggle" id="mobile-menu-btn">☰</div>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html">Início</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="imoveis.html">Imóveis</a>
+                <a href="simulador.html">Simulador</a>
+                <a href="contato.html" class="active">Contato</a>
+            
+                <a href="admin.html" style="color: var(--color-gold); font-weight: 600; border: 1px solid var(--color-gold); padding: 5px 15px; margin-left: 20px; border-radius: 4px;">Painel</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="section-title">Fale Conosco</h1>
+            <p class="section-subtitle">Agende uma visita ou solicite uma consultoria exclusiva</p>
+        </div>
+    </div>
+
+    <main class="home-content section-padding">
+        <div class="container contact-container">
+            <div class="contact-details">
+                <div class="contact-info-card">
+                    <h4>WhatsApp</h4>
+                    <a href="#">(11) 99999-9999</a>
+                </div>
+                <div class="contact-info-card">
+                    <h4>Telefone</h4>
+                    <a href="#">(11) 3000-0000</a>
+                </div>
+                <div class="contact-info-card">
+                    <h4>E-mail</h4>
+                    <a href="#">contato@fabelleimobiliaria.com.br</a>
+                </div>
+                <div class="contact-info-card">
+                    <h4>Endereço</h4>
+                    <p>Av. Brigadeiro Faria Lima, 3000<br>Jardim Paulistano, São Paulo - SP<br>Atendimento com hora marcada.</p>
+                </div>
+                <div class="contact-info-card" style="padding: 0; overflow: hidden; border-color: var(--color-gold);">
+                    <iframe src="https://www.google.com/maps?q=Av.+Brigadeiro+Faria+Lima,+3000,+São+Paulo&output=embed" width="100%" height="280" style="border:0; display: block;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso. Entraremos em contato em breve.');">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone / WhatsApp</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Assunto</label>
+                        <select class="form-control">
+                            <option>Comprar Imóvel</option>
+                            <option>Alugar Imóvel</option>
+                            <option>Vender meu Imóvel</option>
+                            <option>Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-solid" style="width: 100%;">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                &copy; 2026 Fabelle Imobiliária. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+

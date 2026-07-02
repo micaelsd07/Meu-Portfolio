@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabelle Imobiliária | Exclusividade & Alto Padrão</title>
+    <meta name="description" content="Encontre os imóveis mais luxuosos e exclusivos. A Fabelle Imobiliária oferece curadoria de alto padrão para venda e aluguel.">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="loader" class="loader">
+        <div class="loader-logo">F</div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">FABELLE</a>
+            <div class="menu-toggle" id="mobile-menu-btn">☰</div>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="active">Início</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="imoveis.html">Imóveis</a>
+                <a href="simulador.html">Simulador</a>
+                <a href="contato.html">Contato</a>
+            
+                <a href="admin.html" style="color: var(--color-gold); font-weight: 600; border: 1px solid var(--color-gold); padding: 5px 15px; margin-left: 20px; border-radius: 4px;">Painel</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-canvas-container">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <span>Role para Explorar</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="home-content">
+        <!-- Intro -->
+        <section class="section-padding">
+            <div class="container intro-section">
+                <h2>O Ápice da Exclusividade</h2>
+                <p>Na Fabelle, nós entendemos que um imóvel de luxo não é apenas um endereço, é um legado. Nossa curadoria rigorosa seleciona apenas as propriedades mais excepcionais, garantindo sofisticação, conforto e discrição para clientes que exigem o extraordinário.</p>
+                <a href="sobre.html" class="btn btn-solid">Conheça a Imobiliária</a>
+            </div>
+        </section>
+
+        <!-- Featured Properties -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="featured-header">
+                    <h2 class="section-title" style="margin-bottom: 0;">Imóveis em Destaque</h2>
+                    <a href="imoveis.html" class="btn">Ver Todos</a>
+                </div>
+                <div class="property-grid" id="featured-grid">
+                    <!-- Loaded dynamically via js/main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram -->
+        <section class="section-padding instagram-section">
+            <div class="container">
+                <div class="ig-content">
+                    <div class="ig-text">
+                        <h2>Estilo de Vida Premium</h2>
+                        <p>Acompanhe nosso perfil no Instagram para inspirações diárias de arquitetura, design de interiores e acesso antecipado às nossas listagens mais exclusivas.</p>
+                        <a href="https://instagram.com/fabelleimobiliaria" target="_blank" class="btn btn-solid">@fabelleimobiliaria</a>
+                    </div>
+                    <div class="ig-images">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 1" class="ig-img">
+                        <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 2" class="ig-img">
+                        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 3" class="ig-img">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 4" class="ig-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">FABELLE</a>
+                    <p>A sua parceira definitiva na busca pelo imóvel perfeito. Alto padrão, discrição e excelência.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="imoveis.html">Imóveis</a></li>
+                        <li><a href="simulador.html">Simulador</a>
+                <a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="#">(11) 99999-9999</a></li>
+                        <li><a href="#">contato@fabelle.com.br</a></li>
+                        <li><a href="#">Av. Faria Lima, 3000 - SP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Restrito</h4>
+                    <ul>
+                        <li><a href="admin.html">Painel Administrativo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Fabelle Imobiliária. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/hero.js"></script>
+</body>
+</html>
+
+
+

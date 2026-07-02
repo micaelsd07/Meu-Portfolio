@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Fabelle</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <script>
+        // Security check
+        if (sessionStorage.getItem('fabelle_admin_auth') !== 'true') {
+            window.location.href = 'admin.html';
+        }
+    </script>
+</head>
+<body class="admin-body">
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">FABELLE</a>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-item active" data-target="properties-view">Gerenciar Imóveis</div>
+                <div class="nav-item" data-target="contracts-view">Contratos</div>
+            </div>
+            <div class="sidebar-footer">
+                <a href="index.html" target="_blank" style="margin-bottom: 15px;">Ver Site Publicado ↗</a>
+                <a href="#" id="logout-btn">Sair do Sistema</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Properties View -->
+            <section id="properties-view" class="view-section active">
+                <div class="header-bar">
+                    <h2>Imóveis Cadastrados</h2>
+                    <button class="admin-btn" id="btn-new-prop">+ Novo Imóvel</button>
+                </div>
+
+                <div id="prop-modal-overlay" class="modal-overlay">
+                    <div id="prop-form-container" class="admin-form-container">
+                        <button class="modal-close" id="btn-close-prop">&times;</button>
+                        <h3 id="prop-form-title" style="margin-bottom: 20px;">Cadastrar Novo Imóvel</h3>
+                        <form id="prop-form">
+                            <input type="hidden" id="p_id">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Nome / Título</label>
+                                    <input type="text" id="p_title" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Localização</label>
+                                    <input type="text" id="p_location" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Preço (texto, ex: R$ 5.000.000)</label>
+                                    <input type="text" id="p_price" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Negociação</label>
+                                    <select id="p_type" class="admin-input">
+                                        <option value="venda">Venda</option>
+                                        <option value="aluguel">Aluguel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Área Construída (m²)</label>
+                                    <input type="number" id="p_area" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Área do Terreno (m²)</label>
+                                    <input type="number" id="p_landArea" class="admin-input" placeholder="Opcional">
+                                </div>
+                                <div class="form-group">
+                                    <label>Quartos</label>
+                                    <input type="number" id="p_beds" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Suítes</label>
+                                    <input type="number" id="p_suites" class="admin-input" placeholder="Opcional">
+                                </div>
+                                <div class="form-group">
+                                    <label>Banheiros</label>
+                                    <input type="number" id="p_baths" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vagas Totais</label>
+                                    <input type="number" id="p_garages" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vagas Cobertas</label>
+                                    <input type="number" id="p_coveredGarages" class="admin-input" placeholder="Opcional">
+                                </div>
+                                <div class="form-group">
+                                    <label>IPTU Mensal</label>
+                                    <input type="text" id="p_iptu" class="admin-input" placeholder="Ex: R$ 350">
+                                </div>
+                                <div class="form-group">
+                                    <label>Condomínio</label>
+                                    <input type="text" id="p_condo" class="admin-input" placeholder="Ex: R$ 1.200">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select id="p_status" class="admin-input">
+                                        <option value="disponivel">Disponível</option>
+                                        <option value="vendido">Vendido</option>
+                                        <option value="alugado">Alugado</option>
+                                        <option value="inativo">Inativo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group image-upload-wrapper">
+                                    <label>Fotos do Imóvel (Selecione uma ou mais)</label>
+                                    <div class="image-preview-gallery" id="p_image_preview_gallery">
+                                        <div style="color: var(--color-text-muted); padding: 20px;">Nenhuma imagem selecionada</div>
+                                    </div>
+                                    <input type="file" id="p_image_file" class="admin-input" accept="image/*" multiple>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Diferenciais (separados por vírgula)</label>
+                                    <input type="text" id="p_diffs" class="admin-input" placeholder="Piscina, Academia, Vista...">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Descrição Completa</label>
+                                    <textarea id="p_desc" class="admin-input" rows="4" required></textarea>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button type="submit" class="admin-btn">Salvar Imóvel</button>
+                                <button type="button" class="admin-btn secondary" id="btn-cancel-prop">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <table class="admin-table" id="prop-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Localização</th>
+                            <th>Tipo</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Contracts View -->
+            <section id="contracts-view" class="view-section">
+                <div class="header-bar">
+                    <h2>Contratos</h2>
+                    <button class="admin-btn" id="btn-new-contract">+ Novo Contrato</button>
+                </div>
+
+                <div id="contract-modal-overlay" class="modal-overlay">
+                    <div id="contract-form-container" class="admin-form-container">
+                        <button class="modal-close" id="btn-close-contract">&times;</button>
+                        <h3 style="margin-bottom: 20px;">Cadastrar Contrato</h3>
+                        <form id="contract-form">
+                            <input type="hidden" id="c_id">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Imóvel Vinculado</label>
+                                    <select id="c_propId" class="admin-input" required>
+                                        <!-- Populated dynamically -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nome do Cliente</label>
+                                    <input type="text" id="c_client" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo de Contrato</label>
+                                    <select id="c_type" class="admin-input">
+                                        <option value="venda">Venda</option>
+                                        <option value="aluguel">Locação</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor Acordado (R$)</label>
+                                    <input type="text" id="c_value" class="admin-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Data de Assinatura</label>
+                                    <input type="date" id="c_date" class="admin-input" required>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button type="submit" class="admin-btn">Salvar Contrato</button>
+                                <button type="button" class="admin-btn secondary" id="btn-cancel-contract">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <table class="admin-table" id="contract-table">
+                    <thead>
+                        <tr>
+                            <th>Imóvel</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

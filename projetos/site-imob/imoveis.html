@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imóveis | Fabelle Imobiliária</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .page-header {
+            padding: 150px 0 50px;
+            background-color: var(--color-black-light);
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">FABELLE</a>
+            <div class="menu-toggle" id="mobile-menu-btn">☰</div>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html">Início</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="imoveis.html" class="active">Imóveis</a>
+                <a href="simulador.html">Simulador</a>
+                <a href="contato.html">Contato</a>
+            
+                <a href="admin.html" style="color: var(--color-gold); font-weight: 600; border: 1px solid var(--color-gold); padding: 5px 15px; margin-left: 20px; border-radius: 4px;">Painel</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="section-title">Portfólio Exclusivo</h1>
+            <p class="section-subtitle">Descubra propriedades extraordinárias selecionadas para você</p>
+        </div>
+    </div>
+
+    <main class="home-content section-padding">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="venda">Venda</button>
+                <button class="filter-btn" data-filter="aluguel">Aluguel</button>
+            </div>
+
+            <div class="property-grid" id="properties-grid">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding-top: 0;">
+                &copy; 2026 Fabelle Imobiliária. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('properties-grid');
+            const buttons = document.querySelectorAll('.filter-btn');
+            const allProperties = getProperties().filter(p => p.status === 'disponivel');
+
+            function renderGrid(filter) {
+                grid.innerHTML = '';
+                let filtered = allProperties;
+                
+                if (filter !== 'all') {
+                    filtered = allProperties.filter(p => p.type === filter);
+                }
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = '<p style="color: var(--color-text-muted); grid-column: 1 / -1; text-align: center;">Nenhum imóvel encontrado nesta categoria.</p>';
+                    return;
+                }
+
+                filtered.forEach(prop => {
+                    const card = document.createElement('a');
+                    card.href = `imovel.html?id=${prop.id}`;
+                    card.className = 'property-card';
+                    
+                    const typeLabel = prop.type === 'venda' ? 'Venda' : 'Aluguel';
+                    
+                    card.innerHTML = `
+                        <div class="property-image-wrapper">
+                            <img src="${prop.image}" alt="${prop.title}" class="property-image">
+                            <div class="property-badge">${typeLabel}</div>
+                        </div>
+                        <div class="property-info">
+                            <h3 class="property-title">${prop.title}</h3>
+                            <p class="property-location">${prop.location}</p>
+                            <p class="property-price">${prop.price}</p>
+                            <div class="property-specs">
+                                <span>${prop.area}m²</span>
+                                <span>•</span>
+                                <span>${prop.bedrooms} Quartos</span>
+                                <span>•</span>
+                                <span>${prop.bathrooms} Banhos</span>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderGrid(e.target.dataset.filter);
+                });
+            });
+
+            // Initial render
+            renderGrid('all');
+        });
+    </script>
+</body>
+</html>
+
+
+

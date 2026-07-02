@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Imóvel - Fabelle CRM</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563eb',
+                            hover: '#1d4ed8'
+                        },
+                        slate: {
+                            850: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* light gray */
+            color: #334155;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- UI Components (Shadcn-like) ---
+        
+        const Card = ({ children, className = "" }) => (
+            <div className={`bg-white rounded-xl border border-slate-200 shadow-sm ${className}`}>
+                {children}
+            </div>
+        );
+
+        const CardHeader = ({ children, className = "" }) => (
+            <div className={`p-6 pb-4 border-b border-slate-100 ${className}`}>
+                {children}
+            </div>
+        );
+
+        const CardTitle = ({ children }) => (
+            <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                {children}
+            </h3>
+        );
+
+        const CardContent = ({ children, className = "" }) => (
+            <div className={`p-6 ${className}`}>
+                {children}
+            </div>
+        );
+
+        const Label = ({ children, className = "" }) => (
+            <label className={`block text-sm font-medium text-slate-700 mb-1.5 ${className}`}>
+                {children}
+            </label>
+        );
+
+        const Input = ({ className = "", icon: Icon, ...props }) => (
+            <div className="relative">
+                {Icon && (
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide={Icon} className="w-4 h-4 text-slate-400"></i>
+                    </div>
+                )}
+                <input 
+                    className={`w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors shadow-sm
+                    ${Icon ? 'pl-9' : ''} ${className}`}
+                    {...props}
+                />
+            </div>
+        );
+
+        const Select = ({ className = "", children, ...props }) => (
+            <select 
+                className={`w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors shadow-sm appearance-none ${className}`}
+                style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.5rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em', paddingRight: '2.5rem' }}
+                {...props}
+            >
+                {children}
+            </select>
+        );
+
+        const Checkbox = ({ id, label, checked, onChange, className="" }) => (
+            <div className={`flex items-center space-x-2 ${className}`}>
+                <input 
+                    type="checkbox" 
+                    id={id}
+                    checked={checked}
+                    onChange={onChange}
+                    className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary transition-all cursor-pointer"
+                />
+                <label htmlFor={id} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-slate-700 cursor-pointer">
+                    {label}
+                </label>
+            </div>
+        );
+
+        const Button = ({ children, variant = "primary", className = "", icon: Icon, ...props }) => {
+            const baseClass = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 px-4 py-2 shadow-sm";
+            const variants = {
+                primary: "bg-primary text-white hover:bg-primary-hover",
+                outline: "border border-slate-200 bg-white hover:bg-slate-100 text-slate-800",
+                ghost: "hover:bg-slate-100 hover:text-slate-900 shadow-none",
+                secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200"
+            };
+            return (
+                <button className={`${baseClass} ${variants[variant]} ${className}`} {...props}>
+                    {Icon && <i data-lucide={Icon} className="w-4 h-4 mr-2"></i>}
+                    {children}
+                </button>
+            );
+        };
+
+        const Textarea = ({ className = "", ...props }) => (
+            <textarea 
+                className={`flex min-h-[120px] w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors shadow-sm ${className}`}
+                {...props}
+            />
+        );
+
+        const NumberInput = ({ label, value, onChange }) => (
+            <div className="flex flex-col items-center justify-center p-3 border border-slate-200 rounded-lg bg-slate-50">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{label}</span>
+                <div className="flex items-center bg-white border border-slate-200 rounded-md overflow-hidden shadow-sm">
+                    <button 
+                        type="button"
+                        onClick={() => onChange(Math.max(0, value - 1))}
+                        className="px-3 py-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors focus:outline-none"
+                    >
+                        <i data-lucide="minus" className="w-4 h-4"></i>
+                    </button>
+                    <div className="w-12 text-center font-medium text-slate-800 text-sm">
+                        {value}
+                    </div>
+                    <button 
+                        type="button"
+                        onClick={() => onChange(value + 1)}
+                        className="px-3 py-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors focus:outline-none"
+                    >
+                        <i data-lucide="plus" className="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        );
+
+        // --- Main Dashboard Component ---
+
+        const NewPropertyDashboard = () => {
+            const [activeTab, setActiveTab] = useState('valores');
+
+            // Form State
+            const [state, setState] = useState({
+                // Valores
+                negocio: { venda: true, locacao: false, temporada: false, estudante: false, permuta: false },
+                preco: '', precoM2: '', precoPromo: '',
+                moeda: 'BRL', financiamento: 'Nao informado', iptuPagamento: '',
+                condominio: '', iptu: '',
+                situacao: 'Ativo', estadoAtual: '', ocupacao: '',
+                
+                // Localização
+                cep: '', endereco: '', numero: '', complemento: '', quadra: '', lote: '',
+                bairroComercial: '', bairroOficial: '',
+                cidade: '', uf: '', pais: 'Brasil',
+                referencia: '', condominioFechado: false,
+
+                // Detalhes
+                dormitorios: 0, suites: 0, suitesCloset: 0, demiSuites: 0,
+                salasTotal: 0, salaEstar: 0, salaJantar: 0, salaTv: 0,
+                garagensTotal: 0, garagensCobertas: 0, garagensDescobertas: 0, banheiros: 0,
+                andares: 0, elevadores: 0, ambientes: 0,
+
+                // Áreas
+                areaConstruida: '', areaUtil: '', areaTotalTerreno: '', areaComum: '', areaPrivativa: '', areaTotal: '',
+                peDireito: '', dimensaoTerreno: '', distanciaMar: '',
+                medida: 'm2', face: '', isolamento: '', posicao: '',
+
+                // Internet/Anuncios
+                portais: { chavesNaMao: false, grupoZap: false },
+                publicar: { siteEmpresa: true, oportunidade: false, destaque: false, valorConsulta: false, valorNegociavel: false, univenTv: false },
+                descricao: ''
+            });
+
+            // Handle Input Change
+            const handleChange = (e) => {
+                const { name, value, type, checked } = e.target;
+                setState(prev => ({
+                    ...prev,
+                    [name]: type === 'checkbox' ? checked : value
+                }));
+            };
+
+            const handleNestedChange = (category, field, value) => {
+                setState(prev => ({
+                    ...prev,
+                    [category]: {
+                        ...prev[category],
+                        [field]: value
+                    }
+                }));
+            };
+
+            const handleNumberChange = (field, value) => {
+                setState(prev => ({ ...prev, [field]: value }));
+            };
+
+            // Re-initialize Lucide icons when component renders
+            useEffect(() => {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            });
+
+            const tabs = [
+                { id: 'valores', label: 'Valores', icon: 'dollar-sign' },
+                { id: 'localizacao', label: 'Localização', icon: 'map-pin' },
+                { id: 'detalhes', label: 'Detalhes', icon: 'list' },
+                { id: 'areas', label: 'Áreas', icon: 'ruler' },
+                { id: 'anuncios', label: 'Internet e Anúncios', icon: 'globe' },
+            ];
+
+            return (
+                <div className="min-h-screen flex flex-col md:flex-row bg-slate-50">
+                    
+                    {/* Left Sidebar - Mídias */}
+                    <aside className="w-full md:w-80 bg-white border-r border-slate-200 flex flex-col shrink-0">
+                        <div className="p-4 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10">
+                            <h2 className="font-semibold text-slate-800 flex items-center gap-2">
+                                <i data-lucide="image" className="w-5 h-5 text-primary"></i>
+                                Mídias do Imóvel
+                            </h2>
+                        </div>
+                        <div className="p-4 flex-1 overflow-y-auto">
+                            <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors cursor-pointer group mb-6">
+                                <div className="w-12 h-12 bg-blue-50 text-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload-cloud" className="w-6 h-6"></i>
+                                </div>
+                                <h3 className="text-sm font-semibold text-slate-800 mb-1">Arraste fotos e vídeos aqui</h3>
+                                <p className="text-xs text-slate-500 mb-4">PNG, JPG, MP4 até 50MB</p>
+                                <Button>SELECIONE...</Button>
+                            </div>
+
+                            <div>
+                                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Vídeos e Mídias Cadastradas</h4>
+                                <div className="bg-slate-50 rounded-lg border border-slate-200 border-dashed p-6 text-center">
+                                    <i data-lucide="folder-open" className="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+                                    <p className="text-sm text-slate-500">Nenhuma mídia adicionada ainda.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 flex flex-col h-screen overflow-hidden">
+                        
+                        {/* Header */}
+                        <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+                            <div>
+                                <h1 className="text-2xl font-bold text-slate-800">Novo Imóvel</h1>
+                                <p className="text-sm text-slate-500">Preencha os dados para cadastrar um novo imóvel no sistema.</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Button variant="outline" icon="x">Cancelar</Button>
+                                <Button icon="save">Salvar Imóvel</Button>
+                            </div>
+                        </header>
+
+                        {/* Form Content Scrollable Area */}
+                        <div className="flex-1 overflow-y-auto p-6">
+                            <div className="max-w-5xl mx-auto space-y-6">
+                                
+                                {/* Tabs Navigation */}
+                                <div className="bg-white p-1 rounded-lg border border-slate-200 inline-flex shadow-sm mb-2 overflow-x-auto max-w-full">
+                                    {tabs.map(tab => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => setActiveTab(tab.id)}
+                                            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap ${activeTab === tab.id ? 'bg-primary text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
+                                        >
+                                            <i data-lucide={tab.icon} className="w-4 h-4"></i>
+                                            {tab.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Tab Content: Valores */}
+                                {activeTab === 'valores' && (
+                                    <div className="space-y-6 animate-in fade-in duration-300">
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle><i data-lucide="tag" className="w-5 h-5 text-primary"></i> Finalidade do Negócio</CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="flex flex-wrap gap-6 border-b border-slate-100">
+                                                <Checkbox id="venda" label="Venda" checked={state.negocio.venda} onChange={e => handleNestedChange('negocio', 'venda', e.target.checked)} />
+                                                <Checkbox id="locacao" label="Locação" checked={state.negocio.locacao} onChange={e => handleNestedChange('negocio', 'locacao', e.target.checked)} />
+                                                <Checkbox id="temporada" label="Temporada" checked={state.negocio.temporada} onChange={e => handleNestedChange('negocio', 'temporada', e.target.checked)} />
+                                                <Checkbox id="estudante" label="Estudante" checked={state.negocio.estudante} onChange={e => handleNestedChange('negocio', 'estudante', e.target.checked)} />
+                                                <Checkbox id="permuta" label="Permuta" checked={state.negocio.permuta} onChange={e => handleNestedChange('negocio', 'permuta', e.target.checked)} />
+                                            </CardContent>
+                                            <CardContent className="space-y-6">
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                    <div>
+                                                        <Label>Preço do Imóvel</Label>
+                                                        <Input placeholder="R$ 0,00" name="preco" value={state.preco} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Preço por m²</Label>
+                                                        <Input placeholder="R$ 0,00" name="precoM2" value={state.precoM2} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Preço Promocional</Label>
+                                                        <Input placeholder="R$ 0,00" name="precoPromo" value={state.precoPromo} onChange={handleChange} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                                                    <div>
+                                                        <Label>Valor do Condomínio</Label>
+                                                        <Input placeholder="R$ 0,00" name="condominio" value={state.condominio} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Valor do IPTU</Label>
+                                                        <Input placeholder="R$ 0,00" name="iptu" value={state.iptu} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Pagamento do IPTU</Label>
+                                                        <Select name="iptuPagamento" value={state.iptuPagamento} onChange={handleChange}>
+                                                            <option value="">Selecione...</option>
+                                                            <option value="mensal">Mensal</option>
+                                                            <option value="anual">Anual</option>
+                                                        </Select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 border-t border-slate-100">
+                                                    <div>
+                                                        <Label>Moeda</Label>
+                                                        <Select name="moeda" value={state.moeda} onChange={handleChange}>
+                                                            <option value="BRL">Real (R$)</option>
+                                                            <option value="USD">Dólar (US$)</option>
+                                                            <option value="EUR">Euro (€)</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Aceita Financiamento?</Label>
+                                                        <Select name="financiamento" value={state.financiamento} onChange={handleChange}>
+                                                            <option value="Nao informado">Não informado</option>
+                                                            <option value="Sim">Sim</option>
+                                                            <option value="Nao">Não</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Estado Atual</Label>
+                                                        <Select name="estadoAtual" value={state.estadoAtual} onChange={handleChange}>
+                                                            <option value="">Selecione...</option>
+                                                            <option value="novo">Novo / Na Planta</option>
+                                                            <option value="usado">Usado</option>
+                                                            <option value="reforma">Necessita Reforma</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Situação do Cadastro</Label>
+                                                        <Select name="situacao" value={state.situacao} onChange={handleChange}>
+                                                            <option value="Ativo">Ativo</option>
+                                                            <option value="Inativo">Inativo</option>
+                                                            <option value="Vendido">Vendido</option>
+                                                            <option value="Alugado">Alugado</option>
+                                                        </Select>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                )}
+
+                                {/* Tab Content: Localização */}
+                                {activeTab === 'localizacao' && (
+                                    <div className="space-y-6 animate-in fade-in duration-300">
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle><i data-lucide="map" className="w-5 h-5 text-primary"></i> Endereço e Localização</CardTitle>
+                                            </CardHeader>
+                                            <CardContent>
+                                                <div className="flex flex-col lg:flex-row gap-8">
+                                                    
+                                                    {/* Map Placeholder */}
+                                                    <div className="lg:w-1/3">
+                                                        <div className="w-full h-64 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative group">
+                                                            <img src="https://maps.googleapis.com/maps/api/staticmap?center=-23.550520,-46.633308&zoom=14&size=600x400&maptype=roadmap&style=feature:all|element:labels.text.fill|color:0x333333&style=feature:poi|element:all|visibility:off&style=feature:water|element:geometry|color:0xcbd5e1&key=YOUR_API_KEY" 
+                                                                alt="Map Placeholder" className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" 
+                                                                onError={(e) => { e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 300"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="16" fill="%2394a3b8">Google Maps Placeholder</text></svg>' }}
+                                                            />
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
+                                                            <div className="absolute bottom-3 left-3 bg-white px-3 py-1.5 rounded shadow text-xs font-medium text-slate-700 flex items-center gap-1.5">
+                                                                <i data-lucide="map-pin" className="w-3 h-3 text-red-500"></i> Atualizar pino no mapa
+                                                            </div>
+                                                        </div>
+                                                        <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                                                            <p className="text-sm text-blue-800 flex items-start gap-2">
+                                                                <i data-lucide="info" className="w-4 h-4 mt-0.5 shrink-0"></i>
+                                                                Digite o CEP e o endereço para posicionar o imóvel no mapa automaticamente.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Address Fields */}
+                                                    <div className="lg:w-2/3 space-y-5">
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                            <div>
+                                                                <Label>CEP</Label>
+                                                                <Input icon="map" placeholder="00000-000" name="cep" value={state.cep} onChange={handleChange} />
+                                                            </div>
+                                                            <div className="flex items-end">
+                                                                <Button variant="secondary" className="w-full">Buscar CEP</Button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                                            <div className="md:col-span-2">
+                                                                <Label>Endereço / Logradouro</Label>
+                                                                <Input placeholder="Av. Paulista..." name="endereco" value={state.endereco} onChange={handleChange} />
+                                                            </div>
+                                                            <div>
+                                                                <Label>Número</Label>
+                                                                <Input placeholder="1000" name="numero" value={state.numero} onChange={handleChange} />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                                            <div>
+                                                                <Label>Complemento</Label>
+                                                                <Input placeholder="Apto 45, Bloco B..." name="complemento" value={state.complemento} onChange={handleChange} />
+                                                            </div>
+                                                            <div>
+                                                                <Label>Quadra</Label>
+                                                                <Input name="quadra" value={state.quadra} onChange={handleChange} />
+                                                            </div>
+                                                            <div>
+                                                                <Label>Lote</Label>
+                                                                <Input name="lote" value={state.lote} onChange={handleChange} />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                                            <div>
+                                                                <Label>Bairro Comercial</Label>
+                                                                <Input name="bairroComercial" value={state.bairroComercial} onChange={handleChange} />
+                                                            </div>
+                                                            <div>
+                                                                <Label>Bairro Oficial (IPTU)</Label>
+                                                                <Input name="bairroOficial" value={state.bairroOficial} onChange={handleChange} />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 border-t border-slate-100 pt-5">
+                                                            <div>
+                                                                <Label>Cidade</Label>
+                                                                <Select name="cidade" value={state.cidade} onChange={handleChange}>
+                                                                    <option value="">Selecione...</option>
+                                                                    <option value="SP">São Paulo</option>
+                                                                    <option value="RJ">Rio de Janeiro</option>
+                                                                </Select>
+                                                            </div>
+                                                            <div>
+                                                                <Label>Estado (UF)</Label>
+                                                                <Select name="uf" value={state.uf} onChange={handleChange}>
+                                                                    <option value="">UF</option>
+                                                                    <option value="SP">SP</option>
+                                                                    <option value="RJ">RJ</option>
+                                                                </Select>
+                                                            </div>
+                                                            <div>
+                                                                <Label>País</Label>
+                                                                <Select name="pais" value={state.pais} onChange={handleChange}>
+                                                                    <option value="Brasil">Brasil</option>
+                                                                </Select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <Label>Ponto de Referência</Label>
+                                                            <Input placeholder="Próximo ao parque..." name="referencia" value={state.referencia} onChange={handleChange} />
+                                                        </div>
+
+                                                        <div className="pt-2">
+                                                            <Checkbox 
+                                                                id="condominioFechado" 
+                                                                label="Este imóvel fica em um Condomínio Fechado" 
+                                                                checked={state.condominioFechado} 
+                                                                onChange={handleChange} 
+                                                                name="condominioFechado" 
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                )}
+
+                                {/* Tab Content: Detalhes */}
+                                {activeTab === 'detalhes' && (
+                                    <div className="space-y-6 animate-in fade-in duration-300">
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle><i data-lucide="layers" className="w-5 h-5 text-primary"></i> Características e Estrutura</CardTitle>
+                                            </CardHeader>
+                                            <CardContent>
+                                                <div className="space-y-10">
+                                                    
+                                                    {/* Quartos */}
+                                                    <div>
+                                                        <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2 pb-2 border-b border-slate-100">
+                                                            <i data-lucide="bed" className="w-4 h-4 text-slate-400"></i> Dormitórios e Suítes
+                                                        </h4>
+                                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                            <NumberInput label="Dormitórios" value={state.dormitorios} onChange={(v) => handleNumberChange('dormitorios', v)} />
+                                                            <NumberInput label="Suítes" value={state.suites} onChange={(v) => handleNumberChange('suites', v)} />
+                                                            <NumberInput label="Suítes c/ Closet" value={state.suitesCloset} onChange={(v) => handleNumberChange('suitesCloset', v)} />
+                                                            <NumberInput label="Demi-suítes" value={state.demiSuites} onChange={(v) => handleNumberChange('demiSuites', v)} />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Salas */}
+                                                    <div>
+                                                        <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2 pb-2 border-b border-slate-100">
+                                                            <i data-lucide="sofa" className="w-4 h-4 text-slate-400"></i> Salas e Ambientes
+                                                        </h4>
+                                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                            <NumberInput label="Salas (Total)" value={state.salasTotal} onChange={(v) => handleNumberChange('salasTotal', v)} />
+                                                            <NumberInput label="Sala de Estar" value={state.salaEstar} onChange={(v) => handleNumberChange('salaEstar', v)} />
+                                                            <NumberInput label="Sala de Jantar" value={state.salaJantar} onChange={(v) => handleNumberChange('salaJantar', v)} />
+                                                            <NumberInput label="Salas de TV" value={state.salaTv} onChange={(v) => handleNumberChange('salaTv', v)} />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Garagens */}
+                                                    <div>
+                                                        <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2 pb-2 border-b border-slate-100">
+                                                            <i data-lucide="car" className="w-4 h-4 text-slate-400"></i> Vagas e Banheiros
+                                                        </h4>
+                                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                            <NumberInput label="Garagens (Total)" value={state.garagensTotal} onChange={(v) => handleNumberChange('garagensTotal', v)} />
+                                                            <NumberInput label="G. Cobertas" value={state.garagensCobertas} onChange={(v) => handleNumberChange('garagensCobertas', v)} />
+                                                            <NumberInput label="G. Descobertas" value={state.garagensDescobertas} onChange={(v) => handleNumberChange('garagensDescobertas', v)} />
+                                                            <NumberInput label="Banheiros" value={state.banheiros} onChange={(v) => handleNumberChange('banheiros', v)} />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Estrutura */}
+                                                    <div>
+                                                        <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2 pb-2 border-b border-slate-100">
+                                                            <i data-lucide="building" className="w-4 h-4 text-slate-400"></i> Estrutura do Prédio/Casa
+                                                        </h4>
+                                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                            <NumberInput label="Nº de Andares" value={state.andares} onChange={(v) => handleNumberChange('andares', v)} />
+                                                            <NumberInput label="Elevadores" value={state.elevadores} onChange={(v) => handleNumberChange('elevadores', v)} />
+                                                            <NumberInput label="Living/Ambientes" value={state.ambientes} onChange={(v) => handleNumberChange('ambientes', v)} />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                )}
+
+                                {/* Tab Content: Áreas */}
+                                {activeTab === 'areas' && (
+                                    <div className="space-y-6 animate-in fade-in duration-300">
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle><i data-lucide="maximize" className="w-5 h-5 text-primary"></i> Dimensões e Áreas</CardTitle>
+                                            </CardHeader>
+                                            <CardContent>
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                                    <div>
+                                                        <Label>Área Construída</Label>
+                                                        <Input name="areaConstruida" value={state.areaConstruida} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Área Útil</Label>
+                                                        <Input name="areaUtil" value={state.areaUtil} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Área Total do Terreno</Label>
+                                                        <Input name="areaTotalTerreno" value={state.areaTotalTerreno} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Área Comum</Label>
+                                                        <Input name="areaComum" value={state.areaComum} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Área Privativa</Label>
+                                                        <Input name="areaPrivativa" value={state.areaPrivativa} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Área Total</Label>
+                                                        <Input name="areaTotal" value={state.areaTotal} onChange={handleChange} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-100">
+                                                    <div>
+                                                        <Label>Pé Direito</Label>
+                                                        <Input name="peDireito" value={state.peDireito} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Dimensão do Terreno</Label>
+                                                        <Input placeholder="Ex: 10x25" name="dimensaoTerreno" value={state.dimensaoTerreno} onChange={handleChange} />
+                                                    </div>
+                                                    <div>
+                                                        <Label>Distância do Mar (metros)</Label>
+                                                        <Input type="number" name="distanciaMar" value={state.distanciaMar} onChange={handleChange} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-6 mt-6 border-t border-slate-100 bg-slate-50 -mx-6 px-6 pb-6 rounded-b-xl">
+                                                    <div>
+                                                        <Label>Medida Padrão</Label>
+                                                        <Select name="medida" value={state.medida} onChange={handleChange}>
+                                                            <option value="m2">Metros Quadrados (m²)</option>
+                                                            <option value="ha">Hectares (ha)</option>
+                                                            <option value="alqueire">Alqueires</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Face</Label>
+                                                        <Select name="face" value={state.face} onChange={handleChange}>
+                                                            <option value="">Selecione...</option>
+                                                            <option value="norte">Norte</option>
+                                                            <option value="sul">Sul</option>
+                                                            <option value="leste">Leste</option>
+                                                            <option value="oeste">Oeste</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Isolamento</Label>
+                                                        <Select name="isolamento" value={state.isolamento} onChange={handleChange}>
+                                                            <option value="">Selecione...</option>
+                                                            <option value="isolado">Isolado</option>
+                                                            <option value="geminado">Geminado</option>
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                        <Label>Posição</Label>
+                                                        <Select name="posicao" value={state.posicao} onChange={handleChange}>
+                                                            <option value="">Selecione...</option>
+                                                            <option value="frente">Frente</option>
+                                                            <option value="fundos">Fundos</option>
+                                                            <option value="lateral">Lateral</option>
+                                                        </Select>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                )}
+
+                                {/* Tab Content: Internet e Anúncios */}
+                                {activeTab === 'anuncios' && (
+                                    <div className="space-y-6 animate-in fade-in duration-300">
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle><i data-lucide="globe" className="w-5 h-5 text-primary"></i> Publicação e Descrição</CardTitle>
+                                            </CardHeader>
+                                            <CardContent>
+                                                <div className="flex flex-col md:flex-row gap-8">
+                                                    
+                                                    {/* Configurações laterais */}
+                                                    <div className="md:w-1/3 space-y-6">
+                                                        <div>
+                                                            <h4 className="text-sm font-semibold text-slate-800 mb-3 border-b border-slate-100 pb-2">Portais de Integração</h4>
+                                                            <div className="space-y-3">
+                                                                <Checkbox id="chavesNaMao" label="Chaves na Mão" checked={state.portais.chavesNaMao} onChange={e => handleNestedChange('portais', 'chavesNaMao', e.target.checked)} />
+                                                                <Checkbox id="grupoZap" label="Grupo ZAP" checked={state.portais.grupoZap} onChange={e => handleNestedChange('portais', 'grupoZap', e.target.checked)} />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <h4 className="text-sm font-semibold text-slate-800 mb-3 border-b border-slate-100 pb-2">Publicar Imóvel em:</h4>
+                                                            <div className="space-y-3">
+                                                                <Checkbox id="siteEmpresa" label="Site da Empresa" checked={state.publicar.siteEmpresa} onChange={e => handleNestedChange('publicar', 'siteEmpresa', e.target.checked)} />
+                                                                <Checkbox id="oportunidade" label="Oportunidade de Negócio" checked={state.publicar.oportunidade} onChange={e => handleNestedChange('publicar', 'oportunidade', e.target.checked)} />
+                                                                <Checkbox id="destaque" label="Destaque na Home" checked={state.publicar.destaque} onChange={e => handleNestedChange('publicar', 'destaque', e.target.checked)} />
+                                                                <Checkbox id="valorConsulta" label="Valor Sob Consulta" checked={state.publicar.valorConsulta} onChange={e => handleNestedChange('publicar', 'valorConsulta', e.target.checked)} />
+                                                                <Checkbox id="valorNegociavel" label="Valor Negociável" checked={state.publicar.valorNegociavel} onChange={e => handleNestedChange('publicar', 'valorNegociavel', e.target.checked)} />
+                                                                <Checkbox id="univenTv" label="Univen TV" checked={state.publicar.univenTv} onChange={e => handleNestedChange('publicar', 'univenTv', e.target.checked)} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Descrição */}
+                                                    <div className="md:w-2/3">
+                                                        <Label className="text-base font-semibold text-slate-800 mb-2">Descrição do Anúncio</Label>
+                                                        <p className="text-xs text-slate-500 mb-4">Escreva um texto atrativo destacando os principais diferenciais do imóvel. Esse texto será exibido no seu site e nos portais.</p>
+                                                        
+                                                        <Textarea 
+                                                            name="descricao" 
+                                                            value={state.descricao} 
+                                                            onChange={handleChange}
+                                                            placeholder="Descreva o imóvel aqui..."
+                                                            className="min-h-[200px] mb-4 text-base"
+                                                        />
+
+                                                        <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg p-4 font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg group">
+                                                            <i data-lucide="sparkles" className="w-5 h-5 text-yellow-300 group-hover:animate-pulse"></i>
+                                                            SUGERIR DESCRIÇÃO DO ANÚNCIO ATRAVÉS DE INTELIGÊNCIA ARTIFICIAL
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<NewPropertyDashboard />);
+    </script>
+</body>
+</html>
