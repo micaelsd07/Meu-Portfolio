@@ -105,7 +105,8 @@ html.io .rv.on{opacity:1;translate:0 0}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;padding:clamp(56px,9vw,110px) 0 0;isolation:isolate}
-.hero::before{content:"";position:absolute;inset:-64px 0 0;z-index:-1;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.hero::before{content:"";position:absolute;inset:-64px 0 0;z-index:-1;background:radial-gradient(ellipse 46% 60% at 82% 28%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%),radial-gradient(ellipse 40% 50% at 8% 90%,color-mix(in srgb,var(--accent) 6%,transparent),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:-64px 0 0;z-index:-1;opacity:.35;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
 .hero-g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:start}
 .kicker{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:28px}
 .live{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 11px}
@@ -189,6 +190,11 @@ html.io .rv.on{opacity:1;translate:0 0}
 .seal svg{flex:none;width:46px;height:46px;color:var(--accent)}
 .seal b{display:block;font-weight:500;font-size:14.5px;line-height:1.3}
 .seal span{font-size:12.5px;color:var(--ink-3)}
+.seal.mini{border-style:solid;border-color:var(--line);background:var(--paper);transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
+.seal.mini:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:0 18px 36px -26px var(--shadow)}
+.seal.mini img{flex:none;width:64px;height:64px}
+.seal em{display:block;font-style:normal;font-size:12.5px;font-weight:500;margin-top:4px;color:var(--ink-2);transition:color .2s}
+.seal.mini:hover em{color:var(--accent)}
 @media (max-width:980px){.seals{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.creds{grid-template-columns:1fr}.cred{grid-template-columns:84px minmax(0,1fr);padding:20px;gap:16px}.cred img{width:84px;height:84px}}
 @media (max-width:480px){.seals{grid-template-columns:1fr}}
@@ -450,7 +456,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
     <div class="sec-h rv">
       <span class="mono">02 / Credenciais</span>
       <h2>Certificações <em>verificáveis</em></h2>
-      <p>As badges da AWS e do Google podem ser conferidas no Credly com um clique.</p>
+      <p>Cinco badges oficiais no Credly, da AWS, do Google Cloud e da Cisco. Clique para conferir.</p>
     </div>
 
     <div class="creds">
@@ -477,18 +483,18 @@ footer{border-top:1px solid var(--line);padding:24px 0}
     </div>
 
     <div class="seals">
-      <div class="seal rv">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><path d="M15 19l5 5-5 5M24 30h9"/></svg>
-        <div><b>Linux Unhatched</b><span>Cisco Networking Academy, 2026</span></div>
-      </div>
-      <div class="seal rv">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><circle cx="24" cy="15" r="3"/><circle cx="15" cy="31" r="3"/><circle cx="33" cy="31" r="3"/><path d="M22.5 17.6l-6 10.8M25.5 17.6l6 10.8M18 31h12"/></svg>
-        <div><b>Conceitos Básicos de Redes</b><span>Cisco Networking Academy, 2026</span></div>
-      </div>
-      <div class="seal rv">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><path d="M24 13l2.6 7.4L34 23l-7.4 2.6L24 33l-2.6-7.4L14 23l7.4-2.6z"/></svg>
-        <div><b>Introdução à IA Moderna</b><span>Cisco Networking Academy, 2026</span></div>
-      </div>
+      <a class="seal mini rv" href="https://www.credly.com/badges/065d4117-09d3-4596-81db-32abb7ded5b4" target="_blank" rel="noopener">
+        <img src="img/badge-cisco-linux.webp" width="220" height="220" alt="Badge Cisco Linux Unhatched" loading="lazy">
+        <div><b>Linux Unhatched</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
+      </a>
+      <a class="seal mini rv" href="https://www.credly.com/badges/6fb92d94-93e9-4870-a2cc-8b477350ff5e" target="_blank" rel="noopener">
+        <img src="img/badge-cisco-redes.webp" width="220" height="220" alt="Badge Cisco Networking Basics" loading="lazy">
+        <div><b>Networking Basics</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
+      </a>
+      <a class="seal mini rv" href="https://www.credly.com/badges/81352673-22aa-481a-95b2-7c9bfe9e9a0f" target="_blank" rel="noopener">
+        <img src="img/badge-cisco-ia.webp" width="220" height="220" alt="Badge Cisco Introduction to Modern AI" loading="lazy">
+        <div><b>Introduction to Modern AI</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
+      </a>
       <div class="seal rv">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><rect x="14" y="21" width="20" height="9" rx="2"/><path d="M18 25.5h2M23 25.5h2M19 21v-4M29 21v-4"/></svg>
         <div><b>Cisco Packet Tracer</b><span>Cisco Networking Academy, 2026</span></div>
@@ -520,7 +526,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
         <li class="now"><span class="mono">2026 até 2027</span><b>Análise e Desenvolvimento de Sistemas</b><span>Faculdade SENAI Taubaté, cursando</span></li>
         <li><span class="mono">out. 2026</span><b>AWS Academy Cloud Foundations</b><span>Amazon Web Services</span></li>
         <li><span class="mono">set. 2026</span><b>Serverless Apps with Firebase</b><span>Google Cloud, skill badge</span></li>
-        <li><span class="mono">2026</span><b>Linux, Redes, IA Moderna e Packet Tracer</b><span>Cisco Networking Academy, 4 cursos</span></li>
+        <li><span class="mono">jun. 2026</span><b>Linux, Redes, IA Moderna e Packet Tracer</b><span>Cisco Networking Academy, 3 badges no Credly</span></li>
         <li><span class="mono">Experiência</span><b>Auxiliar Administrativo</b><span>Fabelle Imobiliária: planilhas, contratos, atendimento e suporte a sistemas</span></li>
         <li><span class="mono">2023</span><b>Informática Básica e Avançada</b><span>Valle Treinamentos</span></li>
         <li><span class="mono">2017 até 2020</span><b>Inglês</b><span>Fisk e Pró Línguas, nível intermediário</span></li>
