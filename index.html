@@ -1,454 +1,621 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Micael Silva Domiciano — Desenvolvedor</title>
-<meta name="description" content="Micael Silva Domiciano — Análise e Desenvolvimento de Sistemas. Portfólio de projetos em tecnologia.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>try{document.querySelector('meta[name="color-scheme"]').content=localStorage.getItem("color-scheme")||"light dark"}catch(e){}</script>
+<title>Micael Silva Domiciano | Desenvolvedor Web e estudante de ADS</title>
+<meta name="description" content="Portfólio de Micael Silva Domiciano, estudante de Análise e Desenvolvimento de Sistemas no SENAI Taubaté. Projetos web, certificações AWS, Google Cloud e Cisco, e currículo para estágio em TI.">
+<meta property="og:title" content="Micael Silva Domiciano | Desenvolvedor Web">
+<meta property="og:description" content="Estudante de ADS em Taubaté. Projetos web, certificações AWS, Google Cloud e Cisco. Disponível para estágio em TI.">
+<meta property="og:image" content="https://meu-portfolio-six-azure.vercel.app/img/og.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f1eee6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11110f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d1431b'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-style='italic' text-anchor='middle' fill='%23fff'%3Em%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Micael Silva Domiciano","jobTitle":"Estudante de Análise e Desenvolvimento de Sistemas","url":"https://meu-portfolio-six-azure.vercel.app","email":"mailto:micaelsd07@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Taubaté","addressRegion":"SP","addressCountry":"BR"},"alumniOf":"Faculdade SENAI Taubaté","sameAs":["https://github.com/micaelsd07","https://www.linkedin.com/in/micael-domiciano-91b5a8177/","https://www.credly.com/users/micael-domiciano.3fe13344"]}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ---------- Tema ---------- */
 :root{
-  --fs:'Instrument Sans',sans-serif;
-  --fser:'Instrument Serif',serif;
-  --fm:'JetBrains Mono',monospace;
-  --max:1080px;
+  color-scheme:light dark;
+  --bg:#f1eee6;--paper:#faf8f2;--ink:#17160f;--ink-2:#55524a;--ink-3:#6c685e;
+  --line:#dcd6c8;--line-2:#c9c2b1;--accent:#d1431b;--accent-soft:#f6d9cc;
+  --grid:rgb(23 22 15 / .07);--shadow:rgb(40 30 10 / .16);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1180px;--gut:clamp(16px,4vw,40px);
+  --ease:cubic-bezier(.22,1,.36,1);
 }
-[data-theme="dark"]{
-  --bg:#101010;--bg2:#161616;--card:#181818;
-  --line:#262626;--line2:#303030;
-  --fg:#ededed;--fg2:#a3a3a3;--fg3:#666;
-  --grn:#4ade80;
-  --inv:#ededed;--inv-fg:#101010;
+:root:has(> head > meta[name="color-scheme"][content="dark"]){color-scheme:dark}
+:root:has(> head > meta[name="color-scheme"][content="light"]){color-scheme:light}
+@supports (color:light-dark(#000,#fff)){
+  :root{
+    --bg:light-dark(#f1eee6,#11110f);
+    --paper:light-dark(#faf8f2,#1a1916);
+    --ink:light-dark(#17160f,#efebe1);
+    --ink-2:light-dark(#55524a,#aba699);
+    --ink-3:light-dark(#6c685e,#8f8a7e);
+    --line:light-dark(#dcd6c8,#2b2924);
+    --line-2:light-dark(#c9c2b1,#3a3832);
+    --accent:light-dark(#d1431b,#ff6b3d);
+    --accent-soft:light-dark(#f6d9cc,#3a1d12);
+    --grid:light-dark(rgb(23 22 15 / .07),rgb(239 235 225 / .045));
+    --shadow:light-dark(rgb(40 30 10 / .16),rgb(0 0 0 / .5));
+  }
 }
-[data-theme="light"]{
-  --bg:#f5f4f1;--bg2:#eeede9;--card:#fcfbf9;
-  --line:#e2e1dc;--line2:#d5d4cf;
-  --fg:#1a1a18;--fg2:#5f5e5a;--fg3:#96958f;
-  --grn:#16a34a;
-  --inv:#1a1a18;--inv-fg:#f5f4f1;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--fs);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .4s ease,color .4s ease}
-::selection{background:var(--fg);color:var(--bg)}
+
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--accent);color:#fff}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px}
+.skip:focus{top:12px}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
-.rv.on{opacity:1;transform:none}
+/* ---------- Revelar ao rolar (CSS nativo, JS só como reserva) ---------- */
+@keyframes rise{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+@supports ((animation-timeline:view()) and (animation-range:0% 100%)){
+  @media (prefers-reduced-motion:no-preference){
+    .rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+  }
+}
+html.io .rv{opacity:0;translate:0 24px;transition:opacity .8s var(--ease),translate .8s var(--ease)}
+html.io .rv.on{opacity:1;translate:0 0}
 
-/* ---------- NAV ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line);transition:background .4s}
-.nav-in{max-width:var(--max);margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:600;font-size:14.5px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
-.brand .av{width:26px;height:26px;border-radius:50%;object-fit:cover;filter:grayscale(30%)}
-.links{display:flex;align-items:center;gap:4px}
-.links a{font-size:13.5px;color:var(--fg2);padding:7px 12px;border-radius:8px;transition:color .25s,background .25s}
-.links a:hover{color:var(--fg);background:var(--bg2)}
-.tgl{margin-left:8px;font-family:var(--fm);font-size:12px;color:var(--fg2);border:1px solid var(--line);background:transparent;border-radius:20px;padding:6px 14px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px}
-.tgl:hover{color:var(--fg);border-color:var(--line2)}
-@media(max-width:560px){.links a{display:none}}
+/* ---------- Navegação ---------- */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut);height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;letter-spacing:-.01em;margin-right:auto}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--accent);color:#fff;display:grid;place-items:center;font:italic 400 18px/1 var(--serif)}
+.brand span small{display:block;font:400 11px/1.2 var(--mono);color:var(--ink-3);letter-spacing:.03em}
+.links{display:flex;gap:2px}
+.links a{font-size:14px;color:var(--ink-2);padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
+.links a:hover{color:var(--ink);background:var(--paper)}
+.tgl{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s}
+.tgl:hover{background:var(--paper)}
+.tgl svg{width:17px;height:17px}
+.to-light{display:none}
+@media (prefers-color-scheme:dark){.to-dark{display:none}.to-light{display:inline-flex}}
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .to-dark{display:none}
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .to-light{display:inline-flex}
+:root:has(> head > meta[name="color-scheme"][content="light"]) .to-light{display:none}
+:root:has(> head > meta[name="color-scheme"][content="light"]) .to-dark{display:inline-flex}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;padding:12px 20px;border-radius:999px;border:1px solid var(--ink);transition:transform .3s var(--ease),background .25s,color .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-ink{background:var(--ink);color:var(--bg)}
+.btn-ink:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+.btn svg{width:16px;height:16px}
+.nav .btn{padding:9px 16px;font-size:13.5px}
+@media (max-width:860px){.links{display:none}}
+@media (max-width:420px){.nav .btn span{display:none}.brand span small{display:none}}
 
-/* ---------- HERO ---------- */
-.hero{padding:170px 0 90px}
-.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--fg2);border:1px solid var(--line);border-radius:30px;padding:7px 16px;margin-bottom:34px}
-.status .d{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 0 color-mix(in srgb,var(--grn) 55%,transparent);animation:ping 2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--grn) 50%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.hero h1{font-size:clamp(2rem,5.4vw,3.6rem);font-weight:500;letter-spacing:-.035em;line-height:1.12;max-width:820px;margin-bottom:26px}
-.hero h1 em{font-family:var(--fser);font-style:italic;font-weight:400;letter-spacing:-.01em}
-.hero .sub{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--fg2);max-width:560px;margin-bottom:44px}
-.meta-row{display:flex;gap:34px;flex-wrap:wrap;font-family:var(--fm);font-size:11.5px;color:var(--fg3);letter-spacing:.04em;text-transform:uppercase}
-.meta-row b{display:block;color:var(--fg2);font-weight:400;font-family:var(--fs);font-size:14px;text-transform:none;letter-spacing:0;margin-top:3px}
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:clamp(56px,9vw,110px) 0 0;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-64px 0 0;z-index:-1;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.hero-g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:start}
+.kicker{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:28px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 11px}
+.live b{width:8px;height:8px;border-radius:50%;background:#2f9e55;box-shadow:0 0 0 4px rgb(47 158 85 / .18)}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,7.2vw,5.6rem);line-height:.98;letter-spacing:-.035em;font-variation-settings:"opsz" 144;margin-bottom:28px}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.hero h1 .u{background:linear-gradient(transparent 68%,var(--accent-soft) 68%,var(--accent-soft) 92%,transparent 92%);padding-inline:.04em}
+.lede{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--ink-2);max-width:560px;margin-bottom:34px}
+.lede strong{color:var(--ink);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
 
-/* ---------- SECTION ---------- */
-section{padding:90px 0}
-.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:44px;gap:16px;flex-wrap:wrap}
-h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;letter-spacing:-.03em}
-h2 em{font-family:var(--fser);font-style:italic;font-weight:400}
-.sec-n{font-family:var(--fm);font-size:11.5px;color:var(--fg3)}
+/* crachá */
+.lanyard{position:relative;justify-self:center;width:min(100%,330px);margin-top:-40px}
+.strap{position:absolute;left:50%;bottom:calc(100% - 26px);width:26px;height:520px;translate:-50% 0;background:var(--accent);z-index:-1;overflow:hidden}
+.strap::after{content:"SENAI TAUBATÉ / ADS / 2026 / SENAI TAUBATÉ / ADS / 2026 / SENAI TAUBATÉ / ADS";position:absolute;left:50%;bottom:10px;writing-mode:vertical-rl;rotate:180deg;translate:-50% 0;font:500 10px/1 var(--mono);letter-spacing:.18em;color:rgb(255 255 255 / .8);white-space:nowrap}
+.idcard{position:relative;background:var(--paper);border:1px solid var(--line-2);border-radius:20px;padding:30px 22px 20px;box-shadow:0 30px 60px -28px var(--shadow),0 2px 0 var(--line);transform-origin:50% -30px;rotate:2.5deg;transition:rotate .6s var(--ease)}
+.idcard:hover{rotate:0deg}
+@media (prefers-reduced-motion:no-preference){.idcard{animation:swing 1.6s var(--ease) both .2s}}
+@keyframes swing{0%{rotate:-9deg}45%{rotate:5deg}75%{rotate:1.5deg}100%{rotate:2.5deg}}
+.idcard::before{content:"";position:absolute;top:12px;left:50%;translate:-50% 0;width:58px;height:9px;border-radius:9px;background:var(--bg);border:1px solid var(--line-2)}
+.id-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.id-top .mono{font-size:10.5px}
+.id-photo{border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--bg);margin-bottom:16px}
+.id-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02)}
+.id-name{font-family:var(--serif);font-size:1.55rem;line-height:1.05;letter-spacing:-.02em;margin-bottom:4px}
+.id-role{font-size:13.5px;color:var(--ink-2);margin-bottom:14px}
+.id-dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px;border-top:1px dashed var(--line-2);padding-top:12px;margin-bottom:14px}
+.id-dl dt{font:400 11px/1.6 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3)}
+.id-dl dd{text-align:right;font-weight:500}
+.barcode{height:34px;border-radius:4px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px,var(--ink) 12px 13px,transparent 13px 17px);opacity:.85}
+.id-foot{display:flex;justify-content:space-between;margin-top:6px}
+.id-foot .mono{font-size:10px}
 
-/* ---------- WORK CARDS ---------- */
-.work{display:flex;flex-direction:column;gap:18px}
-.card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .35s,transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
-.card:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(0,0,0,.5)}
-.card-body{padding:40px;display:flex;flex-direction:column;justify-content:space-between;gap:26px}
-.card-kind{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--fg3);margin-bottom:14px}
-.card h3{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:500;letter-spacing:-.02em;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.card h3 .aw{font-size:1rem;color:var(--fg3);transition:transform .35s,color .3s}
-.card:hover h3 .aw{transform:translate(3px,-3px);color:var(--fg)}
-.card p{font-size:14px;color:var(--fg2);max-width:400px}
-.metrics{display:flex;gap:28px;flex-wrap:wrap}
-.metric b{font-size:1.35rem;font-weight:600;letter-spacing:-.02em;display:block;line-height:1.2}
-.metric i{font-style:normal;font-size:12px;color:var(--fg3)}
-.card-visual{background:var(--bg2);display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;overflow:hidden;border-left:1px solid var(--line)}
-.card-visual .big{font-family:var(--fser);font-style:italic;font-size:clamp(3rem,7vw,5.5rem);color:var(--fg);opacity:.08;user-select:none;letter-spacing:-.04em;transition:opacity .5s,transform .6s cubic-bezier(.22,1,.36,1)}
-.card:hover .card-visual .big{opacity:.16;transform:scale(1.05) rotate(-2deg)}
-.card-visual .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.card:hover .card-visual .shot{transform:scale(1.04)}
-.card-visual::after{content:'';position:absolute;inset:auto 0 0 0;height:70px;background:linear-gradient(transparent,rgba(0,0,0,.35));pointer-events:none}
-.chip-row{position:absolute;bottom:18px;left:18px;display:flex;gap:7px;flex-wrap:wrap;z-index:1}
-.chip{font-family:var(--fm);font-size:10px;letter-spacing:.06em;padding:5px 11px;border-radius:20px;background:var(--card);border:1px solid var(--line);color:var(--fg2)}
-@media(max-width:760px){.card{grid-template-columns:1fr}.card-visual{min-height:180px;border-left:none;border-top:1px solid var(--line)}.card-body{padding:28px}}
+/* ficha numérica */
+.ficha{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin-top:clamp(56px,8vw,96px)}
+.ficha div{padding:20px 18px 18px 0}
+.ficha div+div{padding-left:18px;border-left:1px solid var(--line)}
+.ficha b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+.ficha span{font-size:13.5px;color:var(--ink-2)}
+@media (max-width:860px){
+  .hero-g{grid-template-columns:1fr}
+  .lanyard{margin-top:64px;width:min(100%,300px)}
+  .strap{height:70px}
+  .ficha{grid-template-columns:repeat(2,1fr)}
+  .ficha div:nth-child(3){border-left:0;padding-left:0}
+  .ficha div:nth-child(n+3){border-top:1px solid var(--line)}
+}
 
-/* ---------- ABOUT ---------- */
-.about-g{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:start}
-.about-g p{font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.7;color:var(--fg2);margin-bottom:22px;letter-spacing:-.01em}
-.about-g p strong{color:var(--fg);font-weight:500}
-.about-g p em{font-family:var(--fser);font-style:italic;color:var(--fg)}
-.ph{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-.ph img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(100%);transition:filter .7s ease,transform .7s ease}
-.ph:hover img{filter:grayscale(0);transform:scale(1.03)}
-.ph .tag{position:absolute;bottom:14px;left:14px;font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:20px;padding:6px 13px;color:var(--fg2)}
-@media(max-width:760px){.about-g{grid-template-columns:1fr;gap:36px}.ph{max-width:340px}}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px}
-.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .3s}
-.fact:hover{border-color:var(--line2)}
-.fact b{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;display:block}
-.fact i{font-style:normal;font-size:12.5px;color:var(--fg3)}
+/* faixa de stack */
+.ticker{overflow:hidden;border-bottom:1px solid var(--line);padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;gap:0;font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.9rem);font-style:italic;color:var(--ink-2)}
+.track span{padding-inline:22px;white-space:nowrap}
+.track span:nth-child(odd){font-style:normal;font-family:var(--mono);font-size:.55em;align-self:center;color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.track{animation:slide 48s linear infinite}.ticker:hover .track{animation-play-state:paused}}
+@keyframes slide{to{translate:-50% 0}}
 
-/* ---------- TIMELINE ---------- */
-.trow{display:grid;grid-template-columns:130px 1fr auto;gap:20px;padding:26px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding-left .35s cubic-bezier(.22,1,.36,1)}
-.trow:first-of-type{border-top:1px solid var(--line)}
-.trow:hover{padding-left:12px}
-.ty{font-family:var(--fm);font-size:11.5px;color:var(--fg3)}
-.tt{font-weight:500;font-size:1.05rem;letter-spacing:-.01em}
-.ts{font-size:13.5px;color:var(--fg2);margin-top:3px}
-.to{font-size:12.5px;color:var(--fg3);text-align:right}
-@media(max-width:600px){.trow{grid-template-columns:1fr}.to{text-align:left}}
-.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.pill-row span{font-size:12px;color:var(--fg2);padding:4px 12px;background:var(--bg2);border:1px solid var(--line);border-radius:16px}
+/* ---------- Seções ---------- */
+.sec{padding:clamp(80px,11vw,140px) 0 0}
+.sec-h{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:18px;margin-bottom:clamp(36px,5vw,56px);padding-bottom:18px;border-bottom:1px solid var(--line)}
+.sec-h .mono{grid-column:1/-1;color:var(--accent);font-weight:500}
+.sec-h h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1;letter-spacing:-.03em}
+.sec-h h2 em{font-style:italic;font-weight:400;color:var(--ink-2)}
+.sec-h p{font-size:14.5px;color:var(--ink-2);max-width:340px;text-align:right}
+@media (max-width:700px){.sec-h{grid-template-columns:1fr}.sec-h p{text-align:left}}
 
-/* ---------- CONTACT ---------- */
-.contact{padding:120px 0 100px;text-align:left}
-.contact h2{font-size:clamp(2rem,5.5vw,3.6rem);margin-bottom:18px;line-height:1.1}
-.contact .sub{color:var(--fg2);font-size:1.05rem;max-width:480px;margin-bottom:44px}
-.mailbtn{display:inline-flex;align-items:center;gap:12px;background:var(--inv);color:var(--inv-fg);font-weight:500;font-size:15px;padding:16px 30px;border-radius:40px;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
-.mailbtn:hover{transform:translateY(-3px);box-shadow:0 16px 34px -16px rgba(0,0,0,.45)}
-.soc-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:40px}
-.soc{font-size:13.5px;color:var(--fg2);border:1px solid var(--line);border-radius:30px;padding:10px 20px;transition:all .3s;display:inline-flex;align-items:center;gap:7px}
-.soc:hover{color:var(--fg);border-color:var(--line2);background:var(--bg2)}
-.soc .aw{font-size:12px;color:var(--fg3)}
+/* ---------- Credenciais ---------- */
+.creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.cred{position:relative;display:grid;grid-template-columns:118px minmax(0,1fr);gap:22px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px;transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
+.cred:hover{border-color:var(--line-2);transform:translateY(-4px);box-shadow:0 24px 50px -32px var(--shadow)}
+.cred img{width:118px;height:118px;filter:drop-shadow(0 10px 14px rgb(0 0 0 / .12))}
+.cred .mono{display:block;margin-bottom:8px;font-size:11px}
+.cred h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.15;letter-spacing:-.015em;margin-bottom:8px}
+.cred p{font-size:14px;color:var(--ink-2);margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tags span{font:400 11.5px/1 var(--mono);padding:6px 9px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink-2)}
+.verify{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:color .2s,border-color .2s}
+.verify:hover{color:var(--accent);border-color:var(--accent)}
+.verify::after{content:"";position:absolute;inset:0;border-radius:20px}
+.seals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:18px}
+.seal{display:flex;gap:14px;align-items:center;border:1px dashed var(--line-2);border-radius:16px;padding:16px}
+.seal svg{flex:none;width:46px;height:46px;color:var(--accent)}
+.seal b{display:block;font-weight:500;font-size:14.5px;line-height:1.3}
+.seal span{font-size:12.5px;color:var(--ink-3)}
+@media (max-width:980px){.seals{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.creds{grid-template-columns:1fr}.cred{grid-template-columns:84px minmax(0,1fr);padding:20px;gap:16px}.cred img{width:84px;height:84px}}
+@media (max-width:480px){.seals{grid-template-columns:1fr}}
 
-/* ---------- FOOTER ---------- */
-footer{border-top:1px solid var(--line);padding:26px 0}
-.foot-in{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--fg3)}
-.foot-in .clk{font-family:var(--fm);font-size:11.5px}
+/* ---------- Trabalhos ---------- */
+.feat{display:grid;gap:clamp(48px,7vw,88px)}
+.proj{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.proj:nth-child(even) .shot{order:2}
+.shot{display:block;position:relative;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:0 30px 60px -40px var(--shadow)}
+.shot-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);font:400 11.5px/1 var(--mono);color:var(--ink-3)}
+.shot-bar i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line-2)}
+.shot-bar i:first-child{background:var(--accent);border-color:var(--accent)}
+.shot-bar span{margin-left:6px}
+.shot img{width:100%;aspect-ratio:900/600;object-fit:cover;object-position:top;transition:scale .8s var(--ease)}
+.shot:hover img{scale:1.03}
+.pnum{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--accent);margin-bottom:10px;display:block}
+.proj h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.02;letter-spacing:-.03em;margin-bottom:6px}
+.proj .mono{display:block;margin-bottom:16px}
+.proj p{color:var(--ink-2);margin-bottom:20px;max-width:440px}
+.nums{display:flex;gap:28px;margin-bottom:22px;flex-wrap:wrap}
+.nums b{display:block;font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.1}
+.nums span{font-size:12.5px;color:var(--ink-3)}
+.go{display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:14.5px;border-bottom:1.5px solid var(--ink);padding-bottom:3px;transition:color .2s,border-color .2s,gap .3s var(--ease)}
+.go:hover{color:var(--accent);border-color:var(--accent);gap:12px}
+@media (max-width:860px){.proj{grid-template-columns:1fr}.proj:nth-child(even) .shot{order:0}}
+
+.more{margin-top:clamp(72px,9vw,110px)}
+.more h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:400;margin-bottom:14px}
+.rows{border-top:1px solid var(--ink)}
+.row{position:relative;display:grid;grid-template-columns:44px minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.3fr) 64px;gap:16px;align-items:baseline;padding:20px 8px;border-bottom:1px solid var(--line);transition:background .25s,padding .35s var(--ease)}
+.row:hover{background:var(--paper);padding-left:16px}
+.row .n{font:400 12px/1 var(--mono);color:var(--ink-3)}
+.row .t{font-family:var(--serif);font-size:1.35rem;font-weight:500;letter-spacing:-.015em;line-height:1.2}
+.row .k{font-size:14px;color:var(--ink-2)}
+.row .s{font:400 12px/1.5 var(--mono);color:var(--ink-3)}
+.row .y{font-size:13px;color:var(--ink-3);text-align:right;white-space:nowrap}
+.row:hover .y{color:var(--accent)}
+.peek{display:none}
+@media (hover:hover) and (min-width:1000px){
+  .peek{display:block;position:absolute;right:96px;top:50%;width:230px;aspect-ratio:900/600;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line-2);box-shadow:0 20px 40px -20px var(--shadow);pointer-events:none;opacity:0;translate:0 -42%;rotate:-4deg;scale:.92;transition:opacity .3s,translate .45s var(--ease),scale .45s var(--ease);z-index:2}
+  .row:hover .peek{opacity:1;translate:0 -50%;scale:1}
+}
+@media (max-width:760px){.row{grid-template-columns:32px minmax(0,1fr) auto}.row .k,.row .s{grid-column:2/-1}.row .y{grid-row:1;grid-column:3}}
+
+/* ---------- Sobre ---------- */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,6vw,90px)}
+.about-txt p{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--ink-2);margin-bottom:20px}
+.about-txt p strong{color:var(--ink);font-weight:500}
+.about-txt p:first-child{font-family:var(--serif);font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.25;letter-spacing:-.015em;color:var(--ink)}
+.about-txt p:first-child em{color:var(--accent)}
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+.stack h3{font:500 11.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.stack li{list-style:none;font-size:14.5px;padding:3px 0}
+@media (max-width:560px){.stack{grid-template-columns:1fr 1fr}}
+.tl{list-style:none;border-left:1px solid var(--line-2);margin-left:6px}
+.tl li{position:relative;padding:0 0 30px 28px}
+.tl li::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--ink-3)}
+.tl li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.tl .mono{display:block;margin-bottom:4px;font-size:11.5px}
+.tl b{display:block;font-weight:500;font-size:1.05rem;line-height:1.35}
+.tl span{font-size:14px;color:var(--ink-2)}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+
+/* ---------- Currículo ---------- */
+.cv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(36px,6vw,90px);align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:clamp(28px,5vw,64px);overflow:hidden}
+.cv h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:16px}
+.cv h3 em{font-style:italic;color:var(--accent);font-weight:400}
+.cv p{color:var(--ink-2);margin-bottom:22px;max-width:440px}
+.checks{list-style:none;display:grid;gap:9px;margin-bottom:30px}
+.checks li{display:flex;gap:10px;font-size:14.5px;align-items:baseline}
+.checks li::before{content:"";flex:none;width:14px;height:8px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);rotate:-45deg;translate:0 -3px}
+.sheet{position:relative;justify-self:center;width:min(100%,400px);rotate:-2.5deg;transition:rotate .6s var(--ease)}
+.sheet:hover{rotate:0deg}
+.sheet img{border-radius:6px;box-shadow:0 40px 70px -36px rgb(0 0 0 / .45),0 0 0 1px rgb(0 0 0 / .06);background:#fff}
+.tape{position:absolute;top:-14px;left:50%;width:120px;height:30px;translate:-50% 0;rotate:3deg;background:color-mix(in srgb,var(--accent) 35%,transparent);backdrop-filter:blur(1px)}
+@media (max-width:860px){.cv{grid-template-columns:1fr}}
+
+/* ---------- Contato ---------- */
+.contact{padding:clamp(90px,12vw,160px) 0 clamp(60px,8vw,100px);text-align:center}
+.contact .mono{color:var(--accent);font-weight:500;margin-bottom:22px;display:block}
+.contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.8rem,9vw,7rem);line-height:.95;letter-spacing:-.045em;margin-bottom:24px}
+.contact h2 em{font-style:italic;font-weight:400;color:var(--accent)}
+.contact p{color:var(--ink-2);max-width:480px;margin:0 auto 34px;font-size:1.05rem}
+.mail{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;border-bottom:2px solid var(--accent);padding-bottom:4px;transition:color .2s}
+.mail:hover{color:var(--accent)}
+.soc{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:40px}
+.soc a{font-size:14px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:10px 18px;transition:all .25s}
+.soc a:hover{color:var(--ink);border-color:var(--ink);background:var(--paper)}
+
+footer{border-top:1px solid var(--line);padding:24px 0}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--ink-3)}
+.foot .mono{font-size:11.5px;text-transform:none}
 </style>
 </head>
 <body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<nav>
+<header class="nav">
   <div class="nav-in">
-    <a href="#" class="brand"><img class="av" src="eu-prof.png" alt="">Micael Silva Domiciano</a>
-    <div class="links">
+    <a href="#" class="brand"><i aria-hidden="true">m</i><span>Micael Domiciano<small>ADS / SENAI Taubaté</small></span></a>
+    <nav class="links" aria-label="Seções">
       <a href="#trabalhos">Trabalhos</a>
+      <a href="#credenciais">Credenciais</a>
       <a href="#sobre">Sobre</a>
-      <a href="#trajetoria">Trajetória</a>
+      <a href="#curriculo">Currículo</a>
       <a href="#contato">Contato</a>
-      <button class="tgl" id="tgl" aria-label="Alternar tema">◐ <span id="tgl-t">Claro</span></button>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap">
-    <div class="status rv on"><span class="d"></span>Disponível para estágio &amp; freelas</div>
-    <h1 class="rv on">Criado em Taubaté, construindo para a <em>web</em>.<br>Estudante de ADS unindo base <em>administrativa</em> com tecnologia.</h1>
-    <p class="sub rv on">Análise e Desenvolvimento de Sistemas no SENAI, certificações Cisco em Linux, redes e IA moderna — e projetos web feitos do zero.</p>
-    <div class="meta-row rv on">
-      <div>Local<b>Taubaté — SP, Brasil</b></div>
-      <div>Hora local<b id="clock">--:--</b></div>
-      <div>Foco<b>Desenvolvimento Web</b></div>
-    </div>
+    </nav>
+    <button class="tgl" id="tgl" type="button">
+      <span class="to-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span class="sr">Mudar para o tema escuro</span></span>
+      <span class="to-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="sr">Mudar para o tema claro</span></span>
+    </button>
+    <a class="btn btn-ink" href="curriculo-micael-silva-domiciano.pdf" download aria-label="Baixar currículo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>Currículo</span></a>
   </div>
 </header>
 
-<!-- TRABALHOS -->
-<section id="trabalhos">
+<main id="conteudo">
+<!-- HERO -->
+<section class="hero">
   <div class="wrap">
-    <div class="sec-head rv"><h2>Trabalhos <em>selecionados</em></h2><span class="sec-n">9 projetos</span></div>
-    <div class="work">
+    <div class="hero-g">
+      <div>
+        <div class="kicker">
+          <span class="live"><b aria-hidden="true"></b>Disponível para estágio em TI</span>
+          <span class="mono">Taubaté, SP / Vale do Paraíba</span>
+        </div>
+        <h1>Sites e sistemas <em>feitos do zero</em>, de Taubaté <span class="u">para a web.</span></h1>
+        <p class="lede">Sou o <strong>Micael Silva Domiciano</strong>, estudante de Análise e Desenvolvimento de Sistemas no <strong>SENAI Taubaté</strong>. Construo projetos web do layout ao deploy e estudo cloud com certificações da <strong>AWS</strong>, do <strong>Google Cloud</strong> e da <strong>Cisco</strong>.</p>
+        <div class="cta">
+          <a class="btn btn-ink" href="#trabalhos">Ver trabalhos <span aria-hidden="true">→</span></a>
+          <a class="btn btn-line" href="curriculo-micael-silva-domiciano.pdf" download>Baixar currículo (PDF)</a>
+        </div>
+      </div>
 
-      <a class="card rv" href="https://linha-404.web.app/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Jogo · Educação — 2026</p>
-            <h3>Linha 404 <span class="aw">↗</span></h3>
-            <p>Jogo educativo em que você programa um ônibus escolar para levar a turma até a aula, montando cartas ou digitando o código em Python ou Java. Desenvolvido para o Framework Arcade, em São Paulo.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>no Firebase</i></div>
-            <div class="metric"><b>20 fases</b><i>Python e Java</i></div>
-          </div>
-        </div>
-        <div class="card-visual"><img class="shot" src="img/linha-404.jpg" alt="Menu do jogo Linha 404" loading="lazy">
-          <div class="chip-row"><span class="chip">TypeScript</span><span class="chip">Vite</span><span class="chip">SVG</span></div>
-        </div>
-      </a>
+      <div class="lanyard">
+        <div class="strap" aria-hidden="true"></div>
+        <article class="idcard" aria-label="Crachá de Micael Silva Domiciano">
+          <div class="id-top"><span class="mono">Credencial</span><span class="mono">Nº 2026/07</span></div>
+          <div class="id-photo"><img src="img/micael-640.webp" width="640" height="640" alt="Foto de Micael Silva Domiciano" fetchpriority="high"></div>
+          <p class="id-name">Micael Silva Domiciano</p>
+          <p class="id-role">Desenvolvedor web em formação</p>
+          <dl class="id-dl">
+            <dt>Curso</dt><dd>ADS, SENAI</dd>
+            <dt>Busca</dt><dd>Estágio em TI</dd>
+            <dt>Idiomas</dt><dd>PT / EN interm.</dd>
+            <dt>Hora local</dt><dd id="clock">--:--</dd>
+          </dl>
+          <div class="barcode" aria-hidden="true"></div>
+          <div class="id-foot"><span class="mono">micaelsd07</span><span class="mono">Válido 2026</span></div>
+        </article>
+      </div>
+    </div>
 
-      <a class="card rv" href="https://jm-materiais.vercel.app/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Catálogo — 2026</p>
-            <h3>JM Materiais <span class="aw">↗</span></h3>
-            <p>Catálogo online de materiais de construção para lojistas: o dono da loja entra, navega pelas categorias, vê medidas, embalagens e preços de cada item e solicita o orçamento. Publicado na Vercel.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>na Vercel</i></div>
-            <div class="metric"><b>176 produtos</b><i>em 19 categorias</i></div>
-          </div>
-        </div>
-        <div class="card-visual"><img class="shot" src="img/jm-materiais.jpg" alt="Print do site JM Materiais" loading="lazy">
-          <div class="chip-row"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">GSAP</span></div>
-        </div>
-      </a>
+    <div class="ficha">
+      <div><b>09</b><span>projetos publicados</span></div>
+      <div><b>06</b><span>certificações em tecnologia</span></div>
+      <div><b>02</b><span>clouds estudadas: AWS e Google</span></div>
+      <div><b>19</b><span>anos, CNH A e B</span></div>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="track">
+      <span>01</span><span>JavaScript</span><span>02</span><span>TypeScript</span><span>03</span><span>React</span><span>04</span><span>Node.js</span><span>05</span><span>SQL e Supabase</span><span>06</span><span>AWS Cloud</span><span>07</span><span>Firebase</span><span>08</span><span>Git e GitHub</span><span>09</span><span>Linux e redes</span>
+      <span>01</span><span>JavaScript</span><span>02</span><span>TypeScript</span><span>03</span><span>React</span><span>04</span><span>Node.js</span><span>05</span><span>SQL e Supabase</span><span>06</span><span>AWS Cloud</span><span>07</span><span>Firebase</span><span>08</span><span>Git e GitHub</span><span>09</span><span>Linux e redes</span>
+    </div>
+  </div>
+</section>
 
-      <a class="card rv" href="https://studio-barber-capussine.vercel.app/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Barbearia + Sistema — 2026</p>
-            <h3>Scapussine Barber <span class="aw">↗</span></h3>
-            <p>Site de barbearia com sistema de agendamento online: galeria de cortes, calendário com horários, agenda do cliente e painel administrativo. Publicado na Vercel.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>na Vercel</i></div>
-            <div class="metric"><b>Agendamento</b><i>+ painel admin</i></div>
-          </div>
-        </div>
-        <div class="card-visual"><img class="shot" src="img/barbearia.jpg" alt="Print do site Scapussine Barber" loading="lazy">
-          <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">Supabase</span><span class="chip">Agendamento</span></div>
-        </div>
-      </a>
+<!-- TRABALHOS -->
+<section class="sec" id="trabalhos">
+  <div class="wrap">
+    <div class="sec-h rv">
+      <span class="mono">01 / Trabalhos</span>
+      <h2>Projetos que <em>estão no ar</em></h2>
+      <p>Cada projeto tem link público. Abra, teste e veja o código no GitHub.</p>
+    </div>
 
-      <a class="card rv" href="https://payia-wine.vercel.app/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">AI · Fintech — 2026</p>
-            <h3>PayIA <span class="aw">↗</span></h3>
-            <p>Sistema de pagamentos com IA: landing page, loja, fluxo completo de pagamento e dashboards com Chart.js. Publicado na Vercel.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>na Vercel</i></div>
-            <div class="metric"><b>Supabase</b><i>backend</i></div>
-          </div>
+    <div class="feat">
+      <article class="proj rv">
+        <a class="shot" href="https://linha-404.web.app/" target="_blank" rel="noopener" aria-label="Abrir Linha 404">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>linha-404.web.app</span></div>
+          <img src="img/linha-404.webp" width="900" height="640" alt="Menu do jogo Linha 404" loading="lazy">
+        </a>
+        <div>
+          <span class="pnum">nº 01</span>
+          <h3>Linha 404</h3>
+          <span class="mono">Jogo educativo / 2026 / TypeScript, Vite, SVG, Firebase</span>
+          <p>Você programa um ônibus escolar para levar a turma até a aula, montando cartas ou digitando o código em Python ou Java. Criado para o Framework Arcade, em São Paulo.</p>
+          <div class="nums"><div><b>20</b><span>fases</span></div><div><b>2</b><span>linguagens</span></div><div><b>Online</b><span>no Firebase</span></div></div>
+          <a class="go" href="https://linha-404.web.app/" target="_blank" rel="noopener">Jogar agora <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="card-visual"><img class="shot" src="img/payia.jpg" alt="Print do site PayIA" loading="lazy">
-          <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">Supabase</span><span class="chip">Chart.js</span></div>
-        </div>
-      </a>
+      </article>
 
-      <a class="card rv" href="https://luizcarlosdvj-ops.github.io/EcoRoute/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Sustentabilidade — Faculdade SENAI</p>
-            <h3>EcoRoute <span class="aw">↗</span></h3>
-            <p>Plataforma que mapeia os pontos de reciclagem e descarte de Taubaté: 13 PEVs com materiais aceitos, horários, mapa interativo e cadastro de parceiros. Projeto em equipe.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>GitHub Pages</i></div>
-            <div class="metric"><b>13 PEVs</b><i>mapeados</i></div>
-          </div>
+      <article class="proj rv">
+        <a class="shot" href="https://jm-materiais.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir JM Materiais">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>jm-materiais.vercel.app</span></div>
+          <img src="img/jm-materiais.webp" width="900" height="640" alt="Página inicial do catálogo JM Materiais" loading="lazy">
+        </a>
+        <div>
+          <span class="pnum">nº 02</span>
+          <h3>JM Materiais</h3>
+          <span class="mono">Catálogo web / 2026 / React, TypeScript, Tailwind, GSAP</span>
+          <p>Catálogo online de materiais de construção para lojistas: categorias, medidas, embalagens e preços de cada item, com pedido de orçamento direto pelo site.</p>
+          <div class="nums"><div><b>176</b><span>produtos</span></div><div><b>19</b><span>categorias</span></div><div><b>Online</b><span>na Vercel</span></div></div>
+          <a class="go" href="https://jm-materiais.vercel.app/" target="_blank" rel="noopener">Ver catálogo <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="card-visual"><img class="shot" src="img/ecoroute.jpg" alt="Print do site EcoRoute" loading="lazy">
-          <div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Equipe</span></div>
-        </div>
-      </a>
+      </article>
 
-      <a class="card rv" href="https://gabrielmorais27.github.io/AutoReq/" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Gestão — Faculdade SENAI</p>
-            <h3>AutoReq <span class="aw">↗</span></h3>
-            <p>Plataforma de gestão de requisitos de software: cadastro com prioridades, autenticação, comentários, histórico de mudanças e dashboard. Equipe de 8 pessoas com Scrum.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Online</b><i>GitHub Pages</i></div>
-            <div class="metric"><b>Scrum</b><i>8 devs em equipe</i></div>
-          </div>
+      <article class="proj rv">
+        <a class="shot" href="https://studio-barber-capussine.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Scapussine Barber">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>studio-barber-capussine.vercel.app</span></div>
+          <img src="img/barbearia.webp" width="900" height="640" alt="Página inicial do site Scapussine Barber" loading="lazy">
+        </a>
+        <div>
+          <span class="pnum">nº 03</span>
+          <h3>Scapussine Barber</h3>
+          <span class="mono">Site e sistema / 2026 / JavaScript, Supabase</span>
+          <p>Site de barbearia com agendamento online: galeria de cortes, calendário com horários livres, agenda do cliente e painel administrativo para o dono.</p>
+          <div class="nums"><div><b>40 min</b><span>por horário</span></div><div><b>Admin</b><span>painel próprio</span></div><div><b>Online</b><span>na Vercel</span></div></div>
+          <a class="go" href="https://studio-barber-capussine.vercel.app/" target="_blank" rel="noopener">Ver site <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="card-visual"><img class="shot" src="img/autoreq.jpg" alt="Print do site AutoReq" loading="lazy">
-          <div class="chip-row"><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">Supabase</span><span class="chip">JavaScript</span></div>
-        </div>
-      </a>
+      </article>
+    </div>
 
-      <a class="card rv" href="projetos/upet/index.html" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Pet — 2026</p>
-            <h3>UPET <span class="aw">↗</span></h3>
-            <p>Plataforma pet completa: serviços, produtos, galeria, agendamento e painel administrativo. SPA com navegação por hash.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>SPA</b><i>por hash</i></div>
-            <div class="metric"><b>Admin</b><i>painel completo</i></div>
-          </div>
-        </div>
-        <div class="card-visual"><img class="shot" src="img/upet.jpg" alt="Print do site UPET" loading="lazy">
-          <div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
-        </div>
-      </a>
+    <div class="more rv">
+      <h3>Outros projetos</h3>
+      <div class="rows">
+        <a class="row" href="https://payia-wine.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">04</span><span class="t">PayIA</span><span class="k">Pagamentos com IA, loja e dashboards</span><span class="s">JavaScript, Supabase, Chart.js</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/payia.webp" width="900" height="431" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://luizcarlosdvj-ops.github.io/EcoRoute/" target="_blank" rel="noopener">
+          <span class="n">05</span><span class="t">EcoRoute</span><span class="k">Mapa de reciclagem de Taubaté, em equipe no SENAI</span><span class="s">HTML, CSS, JavaScript</span><span class="y">SENAI ↗</span>
+          <img class="peek" src="img/ecoroute.webp" width="900" height="431" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://gabrielmorais27.github.io/AutoReq/" target="_blank" rel="noopener">
+          <span class="n">06</span><span class="t">AutoReq</span><span class="k">Gestão de requisitos, 8 devs com Scrum</span><span class="s">PHP, MySQL, Supabase</span><span class="y">SENAI ↗</span>
+          <img class="peek" src="img/autoreq.webp" width="900" height="430" alt="" loading="lazy">
+        </a>
+        <a class="row" href="projetos/upet/index.html" target="_blank" rel="noopener">
+          <span class="n">07</span><span class="t">UPET</span><span class="k">Plataforma pet com agendamento e painel</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/upet.webp" width="900" height="430" alt="" loading="lazy">
+        </a>
+        <a class="row" href="projetos/site-imob/index.html" target="_blank" rel="noopener">
+          <span class="n">08</span><span class="t">Site Imob</span><span class="k">Imóveis com simulador de financiamento</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/imob.webp" width="900" height="432" alt="" loading="lazy">
+        </a>
+        <a class="row" href="projetos/mario/index.html" target="_blank" rel="noopener">
+          <span class="n">09</span><span class="t">Jogo do Mario</span><span class="k">Endless runner no navegador</span><span class="s">JavaScript puro</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/mario.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <a class="card rv" href="projetos/site-imob/index.html" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Web · Imobiliária — 2026</p>
-            <h3>Site Imob <span class="aw">↗</span></h3>
-            <p>Listagem de imóveis com simulador de financiamento e dashboard administrativo para gestão.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>Simulador</b><i>de financiamento</i></div>
-          </div>
-        </div>
-        <div class="card-visual"><img class="shot" src="img/imob.jpg" alt="Print do Site Imob" loading="lazy">
-          <div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
-        </div>
-      </a>
+<!-- CREDENCIAIS -->
+<section class="sec" id="credenciais">
+  <div class="wrap">
+    <div class="sec-h rv">
+      <span class="mono">02 / Credenciais</span>
+      <h2>Certificações <em>verificáveis</em></h2>
+      <p>As badges da AWS e do Google podem ser conferidas no Credly com um clique.</p>
+    </div>
 
-      <a class="card rv" href="projetos/mario/index.html" target="_blank" rel="noopener">
-        <div class="card-body">
-          <div>
-            <p class="card-kind">Jogo · Frontend — 2026</p>
-            <h3>Jogo do Mario <span class="aw">↗</span></h3>
-            <p>Endless runner inspirado no Mario — pressione qualquer tecla para pular o cano. JavaScript puro.</p>
-          </div>
-          <div class="metrics">
-            <div class="metric"><b>JS puro</b><i>zero libs</i></div>
-          </div>
+    <div class="creds">
+      <article class="cred rv">
+        <img src="img/badge-aws.webp" width="280" height="280" alt="Badge AWS Academy Graduate Cloud Foundations" loading="lazy">
+        <div>
+          <span class="mono">Amazon Web Services / out. 2026</span>
+          <h3>AWS Academy Graduate: Cloud Foundations</h3>
+          <p>Fundamentos de nuvem na AWS: arquitetura, serviços principais, preços e suporte.</p>
+          <div class="tags"><span>AWS Cloud</span><span>Arquitetura</span><span>Core Services</span><span>Pricing</span><span>Support</span></div>
+          <a class="verify" href="https://www.credly.com/badges/5e6a20ad-74f8-4d12-b68c-abc62d1fd266" target="_blank" rel="noopener">Verificar no Credly ↗</a>
         </div>
-        <div class="card-visual"><img class="shot" src="img/mario.jpg" alt="Print do Jogo do Mario" loading="lazy">
-          <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">CSS</span><span class="chip">HTML</span></div>
+      </article>
+      <article class="cred rv">
+        <img src="img/badge-google.webp" width="280" height="280" alt="Badge Google Cloud Develop Serverless Apps with Firebase" loading="lazy">
+        <div>
+          <span class="mono">Google Cloud / set. 2026 / Intermediário</span>
+          <h3>Develop Serverless Apps with Firebase</h3>
+          <p>Laboratório prático: apps serverless com Firebase, banco Firestore e deploy automatizado com Cloud Build.</p>
+          <div class="tags"><span>Firebase</span><span>Firestore</span><span>Cloud Build</span><span>Cloud Run</span><span>REST API</span></div>
+          <a class="verify" href="https://www.credly.com/badges/ced12504-054d-4e80-9f91-797dfd70570d" target="_blank" rel="noopener">Verificar no Credly ↗</a>
         </div>
-      </a>
+      </article>
+    </div>
 
+    <div class="seals">
+      <div class="seal rv">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><path d="M15 19l5 5-5 5M24 30h9"/></svg>
+        <div><b>Linux Unhatched</b><span>Cisco Networking Academy, 2026</span></div>
+      </div>
+      <div class="seal rv">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><circle cx="24" cy="15" r="3"/><circle cx="15" cy="31" r="3"/><circle cx="33" cy="31" r="3"/><path d="M22.5 17.6l-6 10.8M25.5 17.6l6 10.8M18 31h12"/></svg>
+        <div><b>Conceitos Básicos de Redes</b><span>Cisco Networking Academy, 2026</span></div>
+      </div>
+      <div class="seal rv">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><path d="M24 13l2.6 7.4L34 23l-7.4 2.6L24 33l-2.6-7.4L14 23l7.4-2.6z"/></svg>
+        <div><b>Introdução à IA Moderna</b><span>Cisco Networking Academy, 2026</span></div>
+      </div>
+      <div class="seal rv">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="22" stroke-dasharray="3 3"/><rect x="14" y="21" width="20" height="9" rx="2"/><path d="M18 25.5h2M23 25.5h2M19 21v-4M29 21v-4"/></svg>
+        <div><b>Cisco Packet Tracer</b><span>Cisco Networking Academy, 2026</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SOBRE -->
-<section id="sobre">
+<section class="sec" id="sobre">
   <div class="wrap">
-    <div class="sec-head rv"><h2>Sobre <em>mim</em></h2><span class="sec-n">Micael Silva Domiciano</span></div>
-    <div class="about-g">
-      <div class="rv">
-        <p>Tenho <strong>19 anos</strong> e estou em transição da rotina administrativa para a <em>tecnologia</em>. Como Auxiliar Administrativo, aprendi o que nenhum tutorial ensina: processos bem feitos, comunicação clara com clientes e atenção a detalhes.</p>
-        <p>Hoje curso <strong>ADS no SENAI</strong> e construo minha base com certificações <strong>Cisco</strong> — Linux, redes e IA moderna — enquanto desenvolvo projetos web do zero, do design ao deploy.</p>
-        <div class="facts">
-          <div class="fact"><b>19</b><i>anos</i></div>
-          <div class="fact"><b>04</b><i>certs Cisco</i></div>
-          <div class="fact"><b>09</b><i>projetos web</i></div>
-          <div class="fact"><b>EN</b><i>intermediário</i></div>
+    <div class="sec-h rv">
+      <span class="mono">03 / Sobre</span>
+      <h2>Do administrativo <em>para o código</em></h2>
+      <p>Trajetória, ferramentas e o que eu levo para uma equipe.</p>
+    </div>
+    <div class="about">
+      <div class="about-txt rv">
+        <p>Antes de programar, eu organizava <em>contratos, planilhas e clientes</em>. Hoje uso esse cuidado para construir software.</p>
+        <p>Trabalhei como <strong>Auxiliar Administrativo</strong> na Fabelle Imobiliária, onde aprendi a lidar com prazos, documentos e atendimento. Isso me ensinou a entender o problema de quem usa o sistema antes de escrever a primeira linha.</p>
+        <p>No <strong>SENAI Taubaté</strong> trabalho em equipe com Scrum, versiono tudo no GitHub e publico os projetos na Vercel e no Firebase. Procuro um <strong>estágio em TI</strong> no Vale do Paraíba para aprender com um time de verdade.</p>
+        <div class="stack">
+          <div><h3>Front-end</h3><ul><li>HTML5 e CSS3</li><li>JavaScript</li><li>TypeScript</li><li>React e Next.js</li><li>Vue.js</li><li>Tailwind CSS</li></ul></div>
+          <div><h3>Back-end e dados</h3><ul><li>Node.js</li><li>PHP</li><li>Python</li><li>SQL e MySQL</li><li>Supabase</li><li>Firebase</li></ul></div>
+          <div><h3>Cloud e rotina</h3><ul><li>AWS</li><li>Google Cloud</li><li>Git e GitHub</li><li>Vercel</li><li>Linux</li><li>Scrum</li></ul></div>
         </div>
       </div>
-      <div class="ph rv">
-        <img src="eu-prof.png" alt="Micael Silva Domiciano" loading="lazy">
-        <span class="tag">Taubaté — SP</span>
-      </div>
+      <ol class="tl rv" aria-label="Trajetória">
+        <li class="now"><span class="mono">2026 até 2027</span><b>Análise e Desenvolvimento de Sistemas</b><span>Faculdade SENAI Taubaté, cursando</span></li>
+        <li><span class="mono">out. 2026</span><b>AWS Academy Cloud Foundations</b><span>Amazon Web Services</span></li>
+        <li><span class="mono">set. 2026</span><b>Serverless Apps with Firebase</b><span>Google Cloud, skill badge</span></li>
+        <li><span class="mono">2026</span><b>Linux, Redes, IA Moderna e Packet Tracer</b><span>Cisco Networking Academy, 4 cursos</span></li>
+        <li><span class="mono">Experiência</span><b>Auxiliar Administrativo</b><span>Fabelle Imobiliária: planilhas, contratos, atendimento e suporte a sistemas</span></li>
+        <li><span class="mono">2023</span><b>Informática Básica e Avançada</b><span>Valle Treinamentos</span></li>
+        <li><span class="mono">2017 até 2020</span><b>Inglês</b><span>Fisk e Pró Línguas, nível intermediário</span></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<!-- TRAJETÓRIA -->
-<section id="trajetoria">
+<!-- CURRÍCULO -->
+<section class="sec" id="curriculo">
   <div class="wrap">
-    <div class="sec-head rv"><h2>Trajetória</h2><span class="sec-n">experiência &amp; formação</span></div>
-
-    <div class="trow rv">
-      <span class="ty">Anterior</span>
-      <span>
-        <span class="tt">Auxiliar Administrativo</span>
-        <p class="ts">Rotinas operacionais e atendimento ao cliente em imobiliária.</p>
-        <div class="pill-row"><span>Planilhas</span><span>E-mails a clientes</span><span>Contratos</span><span>Suporte com sistemas</span><span>Redes sociais</span></div>
-      </span>
-      <span class="to">Fabelle Imobiliária</span>
+    <div class="sec-h rv">
+      <span class="mono">04 / Currículo</span>
+      <h2>Tudo em <em>uma página</em></h2>
+      <p>Atualizado em outubro de 2026, com as novas certificações.</p>
     </div>
-
-    <div class="trow rv">
-      <span class="ty">2026 — 2027</span>
-      <span><span class="tt">Análise e Desenvolvimento de Sistemas</span><p class="ts">Graduação — cursando.</p></span>
-      <span class="to">Faculdade SENAI</span>
-    </div>
-
-    <div class="trow rv">
-      <span class="ty">2026</span>
-      <span><span class="tt">Linux · IA Moderna · Redes · Packet Tracer</span><p class="ts">Quatro certificações em tecnologia.</p></span>
-      <span class="to">Cisco Networking Academy</span>
-    </div>
-
-    <div class="trow rv">
-      <span class="ty">2023</span>
-      <span><span class="tt">Informática Básico e Avançado</span></span>
-      <span class="to">Valle Treinamentos</span>
-    </div>
-
-    <div class="trow rv">
-      <span class="ty">2017 — 2020</span>
-      <span><span class="tt">Inglês — Intermediário</span></span>
-      <span class="to">Fisk · Pró Línguas</span>
+    <div class="cv rv">
+      <div>
+        <h3>Currículo pronto para <em>download</em></h3>
+        <p>Uma página, texto selecionável e seções padrão, fácil de ler para recrutadores e para os sistemas de triagem.</p>
+        <ul class="checks">
+          <li>Resumo, experiência, projetos e formação</li>
+          <li>Certificações AWS, Google Cloud e Cisco</li>
+          <li>Links para portfólio, GitHub e LinkedIn</li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-ink" href="curriculo-micael-silva-domiciano.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Baixar PDF</a>
+          <a class="btn btn-line" href="curriculo-micael-silva-domiciano.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+      <a class="sheet" href="curriculo-micael-silva-domiciano.pdf" target="_blank" rel="noopener" aria-label="Abrir currículo em PDF">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="img/curriculo-preview.webp" width="900" height="1273" alt="Prévia do currículo de Micael Silva Domiciano" loading="lazy">
+      </a>
     </div>
   </div>
 </section>
 
 <!-- CONTATO -->
-<section id="contato" class="contact">
-  <div class="wrap">
-    <div class="rv">
-      <h2>Vamos construir<br>algo <em>juntos</em>?</h2>
-      <p class="sub">Aberto a estágio, primeiro emprego em tech e projetos freelance. Resposta rápida garantida.</p>
-      <a class="mailbtn" href="mailto:micaelsd07@gmail.com">micaelsd07@gmail.com <span>→</span></a>
-      <div class="soc-row">
-        <a class="soc" href="https://github.com/micaelsd07" target="_blank" rel="noopener">GitHub <span class="aw">↗</span></a>
-        <a class="soc" href="https://www.linkedin.com/in/micael-domiciano-91b5a8177/" target="_blank" rel="noopener">LinkedIn <span class="aw">↗</span></a>
-        <a class="soc" href="https://wa.me/5512992013137" target="_blank" rel="noopener">WhatsApp <span class="aw">↗</span></a>
-        <a class="soc" href="curriculo-micael-silva-domiciano.pdf" download>Currículo ↓</a>
-      </div>
+<section class="contact" id="contato">
+  <div class="wrap rv">
+    <span class="mono">05 / Contato</span>
+    <h2>Vamos <em>conversar?</em></h2>
+    <p>Aberto a estágio em TI, primeiro emprego em tecnologia e projetos freelance. Respondo rápido.</p>
+    <a class="mail" href="mailto:micaelsd07@gmail.com">micaelsd07@gmail.com <span aria-hidden="true">→</span></a>
+    <div class="soc">
+      <a href="https://wa.me/5512992013137" target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="https://www.linkedin.com/in/micael-domiciano-91b5a8177/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/micaelsd07" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.credly.com/users/micael-domiciano.3fe13344" target="_blank" rel="noopener">Credly ↗</a>
     </div>
   </div>
 </section>
+</main>
 
 <footer>
-  <div class="foot-in">
+  <div class="wrap foot">
     <span>© 2026 Micael Silva Domiciano</span>
-    <span class="clk" id="clock2">Taubaté — --:--</span>
-    <span>HTML, CSS &amp; JS puro</span>
+    <span class="mono" id="clock2">Taubaté, --:--</span>
+    <span>Feito à mão com HTML, CSS e JavaScript</span>
   </div>
 </footer>
 
 <script>
-// Tema claro/escuro
+// Tema: segue o sistema; o botão só guarda a escolha quando ela difere do sistema.
 (function(){
-  var html=document.documentElement,btn=document.getElementById('tgl'),t=document.getElementById('tgl-t');
-  var saved=localStorage.getItem('theme');
-  if(saved){html.dataset.theme=saved}
-  sync();
-  btn.addEventListener('click',function(){
-    html.dataset.theme=html.dataset.theme==='dark'?'light':'dark';
-    localStorage.setItem('theme',html.dataset.theme);
-    sync();
+  var meta=document.querySelector('meta[name="color-scheme"]');
+  var sys=matchMedia('(prefers-color-scheme: dark)');
+  function sysScheme(){return sys.matches?'dark':'light'}
+  function rendered(){var v=meta.content;return v==='dark'||v==='light'?v:sysScheme()}
+  document.getElementById('tgl').addEventListener('click',function(){
+    var target=rendered()==='dark'?'light':'dark';
+    var keep=target!==sysScheme();
+    try{keep?localStorage.setItem('color-scheme',target):localStorage.removeItem('color-scheme')}catch(e){}
+    meta.content=keep?target:'light dark';
   });
-  function sync(){t.textContent=html.dataset.theme==='dark'?'Claro':'Escuro'}
+  addEventListener('storage',function(e){if(e.key==='color-scheme')meta.content=e.newValue||'light dark'});
 })();
 
-// Hora local
+// Hora de Taubaté, independente do fuso de quem visita.
 (function(){
-  function tick(){
-    var d=new Date();
-    var h=('0'+d.getHours()).slice(-2),m=('0'+d.getMinutes()).slice(-2);
-    document.getElementById('clock').textContent=h+':'+m;
-    document.getElementById('clock2').textContent='Taubaté — '+h+':'+m;
-  }
+  var f=new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
+  var a=document.getElementById('clock'),b=document.getElementById('clock2');
+  function tick(){var t=f.format(new Date());a.textContent=t;b.textContent='Taubaté, '+t}
   tick();setInterval(tick,30000);
 })();
 
-// Reveal on scroll
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
-},{threshold:.1});
-document.querySelectorAll('.rv').forEach(function(x){io.observe(x)});
+// Reserva para navegadores sem animações por rolagem nativas.
+(function(){
+  var native=CSS.supports('animation-timeline: view()')&&CSS.supports('animation-range: 0% 100%');
+  if(native||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  document.documentElement.classList.add('io');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+})();
 </script>
 </body>
 </html>
