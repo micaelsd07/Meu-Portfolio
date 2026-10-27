@@ -75,6 +75,15 @@ img{display:block;max-width:100%;height:auto}
 html.io .rv{opacity:0;translate:0 24px;transition:opacity .8s var(--ease),translate .8s var(--ease)}
 html.io .rv.on{opacity:1;translate:0 0}
 
+/* ---------- 3D: fundo e inclinação dos cards ---------- */
+#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
+#bg3d.on{opacity:1}
+[data-tilt]{--rx:0deg;--ry:0deg;--lift:0px;transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));transition:transform .6s var(--ease),rotate .6s var(--ease),border-color .3s,box-shadow .4s}
+[data-tilt].tilting{transition:transform .12s linear,rotate .6s var(--ease),border-color .3s,box-shadow .4s}
+.idcard[data-tilt],.sheet[data-tilt]{transition:transform .6s var(--ease),rotate .6s var(--ease)}
+[data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgb(255 255 255 / .22),transparent 55%);opacity:0;transition:opacity .4s;z-index:3}
+[data-tilt].tilting::after{opacity:1}
+
 /* ---------- Navegação ---------- */
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut);height:64px;display:flex;align-items:center;gap:16px}
@@ -175,7 +184,7 @@ html.io .rv.on{opacity:1;translate:0 0}
 /* ---------- Credenciais ---------- */
 .creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .cred{position:relative;display:grid;grid-template-columns:118px minmax(0,1fr);gap:22px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px;transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
-.cred:hover{border-color:var(--line-2);transform:translateY(-4px);box-shadow:0 24px 50px -32px var(--shadow)}
+.cred:hover{border-color:var(--line-2);--lift:-4px;box-shadow:0 24px 50px -32px var(--shadow)}
 .cred img{width:118px;height:118px;filter:drop-shadow(0 10px 14px rgb(0 0 0 / .12))}
 .cred .mono{display:block;margin-bottom:8px;font-size:11px}
 .cred h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.15;letter-spacing:-.015em;margin-bottom:8px}
@@ -190,8 +199,8 @@ html.io .rv.on{opacity:1;translate:0 0}
 .seal svg{flex:none;width:46px;height:46px;color:var(--accent)}
 .seal b{display:block;font-weight:500;font-size:14.5px;line-height:1.3}
 .seal span{font-size:12.5px;color:var(--ink-3)}
-.seal.mini{border-style:solid;border-color:var(--line);background:var(--paper);transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
-.seal.mini:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:0 18px 36px -26px var(--shadow)}
+.seal.mini{position:relative;border-style:solid;border-color:var(--line);background:var(--paper);transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
+.seal.mini:hover{border-color:var(--line-2);--lift:-3px;box-shadow:0 18px 36px -26px var(--shadow)}
 .seal.mini img{flex:none;width:64px;height:64px}
 .seal em{display:block;font-style:normal;font-size:12.5px;font-weight:500;margin-top:4px;color:var(--ink-2);transition:color .2s}
 .seal.mini:hover em{color:var(--accent)}
@@ -290,6 +299,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 </style>
 </head>
 <body>
+<canvas id="bg3d" aria-hidden="true"></canvas>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="nav">
@@ -330,7 +340,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 
       <div class="lanyard">
         <div class="strap" aria-hidden="true"></div>
-        <article class="idcard" aria-label="Crachá de Micael Silva Domiciano">
+        <article class="idcard" data-tilt="8" aria-label="Crachá de Micael Silva Domiciano">
           <div class="id-top"><span class="mono">Credencial</span><span class="mono">Nº 2026/07</span></div>
           <div class="id-photo"><img src="img/micael-640.webp" width="640" height="640" alt="Foto de Micael Silva Domiciano" fetchpriority="high"></div>
           <p class="id-name">Micael Silva Domiciano</p>
@@ -373,7 +383,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 
     <div class="feat">
       <article class="proj rv">
-        <a class="shot" href="https://linha-404.web.app/" target="_blank" rel="noopener" aria-label="Abrir Linha 404">
+        <a class="shot" data-tilt="5" href="https://linha-404.web.app/" target="_blank" rel="noopener" aria-label="Abrir Linha 404">
           <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>linha-404.web.app</span></div>
           <img src="img/linha-404.webp" width="1100" height="782" alt="Menu do jogo Linha 404" loading="lazy">
         </a>
@@ -388,7 +398,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
       </article>
 
       <article class="proj rv">
-        <a class="shot" href="https://jm-materiais.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir JM Materiais">
+        <a class="shot" data-tilt="5" href="https://jm-materiais.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir JM Materiais">
           <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>jm-materiais.vercel.app</span></div>
           <img src="img/jm-materiais.webp" width="900" height="640" alt="Página inicial do catálogo JM Materiais" loading="lazy">
         </a>
@@ -403,7 +413,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
       </article>
 
       <article class="proj rv">
-        <a class="shot" href="https://studio-barber-capussine.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Scapussine Barber">
+        <a class="shot" data-tilt="5" href="https://studio-barber-capussine.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Scapussine Barber">
           <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>studio-barber-capussine.vercel.app</span></div>
           <img src="img/barbearia.webp" width="900" height="640" alt="Página inicial do site Scapussine Barber" loading="lazy">
         </a>
@@ -460,7 +470,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
     </div>
 
     <div class="creds">
-      <article class="cred rv">
+      <article class="cred rv" data-tilt="4">
         <img src="img/badge-aws.webp" width="280" height="280" alt="Badge AWS Academy Graduate Cloud Foundations" loading="lazy">
         <div>
           <span class="mono">Amazon Web Services / out. 2026</span>
@@ -470,7 +480,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
           <a class="verify" href="https://www.credly.com/badges/5e6a20ad-74f8-4d12-b68c-abc62d1fd266" target="_blank" rel="noopener">Verificar no Credly ↗</a>
         </div>
       </article>
-      <article class="cred rv">
+      <article class="cred rv" data-tilt="4">
         <img src="img/badge-google.webp" width="280" height="280" alt="Badge Google Cloud Develop Serverless Apps with Firebase" loading="lazy">
         <div>
           <span class="mono">Google Cloud / set. 2026 / Intermediário</span>
@@ -483,15 +493,15 @@ footer{border-top:1px solid var(--line);padding:24px 0}
     </div>
 
     <div class="seals">
-      <a class="seal mini rv" href="https://www.credly.com/badges/065d4117-09d3-4596-81db-32abb7ded5b4" target="_blank" rel="noopener">
+      <a class="seal mini rv" data-tilt="8" href="https://www.credly.com/badges/065d4117-09d3-4596-81db-32abb7ded5b4" target="_blank" rel="noopener">
         <img src="img/badge-cisco-linux.webp" width="220" height="220" alt="Badge Cisco Linux Unhatched" loading="lazy">
         <div><b>Linux Unhatched</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
       </a>
-      <a class="seal mini rv" href="https://www.credly.com/badges/6fb92d94-93e9-4870-a2cc-8b477350ff5e" target="_blank" rel="noopener">
+      <a class="seal mini rv" data-tilt="8" href="https://www.credly.com/badges/6fb92d94-93e9-4870-a2cc-8b477350ff5e" target="_blank" rel="noopener">
         <img src="img/badge-cisco-redes.webp" width="220" height="220" alt="Badge Cisco Networking Basics" loading="lazy">
         <div><b>Networking Basics</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
       </a>
-      <a class="seal mini rv" href="https://www.credly.com/badges/81352673-22aa-481a-95b2-7c9bfe9e9a0f" target="_blank" rel="noopener">
+      <a class="seal mini rv" data-tilt="8" href="https://www.credly.com/badges/81352673-22aa-481a-95b2-7c9bfe9e9a0f" target="_blank" rel="noopener">
         <img src="img/badge-cisco-ia.webp" width="220" height="220" alt="Badge Cisco Introduction to Modern AI" loading="lazy">
         <div><b>Introduction to Modern AI</b><span>Cisco, jun. 2026</span><em>Verificar no Credly ↗</em></div>
       </a>
@@ -557,7 +567,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
           <a class="btn btn-line" href="curriculo-micael-silva-domiciano.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
         </div>
       </div>
-      <a class="sheet" href="curriculo-micael-silva-domiciano.pdf" target="_blank" rel="noopener" aria-label="Abrir currículo em PDF">
+      <a class="sheet" data-tilt="6" href="curriculo-micael-silva-domiciano.pdf" target="_blank" rel="noopener" aria-label="Abrir currículo em PDF">
         <span class="tape" aria-hidden="true"></span>
         <img src="img/curriculo-preview.webp" width="900" height="1273" alt="Prévia do currículo de Micael Silva Domiciano" loading="lazy">
       </a>
@@ -586,7 +596,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   <div class="wrap foot">
     <span>© 2026 Micael Silva Domiciano</span>
     <span class="mono" id="clock2">Taubaté, --:--</span>
-    <span>Feito à mão com HTML, CSS e JavaScript</span>
+    <span>Feito à mão com HTML, CSS, JavaScript e WebGL</span>
   </div>
 </footer>
 
@@ -614,6 +624,23 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   tick();setInterval(tick,30000);
 })();
 
+// Inclinação 3D dos cards seguindo o mouse (só em mouse, sem "reduzir movimento").
+(function(){
+  if(!matchMedia('(hover: hover) and (pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('[data-tilt]').forEach(function(el){
+    var max=+el.dataset.tilt||6;
+    el.addEventListener('pointermove',function(e){
+      var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      el.classList.add('tilting');
+      el.style.setProperty('--ry',((x-.5)*max*2).toFixed(2)+'deg');
+      el.style.setProperty('--rx',((.5-y)*max*1.6).toFixed(2)+'deg');
+      el.style.setProperty('--gx',(x*100).toFixed(1)+'%');
+      el.style.setProperty('--gy',(y*100).toFixed(1)+'%');
+    });
+    el.addEventListener('pointerleave',function(){el.classList.remove('tilting');el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')});
+  });
+})();
+
 // Reserva para navegadores sem animações por rolagem nativas.
 (function(){
   var native=CSS.supports('animation-timeline: view()')&&CSS.supports('animation-range: 0% 100%');
@@ -623,5 +650,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 })();
 </script>
+<script src="js/fundo-3d.js" defer></script>
 </body>
 </html>
