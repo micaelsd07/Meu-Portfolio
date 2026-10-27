@@ -9,14 +9,15 @@ const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let renderer;
 try {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: (window.devicePixelRatio || 1) < 1.5, powerPreference: 'high-performance', stencil: false });
 } catch (e) { renderer = null; }
 
 if (renderer) init();
 
 function init() {
   const small = matchMedia('(max-width: 760px)').matches;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.25 : 1.5));
+  let ratio = Math.min(window.devicePixelRatio || 1, small ? 1 : 1.25);
+  renderer.setPixelRatio(ratio);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
 
@@ -30,8 +31,9 @@ function init() {
   const CYAN = new THREE.Color('#38bdf8');
 
   // ---------- helpers ----------
-  const std = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.75, metalness: 0.1, ...extra });
-  const glow = (color, intensity = 2) => new THREE.MeshStandardMaterial({ color: '#000', emissive: color, emissiveIntensity: intensity });
+  // Lambert é bem mais barato que Standard; LEDs e telas não precisam de luz (MeshBasic).
+  const std = (color, extra = {}) => { const { roughness, metalness, ...rest } = extra; return new THREE.MeshLambertMaterial({ color, ...rest }); };
+  const glow = (color, intensity = 2) => new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(Math.min(intensity, 2.2)), toneMapped: false });
   function box(w, h, d, mat, x, y, z, parent = scene) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
     m.position.set(x, y, z); parent.add(m); return m;
@@ -51,7 +53,7 @@ function init() {
   const left = new THREE.Mesh(new THREE.PlaneGeometry(14, 6), std('#18151f'));
   left.rotation.y = Math.PI / 2; left.position.set(-3.3, 3, 0); scene.add(left);
   // tapete
-  const rug = new THREE.Mesh(new THREE.CircleGeometry(1.6, 48), std('#231d2e', { roughness: 1 }));
+  const rug = new THREE.Mesh(new THREE.CircleGeometry(1.6, 32), std('#231d2e', { roughness: 1 }));
   rug.rotation.x = -Math.PI / 2; rug.position.set(0.2, 0.005, 0.4); scene.add(rug);
   // fitas de LED
   box(14, 0.03, 0.03, glow(PURPLE, 3), 0, 3.6, -1.58);
@@ -77,9 +79,10 @@ function init() {
       ctx.fillRect(8 + k * 33.4, 8 + r * 30, 28, 24);
     }
   });
-  const kb = box(0.92, 0.03, 0.3, [legMat, legMat, new THREE.MeshStandardMaterial({ color: '#111', emissive: '#fff', emissiveMap: keys.tex, emissiveIntensity: 1.2 }), legMat, legMat, legMat], 0, 0.81, -0.6);
+  keys.tex.wrapS = THREE.RepeatWrapping; keys.tex.needsUpdate = true;
+  const kb = box(0.92, 0.03, 0.3, [legMat, legMat, new THREE.MeshBasicMaterial({ map: keys.tex, toneMapped: false }), legMat, legMat, legMat], 0, 0.81, -0.6);
   // mouse
-  const mouse = new THREE.Mesh(new THREE.SphereGeometry(0.05, 20, 12), std('#121117', { roughness: 0.3 }));
+  const mouse = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 8), std('#121117', { roughness: 0.3 }));
   mouse.scale.set(0.75, 0.45, 1.25); mouse.position.set(0.68, 0.81, -0.6); scene.add(mouse);
   box(0.012, 0.004, 0.05, glow(CYAN, 3), 0.68, 0.833, -0.62);
 
@@ -89,10 +92,10 @@ function init() {
   box(0.08, 0.42, 0.06, legMat, 0, 0.99, -1.27);
   box(0.46, 0.02, 0.26, legMat, 0, 0.8, -1.24);
   const screenCanvas = document.createElement('canvas');
-  screenCanvas.width = 1600; screenCanvas.height = 896;
+  screenCanvas.width = 1280; screenCanvas.height = 716;
   const sctx = screenCanvas.getContext('2d');
   const screenTex = new THREE.CanvasTexture(screenCanvas);
-  screenTex.colorSpace = THREE.SRGBColorSpace; screenTex.anisotropy = 8;
+  screenTex.colorSpace = THREE.SRGBColorSpace; screenTex.anisotropy = 4; screenTex.generateMipmaps = false; screenTex.minFilter = THREE.LinearFilter;
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(SCREEN.w, SCREEN.h), new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false }));
   screen.position.set(SCREEN.x, SCREEN.y, SCREEN.z); scene.add(screen);
   // brilho roxo atrás do monitor
@@ -142,11 +145,11 @@ function init() {
   // ---------- gabinete com ventoinhas RGB ----------
   const pc = new THREE.Group(); pc.position.set(1.38, 1.15, -1.0); scene.add(pc);
   box(0.34, 0.72, 0.62, std('#0d0c11', { metalness: 0.5, roughness: 0.35 }), 0, 0, 0, pc);
-  const glass = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.66), new THREE.MeshStandardMaterial({ color: '#1a1530', emissive: '#2a1a55', emissiveIntensity: 0.8, transparent: true, opacity: 0.85 }));
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.66), new THREE.MeshBasicMaterial({ color: '#241a48' }));
   glass.position.set(0, 0, 0.312); pc.add(glass);
   const fans = [];
   [0.2, 0, -0.2].forEach((y) => {
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.011, 10, 40), glow(ORANGE, 3));
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.011, 6, 28), new THREE.MeshBasicMaterial({ color: ORANGE.clone(), toneMapped: false }));
     ring.position.set(0, y, 0.318); pc.add(ring); fans.push(ring);
     const blades = new THREE.Mesh(new THREE.CircleGeometry(0.07, 6), std('#1b1825', { roughness: 0.6 }));
     blades.position.set(0, y, 0.316); pc.add(blades);
@@ -157,7 +160,7 @@ function init() {
   [['#e85d3f', 0.06, 0.3], ['#3b82f6', 0.05, 0.26], ['#f5c04a', 0.07, 0.32], ['#10b981', 0.05, 0.24], ['#a78bfa', 0.06, 0.28]].forEach(([c, w, h], i) => {
     box(w, h, 0.2, std(c, { roughness: 0.8 }), -1.85 + i * 0.075, 2.32 + h / 2, -1.48);
   });
-  const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.055, 0.12, 20), std('#d9d2c3'));
+  const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.055, 0.12, 12), std('#d9d2c3'));
   pot.position.set(-0.95, 2.38, -1.48); scene.add(pot);
   const leaf = new THREE.Mesh(new THREE.IcosahedronGeometry(0.13, 1), std('#2f7d4f', { roughness: 0.9, flatShading: true }));
   leaf.position.set(-0.95, 2.53, -1.48); leaf.scale.y = 1.2; scene.add(leaf);
@@ -183,7 +186,7 @@ function init() {
   posterMesh.rotation.y = Math.PI / 2; posterMesh.position.set(-3.28, 1.95, -0.3); scene.add(posterMesh);
 
   // ---------- cadeira gamer (afastada para o lado) ----------
-  const chair = new THREE.Group(); chair.position.set(1.95, 0, 0.05); chair.rotation.y = -0.6; scene.add(chair);
+  const chair = new THREE.Group(); chair.position.set(2.45, 0, 0.75); chair.rotation.y = -0.85; scene.add(chair);
   const seatMat = std('#16141b', { roughness: 0.6 });
   box(0.56, 0.1, 0.55, seatMat, 0, 0.5, 0, chair);
   box(0.56, 0.85, 0.1, seatMat, 0, 0.98, 0.26, chair);
@@ -194,11 +197,14 @@ function init() {
   box(0.06, 0.03, 0.6, legMat, 0, 0.03, 0, chair);
 
   // ---------- luzes ----------
-  scene.add(new THREE.AmbientLight('#8c7fb8', 0.55));
+  scene.add(new THREE.HemisphereLight('#b3a4e0', '#2a2036', 2.1));
   const monitorLight = new THREE.PointLight('#cfe1ff', 6, 4, 2); monitorLight.position.set(0, 1.35, -0.8); scene.add(monitorLight);
   const purple = new THREE.PointLight(PURPLE, 14, 6, 2); purple.position.set(-1.6, 2.9, -1.1); scene.add(purple);
   const orange = new THREE.PointLight(ORANGE, 9, 5, 2); orange.position.set(1.5, 2.3, -1.15); scene.add(orange);
-  const fill = new THREE.PointLight('#b9a7ff', 5, 9, 2); fill.position.set(2.5, 2.6, 2.5); scene.add(fill);
+
+  // nada no quarto se mexe: calcula as matrizes uma vez e desliga a atualização automática
+  scene.traverse((o) => { o.updateMatrix(); o.matrixAutoUpdate = false; });
+  scene.updateMatrixWorld(true);
 
   // ---------- tela: terminal que digita conforme a rolagem ----------
   const photo = new Image(); photo.src = 'img/micael-640.webp';
@@ -209,21 +215,17 @@ function init() {
     { cmd: 'cat stack.txt', out: ['React  TypeScript  Node.js  SQL  Git'] },
     { cmd: './portfolio --abrir', out: [] },
   ];
-  let lastKey = '';
-  function drawScreen(p, time) {
-    const typed = Math.max(0, (p - 0.08) / 0.8) * LINES.length; // quantos comandos já apareceram
-    const blink = Math.floor(time / 500) % 2;
-    const key = typed.toFixed(2) + blink + (photo.complete ? 1 : 0);
-    if (key === lastKey) return; lastKey = key;
-    const W = screenCanvas.width, H = screenCanvas.height, c = sctx;
+  let lastKey = '', lastDraw = 0, base = null;
+  // camada fixa (fundo, barra e foto) desenhada uma vez só
+  function buildBase() {
+    base = document.createElement('canvas'); base.width = 1600; base.height = 896;
+    const c = base.getContext('2d'), W = 1600, H = 896;
     const bg = c.createLinearGradient(0, 0, W, H); bg.addColorStop(0, '#120f1c'); bg.addColorStop(1, '#0b1220');
     c.fillStyle = bg; c.fillRect(0, 0, W, H);
-    // barra superior
     c.fillStyle = 'rgba(255,255,255,.05)'; c.fillRect(0, 0, W, 54);
     c.font = '500 22px "IBM Plex Mono", monospace'; c.fillStyle = '#a9a3c4';
     c.fillText('micael@senai: ~/portfolio', 28, 35);
     [['#ff5f57', 0], ['#febc2e', 1], ['#28c840', 2]].forEach(([col, i]) => { c.fillStyle = col; c.beginPath(); c.arc(W - 120 + i * 34, 27, 9, 0, 7); c.fill(); });
-    // foto à direita
     const px = W - 430, py = 110, ps = 330;
     c.save(); c.beginPath(); c.roundRect(px, py, ps, ps, 24); c.clip();
     if (photo.complete && photo.naturalWidth) c.drawImage(photo, px, py, ps, ps); else { c.fillStyle = '#1d1a2a'; c.fillRect(px, py, ps, ps); }
@@ -231,7 +233,18 @@ function init() {
     c.strokeStyle = '#ff6b3d'; c.lineWidth = 3; c.beginPath(); c.roundRect(px, py, ps, ps, 24); c.stroke();
     c.font = '500 22px "IBM Plex Mono", monospace'; c.fillStyle = '#ff9a73'; c.fillText('Disponível para estágio', px, py + ps + 46);
     c.fillStyle = '#7d779a'; c.fillText('Taubaté, SP', px, py + ps + 82);
-    // linhas do terminal
+  }
+  function drawScreen(p, time) {
+    const typed = Math.max(0, (p - 0.08) / 0.8) * LINES.length;
+    const step = Math.floor(typed * 24); // muda só quando aparece uma letra nova
+    const blink = Math.floor(time / 500) % 2;
+    const key = step + '-' + blink;
+    if (key === lastKey || (time - lastDraw < 66 && lastKey)) return; // no máximo ~15 atualizações por segundo
+    lastKey = key; lastDraw = time;
+    if (!base) buildBase();
+    const c = sctx;
+    c.setTransform(0.8, 0, 0, 0.8, 0, 0); // desenha em coordenadas 1600x896 sobre a tela 1280x716
+    c.drawImage(base, 0, 0);
     c.font = '500 30px "IBM Plex Mono", monospace';
     let y = 120;
     for (let i = 0; i < LINES.length; i++) {
@@ -284,6 +297,7 @@ function init() {
 
   const look = new THREE.Vector3(), pos = new THREE.Vector3();
   const ui = section.querySelector('.setup-ui'), fade = section.querySelector('.setup-fade'), bar = section.querySelector('.setup-bar i');
+  let lastUi = -1;
   function frame(time) {
     smooth += (progress - smooth) * (calm ? 1 : 0.09);
     cmx += (mx - cmx) * 0.06; cmy += (my - cmy) * 0.06;
@@ -295,28 +309,43 @@ function init() {
     look.lerpVectors(lookStart, lookEnd, Math.min(1, zoom * 1.4));
     camera.lookAt(look);
 
-    fans.forEach((f, i) => { f.material.emissive.setHSL(((time / 4000) + i * 0.12) % 1, 0.9, 0.55); });
-    keys.tex.offset.x = (time / 6000) % 1; keys.tex.wrapS = THREE.RepeatWrapping;
+    fans.forEach((f, i) => { f.material.color.setHSL(((time / 4000) + i * 0.12) % 1, 0.9, 0.6); });
+    keys.tex.offset.x = (time / 6000) % 1;
     drawScreen(calm ? 1 : smooth, time);
     renderer.render(scene, camera);
 
-    if (ui) { ui.style.opacity = String(Math.max(0, 1 - smooth / 0.18)); ui.style.translate = `0 ${-smooth * 120}px`; }
-    if (bar) bar.style.transform = `scaleY(${smooth})`;
+    const s3 = Math.round(smooth * 1000);
+    if (s3 !== lastUi) {
+      lastUi = s3;
+      if (ui) { ui.style.opacity = String(Math.max(0, 1 - smooth / 0.18)); ui.style.translate = `0 ${-smooth * 120}px`; }
+      if (bar) bar.style.transform = `scaleY(${smooth})`;
+    }
   }
 
   // ---------- ciclo de vida ----------
   let visible = true, raf = 0, running = false;
-  function loop(t) { frame(t); raf = requestAnimationFrame(loop); }
-  function play() { if (running || calm || !visible || document.hidden) return; running = true; raf = requestAnimationFrame(loop); }
+  let prevT = 0, slow = 0, idleSkip = false;
+  function loop(t) {
+    raf = requestAnimationFrame(loop);
+    const dt = prevT ? t - prevT : 16; prevT = t;
+    // parado (sem rolar nem mexer o mouse): desenha em 30 fps, só as luzes RGB se movem
+    const still = Math.abs(progress - smooth) < 0.0005 && Math.abs(mx - cmx) < 0.002 && Math.abs(my - cmy) < 0.002;
+    if (still) { idleSkip = !idleSkip; if (idleSkip) return; }
+    // aparelho lento: baixa a resolução aos poucos até ficar fluido
+    if (dt > 26 && dt < 200) slow++; else slow = Math.max(0, slow - 1);
+    if (slow > 40 && ratio > 0.65) { ratio = Math.max(0.65, ratio - 0.15); renderer.setPixelRatio(ratio); resize(); slow = 0; }
+    frame(t);
+  }
+  function play() { if (running || calm || !visible || document.hidden) return; running = true; prevT = 0; raf = requestAnimationFrame(loop); }
   function pause() { running = false; cancelAnimationFrame(raf); }
   new IntersectionObserver((es) => { visible = es[0].isIntersecting; visible ? play() : pause(); }).observe(section);
   document.addEventListener('visibilitychange', () => (document.hidden ? pause() : play()));
 
   if (!calm) section.classList.add('on'); // libera a trilha de rolagem
   resize(); readProgress();
-  const ready = () => { lastKey = ''; calm ? frame(4000) : play(); };
+  const ready = () => { base = null; lastKey = ''; calm ? frame(4000) : play(); };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(ready);
-  photo.onload = () => { lastKey = ''; if (calm) frame(4000); };
+  photo.onload = () => { base = null; lastKey = ''; if (calm) frame(4000); };
   section.classList.add('ready');
 
   // menu escuro enquanto a cena está sob ele (faixa do topo da tela)

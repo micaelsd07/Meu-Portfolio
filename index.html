@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<script>try{document.querySelector('meta[name="color-scheme"]').content=localStorage.getItem("color-scheme")||"light dark"}catch(e){}</script>
+<meta name="color-scheme" content="dark">
 <title>Micael Silva Domiciano | Desenvolvedor Web e estudante de ADS</title>
 <meta name="description" content="Portfólio de Micael Silva Domiciano, estudante de Análise e Desenvolvimento de Sistemas no SENAI Taubaté. Projetos web, certificações AWS, Google Cloud e Cisco, e currículo para estágio em TI.">
 <meta property="og:title" content="Micael Silva Domiciano | Desenvolvedor Web">
 <meta property="og:description" content="Estudante de ADS em Taubaté. Projetos web, certificações AWS, Google Cloud e Cisco. Disponível para estágio em TI.">
 <meta property="og:image" content="https://meu-portfolio-six-azure.vercel.app/img/og.jpg">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#f1eee6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#11110f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b0a10">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d1431b'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-style='italic' text-anchor='middle' fill='%23fff'%3Em%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,35 +21,21 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ---------- Tema ---------- */
+/* ---------- Tema (escuro, nas cores do setup 3D) ---------- */
 :root{
-  color-scheme:light dark;
-  --bg:#f1eee6;--paper:#faf8f2;--ink:#17160f;--ink-2:#55524a;--ink-3:#6c685e;
-  --line:#dcd6c8;--line-2:#c9c2b1;--accent:#d1431b;--accent-soft:#f6d9cc;
-  --grid:rgb(23 22 15 / .07);--shadow:rgb(40 30 10 / .16);
+  color-scheme:dark;
+  --bg:#0b0a10;--paper:#14111d;--ink:#f1edf7;--ink-2:#b8b1cc;--ink-3:#8f88a8;
+  --line:#231e31;--line-2:#352d4a;--accent:#ff6b3d;--accent-soft:#3a1d2a;
+  --violet:#8b5cf6;--violet-soft:rgb(139 92 246 / .14);
+  --grid:rgb(241 237 247 / .045);--shadow:rgb(0 0 0 / .6);
   --serif:'Fraunces',Georgia,serif;
   --sans:'IBM Plex Sans',system-ui,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
   --max:1180px;--gut:clamp(16px,4vw,40px);
   --ease:cubic-bezier(.22,1,.36,1);
 }
-:root:has(> head > meta[name="color-scheme"][content="dark"]){color-scheme:dark}
-:root:has(> head > meta[name="color-scheme"][content="light"]){color-scheme:light}
-@supports (color:light-dark(#000,#fff)){
-  :root{
-    --bg:light-dark(#f1eee6,#11110f);
-    --paper:light-dark(#faf8f2,#1a1916);
-    --ink:light-dark(#17160f,#efebe1);
-    --ink-2:light-dark(#55524a,#aba699);
-    --ink-3:light-dark(#6c685e,#8f8a7e);
-    --line:light-dark(#dcd6c8,#2b2924);
-    --line-2:light-dark(#c9c2b1,#3a3832);
-    --accent:light-dark(#d1431b,#ff6b3d);
-    --accent-soft:light-dark(#f6d9cc,#3a1d12);
-    --grid:light-dark(rgb(23 22 15 / .07),rgb(239 235 225 / .045));
-    --shadow:light-dark(rgb(40 30 10 / .16),rgb(0 0 0 / .5));
-  }
-}
+/* luz roxa e laranja ao fundo, como as fitas de LED do quarto */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 10% 15%,rgb(139 92 246 / .13),transparent 70%),radial-gradient(ellipse 50% 40% at 92% 85%,rgb(255 107 61 / .09),transparent 70%)}
 
 html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -114,15 +98,6 @@ html.io .rv.on{opacity:1;translate:0 0}
 .links{display:flex;gap:2px}
 .links a{font-size:14px;color:var(--ink-2);padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
 .links a:hover{color:var(--ink);background:var(--paper)}
-.tgl{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s}
-.tgl:hover{background:var(--paper)}
-.tgl svg{width:17px;height:17px}
-.to-light{display:none}
-@media (prefers-color-scheme:dark){.to-dark{display:none}.to-light{display:inline-flex}}
-:root:has(> head > meta[name="color-scheme"][content="dark"]) .to-dark{display:none}
-:root:has(> head > meta[name="color-scheme"][content="dark"]) .to-light{display:inline-flex}
-:root:has(> head > meta[name="color-scheme"][content="light"]) .to-light{display:none}
-:root:has(> head > meta[name="color-scheme"][content="light"]) .to-dark{display:inline-flex}
 .btn{display:inline-flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;padding:12px 20px;border-radius:999px;border:1px solid var(--ink);transition:transform .3s var(--ease),background .25s,color .25s}
 .btn:hover{transform:translateY(-2px)}
 .btn-ink{background:var(--ink);color:var(--bg)}
@@ -136,7 +111,7 @@ html.io .rv.on{opacity:1;translate:0 0}
 /* ---------- Hero ---------- */
 .hero{position:relative;padding:clamp(56px,9vw,110px) 0 0;isolation:isolate;overflow:clip}
 .hero::before{content:"";position:absolute;inset:-64px 0 0;z-index:-1;background:radial-gradient(ellipse 46% 60% at 82% 28%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%),radial-gradient(ellipse 40% 50% at 8% 90%,color-mix(in srgb,var(--accent) 6%,transparent),transparent 70%)}
-.hero::after{content:"";position:absolute;inset:-64px 0 0;z-index:-1;opacity:.35;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+.hero::after{content:"";position:absolute;inset:-64px 0 0;z-index:-1;opacity:.35;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.75 0 0 0 0 0.7 0 0 0 0 0.9 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
 .hero-g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:start}
 .kicker{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:28px}
 .live{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 11px}
@@ -332,10 +307,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
       <a href="#curriculo">Currículo</a>
       <a href="#contato">Contato</a>
     </nav>
-    <button class="tgl" id="tgl" type="button">
-      <span class="to-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span class="sr">Mudar para o tema escuro</span></span>
-      <span class="to-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="sr">Mudar para o tema claro</span></span>
-    </button>
     <a class="btn btn-ink" href="curriculo-micael-silva-domiciano.pdf" download aria-label="Baixar currículo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg><span>Currículo</span></a>
   </div>
 </header>
@@ -636,20 +607,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 </footer>
 
 <script>
-// Tema: segue o sistema; o botão só guarda a escolha quando ela difere do sistema.
-(function(){
-  var meta=document.querySelector('meta[name="color-scheme"]');
-  var sys=matchMedia('(prefers-color-scheme: dark)');
-  function sysScheme(){return sys.matches?'dark':'light'}
-  function rendered(){var v=meta.content;return v==='dark'||v==='light'?v:sysScheme()}
-  document.getElementById('tgl').addEventListener('click',function(){
-    var target=rendered()==='dark'?'light':'dark';
-    var keep=target!==sysScheme();
-    try{keep?localStorage.setItem('color-scheme',target):localStorage.removeItem('color-scheme')}catch(e){}
-    meta.content=keep?target:'light dark';
-  });
-  addEventListener('storage',function(e){if(e.key==='color-scheme')meta.content=e.newValue||'light dark'});
-})();
 
 // Hora de Taubaté, independente do fuso de quem visita.
 (function(){
