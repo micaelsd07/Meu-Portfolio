@@ -76,13 +76,34 @@ html.io .rv{opacity:0;translate:0 24px;transition:opacity .8s var(--ease),transl
 html.io .rv.on{opacity:1;translate:0 0}
 
 /* ---------- 3D: fundo e inclinação dos cards ---------- */
-#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
-#bg3d.on{opacity:1}
 [data-tilt]{--rx:0deg;--ry:0deg;--lift:0px;transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));transition:transform .6s var(--ease),rotate .6s var(--ease),border-color .3s,box-shadow .4s}
 [data-tilt].tilting{transition:transform .12s linear,rotate .6s var(--ease),border-color .3s,box-shadow .4s}
 .idcard[data-tilt],.sheet[data-tilt]{transition:transform .6s var(--ease),rotate .6s var(--ease)}
 [data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgb(255 255 255 / .22),transparent 55%);opacity:0;transition:opacity .4s;z-index:3}
 [data-tilt].tilting::after{opacity:1}
+
+/* ---------- Setup 3D ---------- */
+.setup{position:relative;height:100svh;background:#0b0a10}
+.setup.on{height:420svh}
+.setup-sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 45%,#2a1d4a 0%,#0b0a10 70%)}
+#room{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1s ease}
+.setup.ready #room{opacity:1}
+.setup-ui{position:absolute;left:var(--gut);bottom:clamp(28px,7vh,72px);max-width:560px;color:#f3efe6;z-index:2;text-shadow:0 2px 30px rgb(0 0 0 / .6)}
+.setup-ui .mono{color:#ff9a73;font-weight:500}
+.setup-name{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,7vw,5.4rem);line-height:.95;letter-spacing:-.04em;margin:12px 0 14px}
+.setup-name em{font-style:italic;font-weight:400;color:#ff7a4d}
+.setup-role{font-size:clamp(1rem,1.6vw,1.15rem);color:#d6d0e6;max-width:430px;margin-bottom:22px}
+.setup-hint{display:inline-flex;align-items:center;gap:12px;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#cfc8e6}
+.setup-hint i{width:22px;height:34px;border:1.5px solid #cfc8e6;border-radius:12px;position:relative}
+.setup-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:#ff7a4d;translate:-50% 0}
+@media (prefers-reduced-motion:no-preference){.setup-hint i::after{animation:wheel 1.6s ease-in-out infinite}}
+@keyframes wheel{0%{opacity:0;translate:-50% 0}40%{opacity:1}100%{opacity:0;translate:-50% 12px}}
+.setup-bar{position:absolute;right:var(--gut);top:50%;width:2px;height:120px;translate:0 -50%;background:rgb(255 255 255 / .15);border-radius:2px;z-index:2}
+.setup-bar i{position:absolute;inset:0;background:#ff7a4d;transform-origin:top;transform:scaleY(0);border-radius:2px}
+.setup:not(.on) .setup-bar{display:none}
+.setup-fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:3}
+.on-setup .nav{--ink:#f3efe6;--ink-2:#cfc8e6;--ink-3:#9a93b5;--paper:rgb(255 255 255 / .08);--line:rgb(255 255 255 / .1);--line-2:rgb(255 255 255 / .22);--bg:#0b0a10;color:var(--ink)}
+.nav{transition:background .4s,border-color .4s,color .4s}
 
 /* ---------- Navegação ---------- */
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -113,7 +134,7 @@ html.io .rv.on{opacity:1;translate:0 0}
 @media (max-width:420px){.nav .btn span{display:none}.brand span small{display:none}}
 
 /* ---------- Hero ---------- */
-.hero{position:relative;padding:clamp(56px,9vw,110px) 0 0;isolation:isolate}
+.hero{position:relative;padding:clamp(56px,9vw,110px) 0 0;isolation:isolate;overflow:clip}
 .hero::before{content:"";position:absolute;inset:-64px 0 0;z-index:-1;background:radial-gradient(ellipse 46% 60% at 82% 28%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%),radial-gradient(ellipse 40% 50% at 8% 90%,color-mix(in srgb,var(--accent) 6%,transparent),transparent 70%)}
 .hero::after{content:"";position:absolute;inset:-64px 0 0;z-index:-1;opacity:.35;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
 .hero-g{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:start}
@@ -299,7 +320,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 </style>
 </head>
 <body>
-<canvas id="bg3d" aria-hidden="true"></canvas>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="nav">
@@ -321,6 +341,21 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 </header>
 
 <main id="conteudo">
+<!-- SETUP 3D: quarto gamer, a câmera dá zoom no monitor ao rolar -->
+<section class="setup" id="setup" aria-label="Apresentação: setup de programação em 3D">
+  <div class="setup-sticky">
+    <canvas id="room" aria-hidden="true"></canvas>
+    <div class="setup-ui">
+      <span class="mono">Portfólio 2026 / Taubaté, SP</span>
+      <p class="setup-name">Micael Silva<br><em>Domiciano</em></p>
+      <p class="setup-role">Estudante de ADS no SENAI. Desenvolvimento web, cloud e redes.</p>
+      <span class="setup-hint"><i aria-hidden="true"></i>Role para entrar no setup</span>
+    </div>
+    <div class="setup-bar" aria-hidden="true"><i></i></div>
+    <div class="setup-fade" aria-hidden="true"></div>
+  </div>
+</section>
+
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
@@ -650,6 +685,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 })();
 </script>
-<script src="js/fundo-3d.js" defer></script>
+<script type="module" src="js/setup-3d.js"></script>
 </body>
 </html>
