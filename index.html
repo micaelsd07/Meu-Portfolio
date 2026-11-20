@@ -98,6 +98,18 @@ html.io .rv.on{opacity:1;translate:0 0}
 @media (max-width:700px){.screen{min-height:62svh}.desk.on{height:200svh}}
 @media (prefers-reduced-motion:reduce){.monitor{transform:none}.desk-fade{opacity:0}}
 
+.sgrid-h{margin-bottom:22px}
+.sgrid-h h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.025em}
+.sgrid-h p{color:var(--ink-2)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px;margin-bottom:clamp(48px,7vw,88px)}
+.sc{position:relative;display:block;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:var(--paper)}
+.sc img{width:100%;aspect-ratio:900/640;object-fit:cover;object-position:top}
+.sc-t{display:grid;gap:2px;padding:14px 16px 16px}
+.sc-t b{font-family:var(--serif);font-weight:500;font-size:1.25rem}
+.sc-t span{font-size:13px;color:var(--ink-3)}
+.sc-t em{font:400 12px/1.4 var(--mono);color:var(--accent);font-style:normal}
+.sc:hover{--lift:-4px;border-color:var(--accent)}
+
 /* ---------- Navegação ---------- */
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut);height:64px;display:flex;align-items:center;gap:16px}
@@ -414,6 +426,38 @@ footer{border-top:1px solid var(--line);padding:24px 0}
       <p>Cada projeto tem link público. Abra, teste e veja o código no GitHub.</p>
     </div>
 
+    <div class="sgrid-h rv"><h3>Sites em destaque</h3><p>Trabalhos recentes, no ar na Vercel.</p></div>
+    <div class="sgrid">
+      <a class="sc rv" data-tilt="5" href="https://vini-rodas.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Vini Rodas">
+        <img src="img/vini-rodas.webp" width="900" height="640" alt="Página inicial do site Vini Rodas" loading="lazy">
+        <div class="sc-t"><b>Vini Rodas</b><span>Rodas e pneus</span><em>React, Vite, GSAP ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://instituto-prudencio.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Instituto Prudêncio">
+        <img src="img/instituto-prudencio.webp" width="900" height="640" alt="Página inicial do site Instituto Prudêncio" loading="lazy">
+        <div class="sc-t"><b>Instituto Prudêncio</b><span>Odontologia</span><em>HTML, CSS, JavaScript ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://andrades-veiculos.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Andrades Veículos">
+        <img src="img/andrades-veiculos.webp" width="900" height="640" alt="Página inicial do site Andrades Veículos" loading="lazy">
+        <div class="sc-t"><b>Andrades Veículos</b><span>Seminovos</span><em>Next.js, GSAP ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://acai-brava.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Fonte do Açaí">
+        <img src="img/acai.webp" width="900" height="640" alt="Página inicial do site Fonte do Açaí" loading="lazy">
+        <div class="sc-t"><b>Fonte do Açaí</b><span>Açaiteria</span><em>HTML, CSS, JavaScript ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://recofer-industria.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Recofer Indústria">
+        <img src="img/recofer.webp" width="900" height="640" alt="Página inicial do site Recofer Indústria" loading="lazy">
+        <div class="sc-t"><b>Recofer Indústria</b><span>Indústria</span><em>Next.js, GSAP ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://curso-rznd.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir Curso RZND">
+        <img src="img/curso-rznd.webp" width="900" height="640" alt="Página inicial do site Curso RZND" loading="lazy">
+        <div class="sc-t"><b>Curso RZND</b><span>Educação</span><em>Next.js, Supabase ↗</em></div>
+      </a>
+      <a class="sc rv" data-tilt="5" href="https://odontoflow-zeta.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir OdontoFlow">
+        <img src="img/odontoflow.webp" width="900" height="640" alt="Página inicial do site OdontoFlow" loading="lazy">
+        <div class="sc-t"><b>OdontoFlow</b><span>Sistema para clínicas</span><em>React, Supabase ↗</em></div>
+      </a>
+    </div>
+
     <div class="feat">
       <article class="proj rv">
         <a class="shot" data-tilt="5" href="https://linha-404.web.app/" target="_blank" rel="noopener" aria-label="Abrir Linha 404">
@@ -487,34 +531,6 @@ footer{border-top:1px solid var(--line);padding:24px 0}
         <a class="row" href="projetos/mario/index.html" target="_blank" rel="noopener">
           <span class="n">09</span><span class="t">Jogo do Mario</span><span class="k">Endless runner no navegador</span><span class="s">JavaScript puro</span><span class="y">2026 ↗</span>
           <img class="peek" src="img/mario.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://vini-rodas.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">10</span><span class="t">Vini Rodas</span><span class="k">Loja de rodas e pneus com catálogo e pedido de orçamento</span><span class="s">React, Vite, Tailwind, GSAP</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/vini-rodas.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://instituto-prudencio.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">11</span><span class="t">Instituto Prudêncio</span><span class="k">Site de odontologia com vídeo que anda com a rolagem</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/instituto-prudencio.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://andrades-veiculos.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">12</span><span class="t">Andrades Veículos</span><span class="k">Estoque de seminovos com filtros e contato pelo WhatsApp</span><span class="s">Next.js, TypeScript, GSAP</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/andrades-veiculos.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://acai-brava.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">13</span><span class="t">Fonte do Açaí</span><span class="k">Cardápio de açaiteria com pedido pelo WhatsApp</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/acai.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://recofer-industria.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">14</span><span class="t">Recofer Indústria</span><span class="k">Site institucional e catálogo de produtos de uma indústria</span><span class="s">Next.js, TypeScript, GSAP</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/recofer.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://curso-rznd.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">15</span><span class="t">Curso RZND</span><span class="k">Site e plataforma de pré-militar e pré-vestibular</span><span class="s">Next.js, Supabase, GSAP</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/curso-rznd.webp" width="900" height="640" alt="" loading="lazy">
-        </a>
-        <a class="row" href="https://odontoflow-zeta.vercel.app/" target="_blank" rel="noopener">
-          <span class="n">16</span><span class="t">OdontoFlow</span><span class="k">Sistema para clínicas odontológicas, com painel e agenda</span><span class="s">React, Supabase</span><span class="y">2026 ↗</span>
-          <img class="peek" src="img/odontoflow.webp" width="900" height="640" alt="" loading="lazy">
         </a>
       </div>
     </div>
