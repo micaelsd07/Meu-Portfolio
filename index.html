@@ -66,28 +66,37 @@ html.io .rv.on{opacity:1;translate:0 0}
 [data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgb(255 255 255 / .22),transparent 55%);opacity:0;transition:opacity .4s;z-index:3}
 [data-tilt].tilting::after{opacity:1}
 
-/* ---------- Setup 3D ---------- */
-.setup{position:relative;height:100svh;background:#0b0a10}
-.setup.on{height:420svh}
-.setup-sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 45%,#2a1d4a 0%,#0b0a10 70%)}
-#room{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1s ease}
-.setup.ready #room{opacity:1}
-.setup-ui{position:absolute;left:var(--gut);bottom:clamp(28px,7vh,72px);max-width:560px;color:#f3efe6;z-index:2;text-shadow:0 2px 30px rgb(0 0 0 / .6)}
-.setup-ui .mono{color:#ff9a73;font-weight:500}
-.setup-name{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,7vw,5.4rem);line-height:.95;letter-spacing:-.04em;margin:12px 0 14px}
-.setup-name em{font-style:italic;font-weight:400;color:#ff7a4d}
-.setup-role{font-size:clamp(1rem,1.6vw,1.15rem);color:#d6d0e6;max-width:430px;margin-bottom:22px}
-.setup-hint{display:inline-flex;align-items:center;gap:12px;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#cfc8e6}
-.setup-hint i{width:22px;height:34px;border:1.5px solid #cfc8e6;border-radius:12px;position:relative}
-.setup-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:#ff7a4d;translate:-50% 0}
-@media (prefers-reduced-motion:no-preference){.setup-hint i::after{animation:wheel 1.6s ease-in-out infinite}}
+.desk{--p:0;position:relative;height:100svh;background:#0b0a10}
+.desk.on{height:210svh}
+.desk-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse 70% 60% at 50% 45%,#2a1d4a 0%,#0b0a10 70%)}
+.monitor{width:min(94vw,1020px);display:flex;flex-direction:column;align-items:center;transform-origin:50% 38%;transform:scale(calc(1 + var(--p) * 2.1));will-change:transform}
+.bezel{width:100%;padding:clamp(8px,1.4vw,16px);border-radius:clamp(14px,2vw,24px);background:linear-gradient(180deg,#221d33,#15121f);border:1px solid #3a3152;box-shadow:0 40px 90px -30px rgb(139 92 246 / .45),0 0 0 1px rgb(0 0 0 / .6)}
+.screen{border-radius:clamp(8px,1.2vw,14px);overflow:hidden;background:#0d0b14;border:1px solid #2b2540;min-height:clamp(320px,58svh,560px)}
+.scr-bar{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;background:#171325;border-bottom:1px solid #2b2540}
+.scr-bar i{width:10px;height:10px;border-radius:50%;background:#3a3152}
+.scr-bar i:nth-child(1){background:#ff6b3d}
+.scr-bar i:nth-child(2){background:#f5b84a}
+.scr-bar i:nth-child(3){background:#46d39a}
+.scr-bar span{margin-left:12px;font:400 11px/1 var(--mono);color:var(--ink-3);letter-spacing:.04em}
+.scr-body{padding:clamp(18px,3.4vw,44px)}
+.scr-body .mono{color:#ff9a73;font-weight:500}
+.desk-name{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,5.6vw,4.4rem);line-height:.98;letter-spacing:-.04em;margin:12px 0 12px;color:#f3efe6}
+.desk-name em{font-style:italic;font-weight:400;color:#ff7a4d}
+.desk-role{font-size:clamp(.92rem,1.5vw,1.1rem);color:#d6d0e6;max-width:520px;margin-bottom:clamp(14px,2.4vw,26px)}
+.desk-label{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#8f88a8;margin-bottom:12px}
+.desk-courses{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.desk-courses li{font-size:clamp(11.5px,1.25vw,13.5px);color:#d6d0e6;padding:7px 13px;border-radius:999px;border:1px solid #352d4a;background:rgb(139 92 246 / .1)}
+.desk-courses li.now{border-color:#ff7a4d;background:rgb(255 122 77 / .14);color:#ffd9cb}
+.neck{width:clamp(34px,6vw,70px);height:clamp(22px,4vw,44px);background:linear-gradient(90deg,#15121f,#261f38,#15121f)}
+.foot{width:clamp(130px,24vw,280px);height:clamp(8px,1.4vw,14px);border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#2a2340,#15121f)}
+.desk-hint{position:absolute;left:50%;bottom:clamp(16px,4vh,38px);translate:-50% 0;display:inline-flex;align-items:center;gap:12px;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#cfc8e6;opacity:calc(1 - var(--p) * 4)}
+.desk-hint i{width:22px;height:34px;border:1.5px solid #cfc8e6;border-radius:12px;position:relative}
+.desk-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:#ff7a4d;translate:-50% 0}
+@media (prefers-reduced-motion:no-preference){.desk-hint i::after{animation:wheel 1.6s ease-in-out infinite}}
 @keyframes wheel{0%{opacity:0;translate:-50% 0}40%{opacity:1}100%{opacity:0;translate:-50% 12px}}
-.setup-bar{position:absolute;right:var(--gut);top:50%;width:2px;height:120px;translate:0 -50%;background:rgb(255 255 255 / .15);border-radius:2px;z-index:2}
-.setup-bar i{position:absolute;inset:0;background:#ff7a4d;transform-origin:top;transform:scaleY(0);border-radius:2px}
-.setup:not(.on) .setup-bar{display:none}
-.setup-fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:3}
-.on-setup .nav{--ink:#f3efe6;--ink-2:#cfc8e6;--ink-3:#9a93b5;--paper:rgb(255 255 255 / .08);--line:rgb(255 255 255 / .1);--line-2:rgb(255 255 255 / .22);--bg:#0b0a10;color:var(--ink)}
-.nav{transition:background .4s,border-color .4s,color .4s}
+.desk-fade{position:absolute;inset:0;background:var(--bg);opacity:calc((var(--p) - .5) * 2);pointer-events:none;z-index:3}
+@media (max-width:700px){.screen{min-height:62svh}.desk.on{height:200svh}}
+@media (prefers-reduced-motion:reduce){.monitor{transform:none}.desk-fade{opacity:0}}
 
 /* ---------- Navegação ---------- */
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -312,18 +321,36 @@ footer{border-top:1px solid var(--line);padding:24px 0}
 </header>
 
 <main id="conteudo">
-<!-- SETUP 3D: quarto gamer, a câmera dá zoom no monitor ao rolar -->
-<section class="setup" id="setup" aria-label="Apresentação: setup de programação em 3D">
-  <div class="setup-sticky">
-    <canvas id="room" aria-hidden="true"></canvas>
-    <div class="setup-ui">
-      <span class="mono">Portfólio 2026 / Taubaté, SP</span>
-      <p class="setup-name">Micael Silva<br><em>Domiciano</em></p>
-      <p class="setup-role">Estudante de ADS no SENAI. Desenvolvimento web, cloud e redes.</p>
-      <span class="setup-hint"><i aria-hidden="true"></i>Role para entrar no setup</span>
+<section class="desk" id="setup" aria-label="Apresentação">
+  <div class="desk-sticky">
+    <div class="monitor" id="monitor">
+      <div class="bezel">
+        <div class="screen">
+          <div class="scr-bar" aria-hidden="true"><i></i><i></i><i></i><span>micael-domiciano.dev</span></div>
+          <div class="scr-body">
+            <span class="mono">Portfólio 2026 / Taubaté, SP</span>
+            <p class="desk-name">Micael Silva <em>Domiciano</em></p>
+            <p class="desk-role">Estudante de ADS no SENAI Taubaté. Desenvolvimento web, cloud e redes.</p>
+            <p class="desk-label">Cursos e certificações</p>
+            <ul class="desk-courses">
+              <li class="now">Análise e Desenvolvimento de Sistemas, SENAI</li>
+              <li>AWS Academy Cloud Foundations</li>
+              <li>Google Cloud: Firebase</li>
+              <li>Cisco Linux Unhatched</li>
+              <li>Cisco Networking Basics</li>
+              <li>Cisco Modern AI</li>
+              <li>Cisco Packet Tracer</li>
+              <li>Informática Básica e Avançada</li>
+              <li>Inglês intermediário</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neck" aria-hidden="true"></div>
+      <div class="foot" aria-hidden="true"></div>
     </div>
-    <div class="setup-bar" aria-hidden="true"><i></i></div>
-    <div class="setup-fade" aria-hidden="true"></div>
+    <span class="desk-hint"><i aria-hidden="true"></i>Role para entrar no site</span>
+    <div class="desk-fade" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -364,7 +391,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
     </div>
 
     <div class="ficha">
-      <div><b>09</b><span>projetos publicados</span></div>
+      <div><b>16</b><span>projetos publicados</span></div>
       <div><b>06</b><span>certificações em tecnologia</span></div>
       <div><b>02</b><span>clouds estudadas: AWS e Google</span></div>
       <div><b>19</b><span>anos, CNH A e B</span></div>
@@ -460,6 +487,34 @@ footer{border-top:1px solid var(--line);padding:24px 0}
         <a class="row" href="projetos/mario/index.html" target="_blank" rel="noopener">
           <span class="n">09</span><span class="t">Jogo do Mario</span><span class="k">Endless runner no navegador</span><span class="s">JavaScript puro</span><span class="y">2026 ↗</span>
           <img class="peek" src="img/mario.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://vini-rodas.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">10</span><span class="t">Vini Rodas</span><span class="k">Loja de rodas e pneus com catálogo e pedido de orçamento</span><span class="s">React, Vite, Tailwind, GSAP</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/vini-rodas.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://instituto-prudencio.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">11</span><span class="t">Instituto Prudêncio</span><span class="k">Site de odontologia com vídeo que anda com a rolagem</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/instituto-prudencio.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://andrades-veiculos.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">12</span><span class="t">Andrades Veículos</span><span class="k">Estoque de seminovos com filtros e contato pelo WhatsApp</span><span class="s">Next.js, TypeScript, GSAP</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/andrades-veiculos.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://acai-brava.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">13</span><span class="t">Fonte do Açaí</span><span class="k">Cardápio de açaiteria com pedido pelo WhatsApp</span><span class="s">HTML, CSS, JavaScript</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/acai.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://recofer-industria.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">14</span><span class="t">Recofer Indústria</span><span class="k">Site institucional e catálogo de produtos de uma indústria</span><span class="s">Next.js, TypeScript, GSAP</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/recofer.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://curso-rznd.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">15</span><span class="t">Curso RZND</span><span class="k">Site e plataforma de pré-militar e pré-vestibular</span><span class="s">Next.js, Supabase, GSAP</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/curso-rznd.webp" width="900" height="640" alt="" loading="lazy">
+        </a>
+        <a class="row" href="https://odontoflow-zeta.vercel.app/" target="_blank" rel="noopener">
+          <span class="n">16</span><span class="t">OdontoFlow</span><span class="k">Sistema para clínicas odontológicas, com painel e agenda</span><span class="s">React, Supabase</span><span class="y">2026 ↗</span>
+          <img class="peek" src="img/odontoflow.webp" width="900" height="640" alt="" loading="lazy">
         </a>
       </div>
     </div>
@@ -602,7 +657,7 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   <div class="wrap foot">
     <span>© 2026 Micael Silva Domiciano</span>
     <span class="mono" id="clock2">Taubaté, --:--</span>
-    <span>Feito à mão com HTML, CSS, JavaScript e WebGL</span>
+    <span>Feito à mão com HTML, CSS e JavaScript</span>
   </div>
 </footer>
 
@@ -642,6 +697,22 @@ footer{border-top:1px solid var(--line);padding:24px 0}
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 })();
 </script>
-<script type="module" src="js/setup-3d.js"></script>
+<script>
+(function(){
+  var d=document.getElementById('setup');
+  if(!d||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  d.classList.add('on');
+  var busy=false;
+  function upd(){
+    var r=d.getBoundingClientRect(),h=d.offsetHeight-innerHeight;
+    var p=h>0?Math.min(1,Math.max(0,-r.top/h)):0;
+    d.style.setProperty('--p',p.toFixed(4));
+    busy=false;
+  }
+  addEventListener('scroll',function(){if(!busy){busy=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener('resize',upd);
+  upd();
+})();
+</script>
 </body>
 </html>
